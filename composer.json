@@ -1,0 +1,16 @@
+{
+    "name": "ar.arif/woocommerce-stock-management-with-google-sheet",
+    "type": "project",
+    "authors": [
+        {
+            "name": "AR. Arif",
+            "email": "dev.ar.arif@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "WSMGS\\": "includes/"
+        }
+    }
+}

@@ -15,7 +15,7 @@
  */
 
 /* if accessed directly exit from plugin */
-defined('ABSPATH') || wp_die(__('You can\'t access this page', 'sheetstowptable'));
+defined('ABSPATH') || wp_die(__('You can\'t access this page', 'wsmgs'));
 
 if (!defined('WSMGS_VERSION')) {
     define('WSMGS_VERSION', '1.0.0');
@@ -36,6 +36,16 @@ if (!defined('WSMGS_BASE_URL')) {
 
 if (!defined('WSMGS_PlUGIN_NAME')) {
     define('WSMGS_PlUGIN_NAME', 'WooCommerce Stock Management with Google Sheet');
+}
+
+if (!defined('WSMGS_PlUGIN_MODE')) {
+    $development = true;
+
+    if ($development) {
+        define('WSMGS_PlUGIN_MODE', 'dev');
+    } else {
+        define('WSMGS_PlUGIN_MODE', 'prod');
+    }
 }
 
 if (!file_exists(WSMGS_BASE_PATH . 'vendor/autoload.php')) {
@@ -72,8 +82,10 @@ final class WSMGS {
      * @return null
      */
     public function initiatePlugin() {
-
         $this->startupHooks();
+
+        // Include the base file of this plugin
+        new WSMGS\Plugin;
     }
 
     public function pluginsCheck() {

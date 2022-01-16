@@ -1,8 +1,11 @@
+@import "./modules/variables";
+
 @import "../../../node_modules/bootstrap/scss/functions";
 
 // Basic utils for bootstrap
 @import "../../../node_modules/bootstrap/scss/variables";
 @import "../../../node_modules/bootstrap/scss/bootstrap-utilities.scss";
+@import "../../../node_modules/bootstrap/scss/close";
 @import "../../../node_modules/bootstrap/scss/mixins";
 @import "../../../node_modules/bootstrap/scss/root";
 @import "../../../node_modules/bootstrap/scss/transitions";
@@ -10,6 +13,5 @@
 // Import required modules
 @import "../../../node_modules/bootstrap/scss/toasts";
 
-// @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
-
+@import "./modules/utils/alert.scss";
 @import "./modules/dashboard.scss";

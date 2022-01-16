@@ -1,0 +1,17 @@
+.wsmgs_alert {
+    .alert_success {
+        background-color: $successBgColor;
+    }
+    .alert_warning {
+        background-color: $warningBgColor;
+    }
+    .alert_error {
+        background-color: $errorBgColor;
+    }
+    .btn-close {
+        opacity: 1;
+    }
+    .message_type {
+        font-weight: bolder;
+    }
+}

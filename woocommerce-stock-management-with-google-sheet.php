@@ -18,8 +18,8 @@
 defined('ABSPATH') || wp_die(__('You can\'t access this page', 'wsmgs'));
 
 if (!defined('WSMGS_VERSION')) {
-    define('WSMGS_VERSION', '1.0.0');
-    // define('WSMGS_VERSION', time());
+    // define('WSMGS_VERSION', '1.0.0');
+    define('WSMGS_VERSION', time());
 }
 
 if (!defined('WSMGS_TEXT_DOMAIN')) {
@@ -82,8 +82,6 @@ final class WSMGS {
      * @return null
      */
     public function initiatePlugin() {
-        $this->startupHooks();
-
         // Include the base file of this plugin
         new WSMGS\Plugin;
     }
@@ -98,12 +96,6 @@ final class WSMGS {
         }
 
         return true;
-    }
-
-    public function startupHooks() {
-        register_activation_hook(__FILE__, function () {
-            flush_rewrite_rules();
-        });
     }
 
     /**

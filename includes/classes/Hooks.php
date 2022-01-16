@@ -16,11 +16,17 @@ class Hooks {
     public function __construct() {
         $this->assignClasses();
         $this->enqueueHooks();
+        $this->actionHooks();
     }
 
     // Assign required classes/methods in its properties
     public function assignClasses() {
         $this->hookCallbacks = new HookCallbacks;
+    }
+
+    public function actionHooks() {
+        add_action('admin_menu', [$this->hookCallbacks, 'addAdminMenus']);
+        add_action('admin_init', [$this->hookCallbacks, 'addMenuSettings']);
     }
 
     public function enqueueHooks() {

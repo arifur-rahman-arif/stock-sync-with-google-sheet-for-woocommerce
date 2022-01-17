@@ -11,9 +11,9 @@
     <p>
     <h3>
 
-        Save the google sheet and give this bot mail
+        Save the google sheet and give this bot
         <span class="bot_mail">
-            woocommerce-to-sheet@woocommerce-to-sheet.iam.gserviceaccount.com
+            <code>wsmgs-plugin@wsmgs-plugin-338313.iam.gserviceaccount.com</code>
         </span> ID editor
         access in your google sheet.
         <br>

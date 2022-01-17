@@ -2,7 +2,7 @@ import { showAlert } from "./helperFunctions";
 
 var $ = jQuery.noConflict();
 
-$(document).ready(function () {
+$(function () {
     class AuthButton {
         constructor() {
             // Define the properties of this class
@@ -26,9 +26,7 @@ $(document).ready(function () {
 
         // Set the auth button after woocommerce export button
         setButtton() {
-            $(this.btn).after(
-                `<a href="#" class="page-title-action wsmgs_authenticate">Export To Sheet</a>`
-            );
+            $(this.btn).after(`<a href="#" class="page-title-action wsmgs_authenticate">Export To Sheet</a>`);
         }
 
         // Authenticate user google sheet by sending request to backend

@@ -18,7 +18,7 @@ $(document).ready(function () {
                 this.authenticateGoogleSheet(e);
             });
 
-            this.botMail.click((e) => {
+            this.botMail.on("click", (e) => {
                 let target = $(e.currentTarget);
                 let text = target.text();
                 copyToClipboard(text);

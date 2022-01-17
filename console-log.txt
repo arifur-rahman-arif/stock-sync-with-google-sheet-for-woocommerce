@@ -1,0 +1,445 @@
+=>	Array
+(
+    [0] => Array
+        (
+            [attributes] => Array
+                (
+                    [attribute_pa_color] => red
+                    [attribute_pa_size] => 
+                )
+
+            [availability_html] => 
+            [backorders_allowed] => 
+            [dimensions] => Array
+                (
+                    [length] => 
+                    [width] => 
+                    [height] => 
+                )
+
+            [dimensions_html] => N/A
+            [display_price] => 20
+            [display_regular_price] => 20
+            [image] => Array
+                (
+                    [title] => vneck-tee-2.jpg
+                    [caption] => 
+                    [url] => http://wsmgs.local.com/wp-content/uploads/2022/01/vneck-tee-2.jpg
+                    [alt] => 
+                    [src] => http://wsmgs.local.com/wp-content/uploads/2022/01/vneck-tee-2-600x599.jpg
+                    [srcset] => http://wsmgs.local.com/wp-content/uploads/2022/01/vneck-tee-2-600x599.jpg 600w, http://wsmgs.local.com/wp-content/uploads/2022/01/vneck-tee-2-300x300.jpg 300w, http://wsmgs.local.com/wp-content/uploads/2022/01/vneck-tee-2-150x150.jpg 150w, http://wsmgs.local.com/wp-content/uploads/2022/01/vneck-tee-2-768x767.jpg 768w, http://wsmgs.local.com/wp-content/uploads/2022/01/vneck-tee-2-450x450.jpg 450w, http://wsmgs.local.com/wp-content/uploads/2022/01/vneck-tee-2-100x100.jpg 100w, http://wsmgs.local.com/wp-content/uploads/2022/01/vneck-tee-2.jpg 801w
+                    [sizes] => (max-width: 600px) 100vw, 600px
+                    [full_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/vneck-tee-2.jpg
+                    [full_src_w] => 801
+                    [full_src_h] => 800
+                    [gallery_thumbnail_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/vneck-tee-2-100x100.jpg
+                    [gallery_thumbnail_src_w] => 100
+                    [gallery_thumbnail_src_h] => 100
+                    [thumb_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/vneck-tee-2-450x450.jpg
+                    [thumb_src_w] => 450
+                    [thumb_src_h] => 450
+                    [src_w] => 600
+                    [src_h] => 599
+                )
+
+            [image_id] => 44
+            [is_downloadable] => 
+            [is_in_stock] => 1
+            [is_purchasable] => 1
+            [is_sold_individually] => no
+            [is_virtual] => 
+            [max_qty] => 
+            [min_qty] => 1
+            [price_html] => <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>20.00</bdi></span></span>
+            [sku] => woo-vneck-tee-red
+            [variation_description] => <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis orci ac odio dictum tincidunt. Donec ut metus leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed luctus, dui eu sagittis sodales, nulla nibh sagittis augue, vel porttitor diam enim non metus. Vestibulum aliquam augue neque. Phasellus tincidunt odio eget ullamcorper efficitur. Cras placerat ut turpis pellentesque vulputate. Nam sed consequat tortor. Curabitur finibus sapien dolor. Ut eleifend tellus nec erat pulvinar dignissim. Nam non arcu purus. Vivamus et massa massa.</p>
+
+            [variation_id] => 33
+            [variation_is_active] => 1
+            [variation_is_visible] => 1
+            [weight] => 
+            [weight_html] => N/A
+        )
+
+    [1] => Array
+        (
+            [attributes] => Array
+                (
+                    [attribute_pa_color] => green
+                    [attribute_pa_size] => 
+                )
+
+            [availability_html] => 
+            [backorders_allowed] => 
+            [dimensions] => Array
+                (
+                    [length] => 
+                    [width] => 
+                    [height] => 
+                )
+
+            [dimensions_html] => N/A
+            [display_price] => 20
+            [display_regular_price] => 20
+            [image] => Array
+                (
+                    [title] => vnech-tee-green-1.jpg
+                    [caption] => 
+                    [url] => http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-green-1.jpg
+                    [alt] => 
+                    [src] => http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-green-1-600x600.jpg
+                    [srcset] => http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-green-1-600x600.jpg 600w, http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-green-1-300x300.jpg 300w, http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-green-1-150x150.jpg 150w, http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-green-1-768x768.jpg 768w, http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-green-1-450x450.jpg 450w, http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-green-1-100x100.jpg 100w, http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-green-1.jpg 800w
+                    [sizes] => (max-width: 600px) 100vw, 600px
+                    [full_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-green-1.jpg
+                    [full_src_w] => 800
+                    [full_src_h] => 800
+                    [gallery_thumbnail_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-green-1-100x100.jpg
+                    [gallery_thumbnail_src_w] => 100
+                    [gallery_thumbnail_src_h] => 100
+                    [thumb_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-green-1-450x450.jpg
+                    [thumb_src_w] => 450
+                    [thumb_src_h] => 450
+                    [src_w] => 600
+                    [src_h] => 600
+                )
+
+            [image_id] => 45
+            [is_downloadable] => 
+            [is_in_stock] => 1
+            [is_purchasable] => 1
+            [is_sold_individually] => no
+            [is_virtual] => 
+            [max_qty] => 
+            [min_qty] => 1
+            [price_html] => <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>20.00</bdi></span></span>
+            [sku] => woo-vneck-tee-green
+            [variation_description] => <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis orci ac odio dictum tincidunt. Donec ut metus leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed luctus, dui eu sagittis sodales, nulla nibh sagittis augue, vel porttitor diam enim non metus. Vestibulum aliquam augue neque. Phasellus tincidunt odio eget ullamcorper efficitur. Cras placerat ut turpis pellentesque vulputate. Nam sed consequat tortor. Curabitur finibus sapien dolor. Ut eleifend tellus nec erat pulvinar dignissim. Nam non arcu purus. Vivamus et massa massa.</p>
+
+            [variation_id] => 34
+            [variation_is_active] => 1
+            [variation_is_visible] => 1
+            [weight] => 
+            [weight_html] => N/A
+        )
+
+    [2] => Array
+        (
+            [attributes] => Array
+                (
+                    [attribute_pa_color] => blue
+                    [attribute_pa_size] => 
+                )
+
+            [availability_html] => 
+            [backorders_allowed] => 
+            [dimensions] => Array
+                (
+                    [length] => 
+                    [width] => 
+                    [height] => 
+                )
+
+            [dimensions_html] => N/A
+            [display_price] => 15
+            [display_regular_price] => 15
+            [image] => Array
+                (
+                    [title] => vnech-tee-blue-1.jpg
+                    [caption] => 
+                    [url] => http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-blue-1.jpg
+                    [alt] => 
+                    [src] => http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-blue-1-600x600.jpg
+                    [srcset] => http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-blue-1-600x600.jpg 600w, http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-blue-1-300x300.jpg 300w, http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-blue-1-150x150.jpg 150w, http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-blue-1-768x768.jpg 768w, http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-blue-1-450x450.jpg 450w, http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-blue-1-100x100.jpg 100w, http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-blue-1.jpg 800w
+                    [sizes] => (max-width: 600px) 100vw, 600px
+                    [full_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-blue-1.jpg
+                    [full_src_w] => 800
+                    [full_src_h] => 800
+                    [gallery_thumbnail_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-blue-1-100x100.jpg
+                    [gallery_thumbnail_src_w] => 100
+                    [gallery_thumbnail_src_h] => 100
+                    [thumb_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/vnech-tee-blue-1-450x450.jpg
+                    [thumb_src_w] => 450
+                    [thumb_src_h] => 450
+                    [src_w] => 600
+                    [src_h] => 600
+                )
+
+            [image_id] => 46
+            [is_downloadable] => 
+            [is_in_stock] => 1
+            [is_purchasable] => 1
+            [is_sold_individually] => no
+            [is_virtual] => 
+            [max_qty] => 
+            [min_qty] => 1
+            [price_html] => <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>15.00</bdi></span></span>
+            [sku] => woo-vneck-tee-blue
+            [variation_description] => <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis orci ac odio dictum tincidunt. Donec ut metus leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed luctus, dui eu sagittis sodales, nulla nibh sagittis augue, vel porttitor diam enim non metus. Vestibulum aliquam augue neque. Phasellus tincidunt odio eget ullamcorper efficitur. Cras placerat ut turpis pellentesque vulputate. Nam sed consequat tortor. Curabitur finibus sapien dolor. Ut eleifend tellus nec erat pulvinar dignissim. Nam non arcu purus. Vivamus et massa massa.</p>
+
+            [variation_id] => 35
+            [variation_is_active] => 1
+            [variation_is_visible] => 1
+            [weight] => 
+            [weight_html] => N/A
+        )
+
+)
+
+	Occured in E:\laragon\www\wsmgs\wp-content\plugins\woocommerce-stock-management-with-google-sheet\includes\classes\GlobalClass.php
+	on line 45
+	at 17-Jan-2022 | 11:59:22 AM 
+
+
+=>	Array
+(
+    [0] => Array
+        (
+            [attributes] => Array
+                (
+                    [attribute_pa_color] => blue
+                    [attribute_logo] => Yes
+                )
+
+            [availability_html] => 
+            [backorders_allowed] => 
+            [dimensions] => Array
+                (
+                    [length] => 
+                    [width] => 
+                    [height] => 
+                )
+
+            [dimensions_html] => N/A
+            [display_price] => 45
+            [display_regular_price] => 45
+            [image] => Array
+                (
+                    [title] => hoodie-with-logo-2.jpg
+                    [caption] => 
+                    [url] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-with-logo-2.jpg
+                    [alt] => 
+                    [src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-with-logo-2-600x600.jpg
+                    [srcset] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-with-logo-2-600x600.jpg 600w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-with-logo-2-300x300.jpg 300w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-with-logo-2-150x150.jpg 150w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-with-logo-2-768x768.jpg 768w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-with-logo-2-450x450.jpg 450w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-with-logo-2-100x100.jpg 100w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-with-logo-2.jpg 801w
+                    [sizes] => (max-width: 600px) 100vw, 600px
+                    [full_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-with-logo-2.jpg
+                    [full_src_w] => 801
+                    [full_src_h] => 801
+                    [gallery_thumbnail_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-with-logo-2-100x100.jpg
+                    [gallery_thumbnail_src_w] => 100
+                    [gallery_thumbnail_src_h] => 100
+                    [thumb_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-with-logo-2-450x450.jpg
+                    [thumb_src_w] => 450
+                    [thumb_src_h] => 450
+                    [src_w] => 600
+                    [src_h] => 600
+                )
+
+            [image_id] => 50
+            [is_downloadable] => 
+            [is_in_stock] => 1
+            [is_purchasable] => 1
+            [is_sold_individually] => no
+            [is_virtual] => 
+            [max_qty] => 
+            [min_qty] => 1
+            [price_html] => <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>45.00</bdi></span></span>
+            [sku] => woo-hoodie-blue-logo
+            [variation_description] => <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis orci ac odio dictum tincidunt. Donec ut metus leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed luctus, dui eu sagittis sodales, nulla nibh sagittis augue, vel porttitor diam enim non metus. Vestibulum aliquam augue neque. Phasellus tincidunt odio eget ullamcorper efficitur. Cras placerat ut turpis pellentesque vulputate. Nam sed consequat tortor. Curabitur finibus sapien dolor. Ut eleifend tellus nec erat pulvinar dignissim. Nam non arcu purus. Vivamus et massa massa.</p>
+
+            [variation_id] => 43
+            [variation_is_active] => 1
+            [variation_is_visible] => 1
+            [weight] => 
+            [weight_html] => N/A
+        )
+
+    [1] => Array
+        (
+            [attributes] => Array
+                (
+                    [attribute_pa_color] => red
+                    [attribute_logo] => No
+                )
+
+            [availability_html] => 
+            [backorders_allowed] => 
+            [dimensions] => Array
+                (
+                    [length] => 
+                    [width] => 
+                    [height] => 
+                )
+
+            [dimensions_html] => N/A
+            [display_price] => 42
+            [display_regular_price] => 45
+            [image] => Array
+                (
+                    [title] => hoodie-2.jpg
+                    [caption] => 
+                    [url] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-2.jpg
+                    [alt] => 
+                    [src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-2-600x600.jpg
+                    [srcset] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-2-600x600.jpg 600w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-2-300x300.jpg 300w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-2-150x150.jpg 150w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-2-768x768.jpg 768w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-2-450x450.jpg 450w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-2-100x100.jpg 100w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-2.jpg 801w
+                    [sizes] => (max-width: 600px) 100vw, 600px
+                    [full_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-2.jpg
+                    [full_src_w] => 801
+                    [full_src_h] => 801
+                    [gallery_thumbnail_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-2-100x100.jpg
+                    [gallery_thumbnail_src_w] => 100
+                    [gallery_thumbnail_src_h] => 100
+                    [thumb_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-2-450x450.jpg
+                    [thumb_src_w] => 450
+                    [thumb_src_h] => 450
+                    [src_w] => 600
+                    [src_h] => 600
+                )
+
+            [image_id] => 47
+            [is_downloadable] => 
+            [is_in_stock] => 1
+            [is_purchasable] => 1
+            [is_sold_individually] => no
+            [is_virtual] => 
+            [max_qty] => 
+            [min_qty] => 1
+            [price_html] => <span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>45.00</bdi></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>42.00</bdi></span></ins></span>
+            [sku] => woo-hoodie-red
+            [variation_description] => <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis orci ac odio dictum tincidunt. Donec ut metus leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed luctus, dui eu sagittis sodales, nulla nibh sagittis augue, vel porttitor diam enim non metus. Vestibulum aliquam augue neque. Phasellus tincidunt odio eget ullamcorper efficitur. Cras placerat ut turpis pellentesque vulputate. Nam sed consequat tortor. Curabitur finibus sapien dolor. Ut eleifend tellus nec erat pulvinar dignissim. Nam non arcu purus. Vivamus et massa massa.</p>
+
+            [variation_id] => 36
+            [variation_is_active] => 1
+            [variation_is_visible] => 1
+            [weight] => 
+            [weight_html] => N/A
+        )
+
+    [2] => Array
+        (
+            [attributes] => Array
+                (
+                    [attribute_pa_color] => green
+                    [attribute_logo] => No
+                )
+
+            [availability_html] => 
+            [backorders_allowed] => 
+            [dimensions] => Array
+                (
+                    [length] => 
+                    [width] => 
+                    [height] => 
+                )
+
+            [dimensions_html] => N/A
+            [display_price] => 45
+            [display_regular_price] => 45
+            [image] => Array
+                (
+                    [title] => hoodie-green-1.jpg
+                    [caption] => 
+                    [url] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-green-1.jpg
+                    [alt] => 
+                    [src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-green-1-600x600.jpg
+                    [srcset] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-green-1-600x600.jpg 600w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-green-1-300x300.jpg 300w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-green-1-150x150.jpg 150w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-green-1-768x768.jpg 768w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-green-1-450x450.jpg 450w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-green-1-100x100.jpg 100w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-green-1.jpg 800w
+                    [sizes] => (max-width: 600px) 100vw, 600px
+                    [full_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-green-1.jpg
+                    [full_src_w] => 800
+                    [full_src_h] => 800
+                    [gallery_thumbnail_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-green-1-100x100.jpg
+                    [gallery_thumbnail_src_w] => 100
+                    [gallery_thumbnail_src_h] => 100
+                    [thumb_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-green-1-450x450.jpg
+                    [thumb_src_w] => 450
+                    [thumb_src_h] => 450
+                    [src_w] => 600
+                    [src_h] => 600
+                )
+
+            [image_id] => 49
+            [is_downloadable] => 
+            [is_in_stock] => 1
+            [is_purchasable] => 1
+            [is_sold_individually] => no
+            [is_virtual] => 
+            [max_qty] => 
+            [min_qty] => 1
+            [price_html] => <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>45.00</bdi></span></span>
+            [sku] => woo-hoodie-green
+            [variation_description] => <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis orci ac odio dictum tincidunt. Donec ut metus leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed luctus, dui eu sagittis sodales, nulla nibh sagittis augue, vel porttitor diam enim non metus. Vestibulum aliquam augue neque. Phasellus tincidunt odio eget ullamcorper efficitur. Cras placerat ut turpis pellentesque vulputate. Nam sed consequat tortor. Curabitur finibus sapien dolor. Ut eleifend tellus nec erat pulvinar dignissim. Nam non arcu purus. Vivamus et massa massa.</p>
+
+            [variation_id] => 37
+            [variation_is_active] => 1
+            [variation_is_visible] => 1
+            [weight] => 
+            [weight_html] => N/A
+        )
+
+    [3] => Array
+        (
+            [attributes] => Array
+                (
+                    [attribute_pa_color] => blue
+                    [attribute_logo] => No
+                )
+
+            [availability_html] => 
+            [backorders_allowed] => 
+            [dimensions] => Array
+                (
+                    [length] => 
+                    [width] => 
+                    [height] => 
+                )
+
+            [dimensions_html] => N/A
+            [display_price] => 45
+            [display_regular_price] => 45
+            [image] => Array
+                (
+                    [title] => hoodie-blue-1.jpg
+                    [caption] => 
+                    [url] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-blue-1.jpg
+                    [alt] => 
+                    [src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-blue-1-600x600.jpg
+                    [srcset] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-blue-1-600x600.jpg 600w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-blue-1-300x300.jpg 300w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-blue-1-150x150.jpg 150w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-blue-1-768x768.jpg 768w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-blue-1-450x450.jpg 450w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-blue-1-100x100.jpg 100w, http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-blue-1.jpg 800w
+                    [sizes] => (max-width: 600px) 100vw, 600px
+                    [full_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-blue-1.jpg
+                    [full_src_w] => 800
+                    [full_src_h] => 800
+                    [gallery_thumbnail_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-blue-1-100x100.jpg
+                    [gallery_thumbnail_src_w] => 100
+                    [gallery_thumbnail_src_h] => 100
+                    [thumb_src] => http://wsmgs.local.com/wp-content/uploads/2022/01/hoodie-blue-1-450x450.jpg
+                    [thumb_src_w] => 450
+                    [thumb_src_h] => 450
+                    [src_w] => 600
+                    [src_h] => 600
+                )
+
+            [image_id] => 48
+            [is_downloadable] => 
+            [is_in_stock] => 1
+            [is_purchasable] => 1
+            [is_sold_individually] => no
+            [is_virtual] => 
+            [max_qty] => 
+            [min_qty] => 1
+            [price_html] => <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>45.00</bdi></span></span>
+            [sku] => woo-hoodie-blue
+            [variation_description] => <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis orci ac odio dictum tincidunt. Donec ut metus leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed luctus, dui eu sagittis sodales, nulla nibh sagittis augue, vel porttitor diam enim non metus. Vestibulum aliquam augue neque. Phasellus tincidunt odio eget ullamcorper efficitur. Cras placerat ut turpis pellentesque vulputate. Nam sed consequat tortor. Curabitur finibus sapien dolor. Ut eleifend tellus nec erat pulvinar dignissim. Nam non arcu purus. Vivamus et massa massa.</p>
+
+            [variation_id] => 38
+            [variation_is_active] => 1
+            [variation_is_visible] => 1
+            [weight] => 
+            [weight_html] => N/A
+        )
+
+)
+
+	Occured in E:\laragon\www\wsmgs\wp-content\plugins\woocommerce-stock-management-with-google-sheet\includes\classes\GlobalClass.php
+	on line 45
+	at 17-Jan-2022 | 11:59:22 AM 
+
+

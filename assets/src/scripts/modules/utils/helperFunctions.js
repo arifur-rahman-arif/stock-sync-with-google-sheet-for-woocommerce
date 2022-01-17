@@ -4,7 +4,6 @@ var $ = jQuery.noConflict();
 
 export const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
-
     showAlert({
         message: "Text copied to clipboard",
         type: "alert_success",

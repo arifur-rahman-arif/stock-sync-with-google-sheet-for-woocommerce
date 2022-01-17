@@ -23,6 +23,6 @@ class Hooks {
     public function ajaxActionHooks() {
 
         // Ajax hook wsmgs_authorize_sheet
-        add_action('wp_ajax_wsmgs_authorize_sheet', [$this->sheetAuth, 'exportProducts']);
+        add_action('wp_ajax_wsmgs_export_product', [$this->sheetAuth, 'exportProducts']);
     }
 }

@@ -95,6 +95,8 @@ class ExportProducts {
 
         $insertionValues = $this->methods->organizeInsertionValues($products);
 
+        $productCount = count($insertionValues);
+
         $args = [
             'sheetId' => $this->methods->getSheetId(get_option('sheetUrl')),
             'tabName' => get_option('tabName'),
@@ -107,7 +109,13 @@ class ExportProducts {
 
             if ($response) {
                 $output['status'] = 'success';
-                $output['message'] = esc_html__('Products inserted in google sheet', WSMGS_TEXT_DOMAIN);
+
+                $output['message'] = esc_html__($productCount . ' products exported in google sheet', WSMGS_TEXT_DOMAIN);
+
+                if ($productCount === 0) {
+                    $output['message'] = esc_html__('All products are already found in google sheet.', WSMGS_TEXT_DOMAIN);
+                }
+
                 wp_send_json_success($output, 201);
                 wp_die();
             } else {
@@ -149,7 +157,6 @@ class ExportProducts {
         $args = [
             'post_type'      => 'product',
             'posts_per_page' => -1
-            // 'post_status'    => 'publish'
         ];
 
         $products = get_posts($args);

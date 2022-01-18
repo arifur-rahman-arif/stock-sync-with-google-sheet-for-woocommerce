@@ -14,13 +14,19 @@ class GlobalClass {
     public function organizeInsertionValues(array $products) {
         $organizedData = [];
 
-        if (!$products) {
+        if (!is_array($products) || count($products) < 1) {
             return $organizedData;
         }
 
         foreach ($products as $key => $product) {
 
             $wcProduct = wc_get_product($product->ID);
+
+            $isProductExported = $this->markProductExported($product->ID);
+
+            if ($isProductExported) {
+                continue;
+            }
 
             array_push($organizedData, [
                 $product->ID ? $product->ID : '', /* Column A*/
@@ -75,6 +81,21 @@ class GlobalClass {
         }
 
         return $organizedData;
+    }
+
+    // Add meta value for each product if its exported
+    /**
+     * @param $productID
+     */
+    public function markProductExported($productID) {
+        $isExported = get_post_meta($productID, 'wsmgs_exported', true);
+
+        if ($isExported) {
+            return true;
+        } else {
+            update_post_meta($productID, 'wsmgs_exported', true);
+            return false;
+        }
     }
 
     /**

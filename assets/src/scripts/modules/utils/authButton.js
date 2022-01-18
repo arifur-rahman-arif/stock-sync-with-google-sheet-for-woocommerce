@@ -13,7 +13,7 @@ $(function () {
         }
 
         events() {
-            $(document).on("click", ".wsmgs_authenticate", (e) => {
+            $(document).on("click", ".wsmgs_export_btn", (e) => {
                 e.preventDefault();
                 this.exportProducts(e);
             });
@@ -25,7 +25,7 @@ $(function () {
 
         // Set the auth button after woocommerce export button
         setButtton() {
-            $(this.btn).after(`<a href="#" class="page-title-action wsmgs_authenticate">Export To Sheet</a>`);
+            $(this.btn).after(`<button href="#" class="page-title-action wsmgs_export_btn">Export To Sheet</button>`);
         }
 
         // Authenticate user google sheet by sending request to backend
@@ -40,6 +40,11 @@ $(function () {
                     wpNonce: wsmgsLocal.wpNonce,
                 },
 
+                beforeSend: () => {
+                    $(e.currentTarget).addClass("disabled");
+                    $(e.currentTarget).attr("disabled", true);
+                },
+
                 success: (response) => {
                     try {
                         showAlert({
@@ -52,6 +57,11 @@ $(function () {
                             type: `alert_error`,
                         });
                     }
+                },
+
+                complete: () => {
+                    $(e.currentTarget).removeClass("disabled");
+                    $(e.currentTarget).attr("disabled", false);
                 },
 
                 error: (error) => {

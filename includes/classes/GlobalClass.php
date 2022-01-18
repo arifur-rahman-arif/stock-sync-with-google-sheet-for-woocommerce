@@ -23,36 +23,86 @@ class GlobalClass {
             $wcProduct = wc_get_product($product->ID);
 
             array_push($organizedData, [
-                $product->ID, /* Column A*/
+                $product->ID ? $product->ID : '', /* Column A*/
 
-                $wcProduct->get_type(), /* Column B*/
+                $wcProduct->get_type() ? $wcProduct->get_type() : '', /* Column B*/
 
-                $wcProduct->get_sku(), /* Column C*/
+                $wcProduct->get_sku() ? $wcProduct->get_sku() : '', /* Column C*/
 
-                $product->post_title, /* Column D*/
+                $product->post_title ? $product->post_title : '', /* Column D*/
 
-                $product->post_status, /*  Column E*/
+                $product->post_status ? $product->post_status : '', /*  Column E*/
 
-                $wcProduct->get_stock_quantity(), /* Column F*/
+                $wcProduct->get_stock_quantity() ? $wcProduct->get_stock_quantity() : '', /* Column F*/
 
-                $wcProduct->get_sale_price(), /* Column G*/
+                $wcProduct->get_sale_price() ? $wcProduct->get_sale_price() : '', /* Column G*/
 
-                $wcProduct->get_regular_price() /* Column H*/
+                $wcProduct->get_regular_price() ? $wcProduct->get_regular_price() : '' /* Column H*/
 
             ]);
 
+            // If the current product is a variable product than push all its variations data afte the variable product
             if ($wcProduct->get_type() === 'variable') {
+
                 $variations = $wcProduct->get_available_variations();
 
                 if (is_array($variations) && count($variations) > 0) {
-                    foreach ($variations as $key => $value) {
-                        //get values HERE
+
+                    foreach ($variations as $key => $variation) {
+
+                        array_push($organizedData, [
+                            $variation['variation_id'] ? $variation['variation_id'] : '', /* Column A*/
+
+                            'variation', /* Column B*/
+
+                            $variation['sku'] ? $variation['sku'] : '', /* Column C*/
+
+                            $this->variationProductName($variation['attributes'], $product->post_title), /* Column D*/
+
+                            $product->post_status ? $product->post_status : '', /*  Column E*/
+
+                            $variation['max_qty'] ? $variation['max_qty'] : '', /* Column F*/
+
+                            $variation['display_price'] ? $variation['display_price'] : '', /* Column G*/
+
+                            $variation['display_regular_price'] ? $variation['display_regular_price'] : '' /* Column H*/
+
+                        ]);
+
                     }
                 }
             }
         }
 
         return $organizedData;
+    }
+
+    /**
+     * @param  array   $attributes
+     * @param  string  $productName
+     * @return mixed
+     */
+    public function variationProductName(array $attributes, string $productName) {
+
+        $variationName = '';
+
+        if (!is_array($attributes)) {
+            return $variationName;
+        }
+
+        if (count($attributes) < 1) {
+            return;
+        }
+
+        $capitalizedArray = [];
+
+        foreach ($attributes as $key => $value) {
+            $capitalizedArray[] = ucfirst($value);
+        }
+
+        $variationName = $productName . ' - ' . implode(", ", $capitalizedArray);
+
+        return $variationName;
     }
 
     /**
@@ -153,6 +203,48 @@ class GlobalClass {
         );
 
         $response = $service->spreadsheets_values->update(
+            $spreadsheetId,
+            $range,
+            $requestBody,
+            [
+                'valueInputOption'          => 'USER_ENTERED',
+                'responseValueRenderOption' => 'FORMATTED_VALUE'
+            ]
+        );
+
+        return $response;
+    }
+
+    /**
+     * Append data after first row in google sheet
+     * @param  $args
+     * @return mixed
+     */
+    public function insertData($args) {
+
+        if (!isset($args['sheetId']) || !$args['sheetId']) {
+            trigger_error("Sheet ID is not found", E_USER_WARNING);
+            return;
+        }
+
+        if (!isset($args['tabName']) || !$args['tabName']) {
+            trigger_error("Sheet tab name is not found", E_USER_WARNING);
+            return;
+        }
+
+        $client = $this->getClient();
+
+        $service = new \Google_Service_Sheets($client);
+
+        $spreadsheetId = $args['sheetId'];
+        $range = '' . $args['tabName'] . '!A1';
+        $requestBody = new \Google_Service_Sheets_ValueRange();
+        $requestBody->setMajorDimension('ROWS');
+        $requestBody->setValues(
+            $args['values']
+        );
+
+        $response = $service->spreadsheets_values->append(
             $spreadsheetId,
             $range,
             $requestBody,

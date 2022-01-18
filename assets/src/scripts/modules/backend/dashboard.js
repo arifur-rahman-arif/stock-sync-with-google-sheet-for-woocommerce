@@ -13,11 +13,6 @@ $(document).ready(function () {
         }
 
         events() {
-            $(document).on("click", ".wsmgs_authenticate", (e) => {
-                e.preventDefault();
-                this.authenticateGoogleSheet(e);
-            });
-
             this.botMail.on("click", (e) => {
                 let target = $(e.currentTarget);
                 let text = target.text();

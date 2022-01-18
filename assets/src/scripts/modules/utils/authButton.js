@@ -15,8 +15,7 @@ $(function () {
         events() {
             $(document).on("click", ".wsmgs_authenticate", (e) => {
                 e.preventDefault();
-
-                this.authenticateGoogleSheet(e);
+                this.exportProducts(e);
             });
         }
 
@@ -30,7 +29,7 @@ $(function () {
         }
 
         // Authenticate user google sheet by sending request to backend
-        authenticateGoogleSheet(e) {
+        exportProducts(e) {
             // Send ajax request to server for user authentication
             $.ajax({
                 type: "POST",
@@ -42,14 +41,27 @@ $(function () {
                 },
 
                 success: (response) => {
-                    console.log(response);
-                    showAlert({
-                        message: "Text copied to clipboard",
-                        type: "alert_success",
-                    });
+                    try {
+                        showAlert({
+                            message: response.data.message,
+                            type: `alert_${response.data.status}`,
+                        });
+                    } catch (error) {
+                        showAlert({
+                            message: error,
+                            type: `alert_error`,
+                        });
+                    }
                 },
 
-                error: (error) => {},
+                error: (error) => {
+                    let response = JSON.parse(error.responseText);
+
+                    showAlert({
+                        message: response.data.message,
+                        type: `alert_${response.data.status}`,
+                    });
+                },
             });
         }
     }

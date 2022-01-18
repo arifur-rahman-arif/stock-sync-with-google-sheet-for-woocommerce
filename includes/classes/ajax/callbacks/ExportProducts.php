@@ -9,7 +9,7 @@ class ExportProducts {
      * @var array
      */
     public $output = [
-        'status'  => 'invalid',
+        'status'  => 'error',
         'message' => "Server error"
     ];
 
@@ -27,8 +27,8 @@ class ExportProducts {
 
         try {
             if (sanitize_text_field($_POST['action']) !== 'wsmgs_export_product') {
-                $output['status'] = 'invalid';
-                $output['message'] = 'Action is not valid';
+                $output['status'] = 'error';
+                $output['message'] = esc_html__('Action is not valid', WSMGS_TEXT_DOMAIN);
                 wp_send_json_error($output, 400);
                 wp_die();
             }
@@ -36,20 +36,14 @@ class ExportProducts {
             $this->reqData = $this->sanitizeData($_POST);
 
             if (!wp_verify_nonce($this->reqData['wpNonce'], 'wsmgs_nonce')) {
-                $output['status'] = 'invalid';
-                $output['message'] = 'Invalid nonce';
+                $output['status'] = 'error';
+                $output['message'] = esc_html__('Invalid nonce', WSMGS_TEXT_DOMAIN);
                 wp_send_json_error($output, 403);
                 wp_die();
             };
 
             // Assigne the global class to use its methods
             $this->methods = new GlobalClass();
-
-            $products = $this->getProducts();
-
-            $insertionValues = $this->methods->organizeInsertionValues($products);
-
-            // wp_console_log($insertionValues);
 
             $this->initExport();
 
@@ -64,7 +58,7 @@ class ExportProducts {
     // Initialize the export of products in google sheet
     public function initExport() {
         $this->addSheetColumn();
-        // $this->insertProducts();
+        $this->insertProducts();
     }
 
     /**
@@ -93,6 +87,40 @@ class ExportProducts {
             $this->methods->updateColumn($args);
         }
 
+    }
+
+    public function insertProducts() {
+
+        $products = $this->getProducts();
+
+        $insertionValues = $this->methods->organizeInsertionValues($products);
+
+        $args = [
+            'sheetId' => $this->methods->getSheetId(get_option('sheetUrl')),
+            'tabName' => get_option('tabName'),
+            'values'  => $insertionValues
+        ];
+
+        try {
+
+            $response = $this->methods->insertData($args);
+
+            if ($response) {
+                $output['status'] = 'success';
+                $output['message'] = esc_html__('Products inserted in google sheet', WSMGS_TEXT_DOMAIN);
+                wp_send_json_success($output, 201);
+                wp_die();
+            } else {
+                $output['status'] = 'error';
+                $output['message'] = esc_html__('Products could not be inserted. Try again', WSMGS_TEXT_DOMAIN);
+                wp_send_json_error($output, 400);
+                wp_die();
+            }
+
+        } catch (\Throwable $error) {
+            $this->output['response_type'] = esc_html('failed');
+            $this->output['output'] = $error;
+        }
     }
 
     /**

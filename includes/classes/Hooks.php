@@ -25,8 +25,13 @@ class Hooks {
     }
 
     public function actionHooks() {
+
+        // Add the admin menu for plugin in wp dashborad
         add_action('admin_menu', [$this->hookCallbacks, 'addAdminMenus']);
         add_action('admin_init', [$this->hookCallbacks, 'addMenuSettings']);
+
+        // Register the rest route to recive webhook request from the sheet
+        add_action('rest_api_init', [$this->hookCallbacks, 'registerRoute']);
     }
 
     public function enqueueHooks() {

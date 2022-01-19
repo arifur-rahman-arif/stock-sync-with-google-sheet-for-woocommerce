@@ -108,4 +108,32 @@ class HookCallbacks {
         load_template(WSMGS_BASE_PATH . 'templates/dashboard_settings.php', true);
     }
 
+    // Register the rest route in wordpress to receive the sheet request and act accordingly
+    public function registerRoute() {
+        register_rest_route('wsmgs/v1', 'update-product', array(
+            'methods'             => \WP_REST_Server::CREATABLE,
+            'callback'            => [$this, 'handleRequest'],
+            'permission_callback' => function () {return '';},
+        ), true);
+    }
+
+    // Handle the post request from sheet
+    /**
+     * @param $request
+     */
+    public function handleRequest($request) {
+
+        $requestBody = $request->get_body();
+
+        $requestBody = json_decode($requestBody);
+
+        wp_console_log($requestBody);
+
+        return json_encode([
+            'status'   => 200,
+            'response' => 'Order created'
+        ]);
+
+    }
+
 }

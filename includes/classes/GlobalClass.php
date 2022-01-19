@@ -152,14 +152,14 @@ class GlobalClass {
     public function sheetColumns() {
 
         $columns = [
-            'ID',
-            'Type',
-            'SKU',
-            'Name',
-            'Published',
-            'Stock',
-            'Sale price',
-            'Regular price'
+            'id'           => 'ID',
+            'type'         => 'Type',
+            'sku'          => 'SKU',
+            'name'         => 'Name',
+            'published'    => 'Published',
+            'stock'        => 'Stock',
+            'salePrice'    => 'Sale price',
+            'regularPrice' => 'Regular price'
         ];
 
         return $columns;

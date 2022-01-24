@@ -7,6 +7,7 @@ defined('ABSPATH') || wp_die(__('You can\'t access this page', 'wsmgs'));
 class HookCallbacks {
 
     public function loadBackendAssets() {
+        $this->loadExternalCss();
         $this->loadBackendScripts();
         $this->localizeFile();
 
@@ -16,9 +17,16 @@ class HookCallbacks {
         }
     }
 
+    public function loadExternalCss() {
+        wp_enqueue_style('WSMGS_prism', WSMGS_BASE_URL . 'assets/public/syntex-highlight/prism.css', [], WSMGS_VERSION, 'all');
+    }
+
     // Load all the scripts for admin panal
     public function loadBackendScripts() {
         wp_enqueue_script('jquery');
+
+        wp_enqueue_script('WSMGS_prism', WSMGS_BASE_URL . 'assets/public/syntex-highlight/prism.js', [], WSMGS_VERSION, true);
+
         wp_enqueue_script('WSMGS_admin', WSMGS_BASE_URL . 'assets/public/scripts/backend.min.js', ['jquery'], WSMGS_VERSION, true);
     }
 
@@ -127,7 +135,7 @@ class HookCallbacks {
 
         $requestBody = json_decode($requestBody);
 
-        wp_console_log($requestBody);
+        // wp_console_log($requestBody);
 
         return json_encode([
             'status'   => 200,

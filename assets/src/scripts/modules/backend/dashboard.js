@@ -2,7 +2,7 @@ import { copyToClipboard } from "../utils/helperFunctions";
 
 var $ = jQuery.noConflict();
 
-$(document).ready(function () {
+$(function () {
     class Dashboard {
         constructor() {
             // Define the properties of this class

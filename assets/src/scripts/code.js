@@ -1,5 +1,13 @@
+// Run on user edit
 function atEdit(e) {
+    let sheet = e.range.getSheet();
+
+    let currentTab = sheet.getName();
+
+    if (currentTab !== "Copy of WooCommerce Stock Management with Google Sheet") return "INVALID_SHEET";
+
     let data = collectData(e);
+
     updateProduct({
         data,
     });
@@ -9,52 +17,69 @@ function atEdit(e) {
 function collectData(e) {
     let sheet = e.range.getSheet();
 
-    let currentTab = sheet.getName();
-
-    if (currentTab !== "Copy of WooCommerce Stock Management with Google Sheet") return "INVALID_SHEET";
-
     let column = e.range.getColumn();
 
     if (column > 8) return "INVALID_COLUMN";
 
     let range = sheet.getActiveRange();
 
-    let editedValues = range.getValues()[0];
+    let editedValues = range.getValues();
 
-    // The start index of the user column selection in the row
-    let startIndex = column;
-    // The end index of user current selection in the row
-    let endIndex = column + (editedValues.length - 1);
+    if (!editedValues) return "NO_VALUES";
 
-    // The colum place
-    let columns = [
-        "id", // Col A
-        "type", // Col B
-        "sku", // Col C
-        "name", // Col D
-        "published", // Col E
-        "stock", // Col F
-        "salePrice", // Col G
-        "regularPrice", // Col H
-    ];
+    let data = [];
 
-    let organizedData = {};
+    editedValues.forEach((editedValue, rowIndex) => {
+        let row = e.range.getRow() + rowIndex;
 
-    let tempIndex = 0;
+        let aToBValues = sheet.getRange(`A${row}:B${row}`).getValues()[0];
 
-    for (let i = startIndex; i <= endIndex; i++) {
-        if (!organizedData[columns[i - 1]]) {
-            organizedData[columns[i - 1]] = editedValues[tempIndex];
+        // The start index of the user column selection in the row
+        let startIndex = column;
+        // The end index of user current selection in the row
+        let endIndex = column + (editedValue.length - 1);
+
+        // The colum place
+        let columns = [
+            "id", // Col A
+            "type", // Col B
+            "sku", // Col C
+            "name", // Col D
+            "published", // Col E
+            "stock", // Col F
+            "salePrice", // Col G
+            "regularPrice", // Col H
+        ];
+
+        let organizedData = {};
+
+        let tempIndex = 0;
+
+        for (let i = startIndex; i <= endIndex; i++) {
+            if (!organizedData[columns[i - 1]]) {
+                organizedData[columns[i - 1]] = editedValue[tempIndex];
+            }
+
+            if (!organizedData.id) {
+                organizedData[columns[0]] = aToBValues[0];
+            }
+
+            if (!organizedData.type) {
+                organizedData[columns[1]] = aToBValues[1];
+            }
+
+            tempIndex++;
         }
-        tempIndex++;
-    }
 
-    return organizedData;
+        data.push(organizedData);
+    });
+
+    return data;
 }
 
 // Update the product on wordpress when there is a new change in sheet
 function updateProduct(args) {
-    if (typeof args.data !== "object") {
+    if (typeof args.data !== "array" || args.data.length < 1) {
         SpreadsheetApp.getActiveSpreadsheet().toast("Data is not valid to send to WordPress");
         return "INVALID_DATA";
     }
@@ -73,7 +98,7 @@ function updateProduct(args) {
     };
 
     try {
-        let url = "https://7e9d-118-179-170-193.ngrok.io/wp-json/wsmgs/v1/update-product";
+        let url = "//localhost:4040/wp-json/wsmgs/v1/update-product";
         let result = UrlFetchApp.fetch(url, options);
         let response = JSON.parse(result.getContentText());
 

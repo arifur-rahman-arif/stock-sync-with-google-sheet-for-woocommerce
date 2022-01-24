@@ -27,18 +27,18 @@ class ExportProducts {
 
         try {
             if (sanitize_text_field($_POST['action']) !== 'wsmgs_export_product') {
-                $output['status'] = 'error';
-                $output['message'] = esc_html__('Action is not valid', WSMGS_TEXT_DOMAIN);
-                wp_send_json_error($output, 400);
+                $this->output['status'] = 'error';
+                $this->output['message'] = esc_html__('Action is not valid', WSMGS_TEXT_DOMAIN);
+                wp_send_json_error($this->output, 400);
                 wp_die();
             }
 
             $this->reqData = $this->sanitizeData($_POST);
 
             if (!wp_verify_nonce($this->reqData['wpNonce'], 'wsmgs_nonce')) {
-                $output['status'] = 'error';
-                $output['message'] = esc_html__('Invalid nonce', WSMGS_TEXT_DOMAIN);
-                wp_send_json_error($output, 403);
+                $this->output['status'] = 'error';
+                $this->output['message'] = esc_html__('Invalid nonce', WSMGS_TEXT_DOMAIN);
+                wp_send_json_error($this->output, 403);
                 wp_die();
             };
 
@@ -48,8 +48,8 @@ class ExportProducts {
             $this->initExport();
 
         } catch (\Throwable $error) {
-            $output['message'] = $error->getMessage();
-            wp_send_json_error($this->output, $error->getMessage());
+            $this->output['message'] = $error->getMessage();
+            wp_send_json_error($this->output, 500);
             wp_die();
         }
 
@@ -108,20 +108,20 @@ class ExportProducts {
             $response = $this->methods->insertData($args);
 
             if ($response) {
-                $output['status'] = 'success';
+                $this->output['status'] = 'success';
 
-                $output['message'] = esc_html__($productCount . ' products exported in google sheet', WSMGS_TEXT_DOMAIN);
+                $this->output['message'] = esc_html__($productCount . ' products exported in google sheet', WSMGS_TEXT_DOMAIN);
 
                 if ($productCount === 0) {
-                    $output['message'] = esc_html__('All products are already found in google sheet.', WSMGS_TEXT_DOMAIN);
+                    $this->output['message'] = esc_html__('All products are already found in google sheet.', WSMGS_TEXT_DOMAIN);
                 }
 
-                wp_send_json_success($output, 201);
+                wp_send_json_success($this->output, 201);
                 wp_die();
             } else {
-                $output['status'] = 'error';
-                $output['message'] = esc_html__('Products could not be inserted. Try again', WSMGS_TEXT_DOMAIN);
-                wp_send_json_error($output, 400);
+                $this->output['status'] = 'error';
+                $this->output['message'] = esc_html__('Products could not be inserted. Try again', WSMGS_TEXT_DOMAIN);
+                wp_send_json_error($this->output, 400);
                 wp_die();
             }
 

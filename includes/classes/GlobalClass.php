@@ -22,7 +22,7 @@ class GlobalClass {
 
             $wcProduct = wc_get_product($product->ID);
 
-            $isProductExported = $this->markProductExported($product->ID);
+            $isProductExported = $this->isProductExported($product->ID);
 
             if ($isProductExported) {
                 continue;
@@ -87,15 +87,48 @@ class GlobalClass {
     /**
      * @param $productID
      */
-    public function markProductExported($productID) {
-        $isExported = get_post_meta($productID, 'wsmgs_exported', true);
+    public function isProductExported($productID) {
+        $sheetProductIDs = $this->getProductIDFromSheet();
 
-        if ($isExported) {
-            return true;
-        } else {
-            update_post_meta($productID, 'wsmgs_exported', true);
+        if (!is_array($sheetProductIDs)) {
             return false;
         }
+
+        $sheetProductIDs = array_merge(...$sheetProductIDs);
+
+        return in_array($productID, $sheetProductIDs);
+    }
+
+    /**
+     * Get only the first column which is product id column
+     * @return mixed
+     */
+    public function getProductIDFromSheet() {
+
+        $sheetID = $this->getSheetId(get_option('sheetUrl'));
+        $tabName = get_option('tabName');
+
+        if (!$sheetID) {
+            trigger_error("Sheet ID is not found", E_USER_WARNING);
+            return;
+        }
+
+        if (!$tabName) {
+            trigger_error("Sheet tab name is not found", E_USER_WARNING);
+            return;
+        }
+
+        $client = $this->getClient();
+        $service = new \Google_Service_Sheets($client);
+
+        $spreadsheetId = $sheetID;
+        $range = '' . $tabName . '!A2:A';
+        $requestBody = new \Google_Service_Sheets_ValueRange();
+        $requestBody->setMajorDimension('ROWS');
+        $response = $service->spreadsheets_values->get($spreadsheetId, $range);
+        $values = $response->getValues();
+        return $values;
+
     }
 
     /**

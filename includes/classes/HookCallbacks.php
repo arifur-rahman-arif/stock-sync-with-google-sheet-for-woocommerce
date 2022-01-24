@@ -59,7 +59,7 @@ class HookCallbacks {
             __('WooCommerce To Google Sheet', WSMGS_TEXT_DOMAIN),
             __('WooCommerce To Google Sheet', WSMGS_TEXT_DOMAIN),
             'manage_options',
-            'wsmgs_page',
+            'wsmgs-page',
             [$this, 'dashboardTemplate'],
             'dashicons-database-export'
         );
@@ -101,13 +101,13 @@ class HookCallbacks {
             'wsmgs_section_id',
             '',
             null,
-            'wsmgs_page'
+            'wsmgs-page'
         );
         add_settings_field(
             'wsmgs_settings_field',
             "",
             [$this, 'loadFieldHTML'],
-            'wsmgs_page',
+            'wsmgs-page',
             'wsmgs_section_id'
         );
     }
@@ -125,8 +125,8 @@ class HookCallbacks {
         ), true);
     }
 
-    // Handle the post request from sheet
     /**
+     * Handle the post request from sheet
      * @param $request
      */
     public function handleRequest($request) {
@@ -135,13 +135,61 @@ class HookCallbacks {
 
         $requestBody = json_decode($requestBody);
 
-        // wp_console_log($requestBody);
+        $token = $requestBody->token;
+        $reqData = $requestBody->reqData;
 
-        return json_encode([
-            'status'   => 200,
-            'response' => 'Order created'
-        ]);
+        if ($token !== get_option('wsmgsToken')) {
+            return wp_send_json_error([
+                'status'  => 'error',
+                'message' => esc_html__('Token is not valid', WSMGS_TEXT_DOMAIN)
+            ], 401);
+        }
 
+        if (count($reqData) < 1) {
+            return wp_send_json_error([
+                'status'  => 'error',
+                'message' => esc_html__('No data found to update', WSMGS_TEXT_DOMAIN)
+            ], 404);
+        }
+
+        return wp_send_json_success([
+            'status'  => 'success',
+            'message' => esc_html__('Data updated in WordPress', WSMGS_TEXT_DOMAIN)
+        ], 200);
+
+    }
+
+    /**
+     * Update woocommerce products based on their id & data
+     * @param array $reqData
+     */
+    public function updateProducts(array $reqData) {
+
+        if (count($reqData) < 1) {
+            return [
+                'status'  => 'error',
+                'message' => esc_html__('No data found to update', WSMGS_TEXT_DOMAIN)
+            ];
+        }
+
+        foreach ($reqData as $key => $data) {
+            $productID = property_exists($data, 'id') ? $data->id : null;
+            $type = property_exists($data, 'type') ? $data->type : null;
+            $sku = property_exists($data, 'sku') ? $data->sku : null;
+            $name = property_exists($data, 'name') ? $data->name : null;
+            $published = property_exists($data, 'published') ? $data->published : null;
+            $stock = property_exists($data, 'stock') ? $data->stock : null;
+            $salePrice = property_exists($data, 'salePrice') ? $data->salePrice : null;
+            $regularPrice = property_exists($data, 'regularPrice') ? $data->regularPrice : null;
+
+            if (!$productID) {
+                continue;
+            }
+
+            if ($sku) {
+                update_post_meta($productID, '_sku', $sku);
+            }
+        }
     }
 
 }

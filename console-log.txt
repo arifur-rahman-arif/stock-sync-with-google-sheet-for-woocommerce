@@ -1,0 +1,21 @@
+=>	stdClass Object
+(
+    [token] => b019fa93-68ec-4415-8276-c273f555be7c
+    [reqData] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [type] => simple
+                    [id] => 30
+                    [sku] => woo-hoodie-with-zipper
+                )
+
+        )
+
+)
+
+	Occured in E:\laragon\www\wsmgs\wp-content\plugins\woocommerce-stock-management-with-google-sheet\includes\classes\HookCallbacks.php
+	on line 138
+	at 24-Jan-2022 | 11:45:50 AM 
+
+

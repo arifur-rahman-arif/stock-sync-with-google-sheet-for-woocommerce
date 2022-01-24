@@ -4,13 +4,15 @@
 <div class="wrap">
     <form action="options.php" method="POST">
         <?php settings_fields('wsmgs_general_setting')?>
-        <?php do_settings_sections('wsmgs_page')?>
+        <?php do_settings_sections('wsmgs-page')?>
         <?php submit_button('Save Settings', 'primary');?>
     </form>
     <br>
-    <p>
-    <h3>
 
+
+    <?php if (get_option('tabName') && get_option('sheetURL')) {?>
+
+    <h3>
         Save the google sheet and give this bot
         <span class="bot_mail">
             <code>wsmgs-plugin@wsmgs-plugin-338313.iam.gserviceaccount.com</code>
@@ -20,9 +22,6 @@
         <br>
         <i>Note:</i> You have to give this bot ID editor access or your won't be in sync with your sheet.
     </h3>
-    </p>
-
-    <?php if (get_option('tabName') && get_option('sheetURL')) {?>
 
     <span>
         <b>
@@ -119,14 +118,14 @@ function collectData(e) {
 
 // Update the product on wordpress when there is a new change in sheet
 function updateProduct(args) {
-    if (typeof args.data !== "array" || args.data.length < 1) {
+    if (!Array.isArray(args.data) || args.data.length < 1) {
         SpreadsheetApp.getActiveSpreadsheet().toast("Data is not valid to send to WordPress");
         return "INVALID_DATA";
     }
 
     //Request body
     let data = {
-        token: "alsdfjoq23drlkncaoiohsdjf",
+        token: "<?php echo get_option('wsmgsToken') ?>",
         reqData: args.data,
     };
 
@@ -144,7 +143,6 @@ function updateProduct(args) {
 
         SpreadsheetApp.getActiveSpreadsheet().toast("Task started");
 
-        Logger.log(response);
     } catch (error) {
         Logger.log(error);
     }

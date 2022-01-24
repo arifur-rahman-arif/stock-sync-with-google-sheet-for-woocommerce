@@ -82,6 +82,12 @@ final class WSMGS {
      * @return null
      */
     public function initiatePlugin() {
+
+        if (get_option('wsmgsRedirect')) {
+            delete_option('wsmgsRedirect');
+            wp_redirect(admin_url('admin.php?page=wsmgs-page'));
+        }
+
         // Include the base file of this plugin
         new WSMGS\Plugin;
     }
@@ -137,7 +143,15 @@ if (!class_exists('WSMGS')) {
 add_action('plugins_loaded', 'woocommerceStockManagementWithSheet');
 
 if (!function_exists('woocommerceStockManagementWithSheet')) {
+
     function woocommerceStockManagementWithSheet() {
         return new WSMGS();
     }
 }
+
+register_activation_hook(__FILE__, function () {
+    if (!get_option('wsmgsToken')) {
+        add_option('wsmgsToken', wp_generate_uuid4());
+    }
+    add_option('wsmgsRedirect', true);
+});

@@ -49,7 +49,7 @@ class ExportProducts {
 
         } catch (\Throwable $error) {
             $this->output['message'] = $error->getMessage();
-            wp_send_json_error($this->output, 500);
+            wp_send_json_error($this->output, $error->getCode());
             wp_die();
         }
 
@@ -72,6 +72,7 @@ class ExportProducts {
         ];
 
         $columns = $this->methods->sheetColumns();
+        $columns = array_values($columns);
 
         $sheetColumn = $this->methods->getSheetColumn($args);
 
@@ -84,7 +85,9 @@ class ExportProducts {
 
             $args['values'] = [$columns];
 
-            $this->methods->updateColumn($args);
+            $response = $this->methods->updateColumn($args);
+
+            return $response;
         }
 
     }
@@ -126,8 +129,8 @@ class ExportProducts {
             }
 
         } catch (\Throwable $error) {
-            $this->output['response_type'] = esc_html('failed');
-            $this->output['output'] = $error;
+            $this->output['message'] = $error->getMessage();
+            wp_send_json_error($this->output, $error->getCode());
         }
     }
 

@@ -291,7 +291,7 @@ class GlobalClass {
         $service = new \Google_Service_Sheets($client);
 
         $spreadsheetId = $args['sheetId'];
-        $range = '' . $args['tabName'] . '!A1';
+        $range = '' . $args['tabName'] . '!A2';
         $requestBody = new \Google_Service_Sheets_ValueRange();
         $requestBody->setMajorDimension('ROWS');
         $requestBody->setValues(

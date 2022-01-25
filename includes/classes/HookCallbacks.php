@@ -131,32 +131,30 @@ class HookCallbacks {
      */
     public function handleRequest($request) {
 
-        $requestBody = $request->get_body();
+        try {
 
-        $requestBody = json_decode($requestBody);
+            $requestBody = $request->get_body();
 
-        $token = $requestBody->token;
-        $reqData = $requestBody->reqData;
+            $requestBody = json_decode($requestBody);
 
-        if ($token !== get_option('wsmgsToken')) {
+            $token = $requestBody->token;
+            $reqData = $requestBody->reqData;
+
+            if ($token !== get_option('wsmgsToken')) {
+                return wp_send_json_error([
+                    'status'  => 'error',
+                    'message' => esc_html__('Token is not valid', WSMGS_TEXT_DOMAIN)
+                ], 401);
+            }
+
+            return $this->updateProducts($reqData);
+
+        } catch (\Throwable $error) {
             return wp_send_json_error([
                 'status'  => 'error',
-                'message' => esc_html__('Token is not valid', WSMGS_TEXT_DOMAIN)
-            ], 401);
+                'message' => esc_html__($error->getMessage(), WSMGS_TEXT_DOMAIN)
+            ], $error->getCode());
         }
-
-        if (count($reqData) < 1) {
-            return wp_send_json_error([
-                'status'  => 'error',
-                'message' => esc_html__('No data found to update', WSMGS_TEXT_DOMAIN)
-            ], 404);
-        }
-
-        return wp_send_json_success([
-            'status'  => 'success',
-            'message' => esc_html__('Data updated in WordPress', WSMGS_TEXT_DOMAIN)
-        ], 200);
-
     }
 
     /**
@@ -165,14 +163,19 @@ class HookCallbacks {
      */
     public function updateProducts(array $reqData) {
 
-        if (count($reqData) < 1) {
-            return [
+        if (count($reqData) < 1 || !$reqData) {
+            return wp_send_json_error([
                 'status'  => 'error',
                 'message' => esc_html__('No data found to update', WSMGS_TEXT_DOMAIN)
-            ];
+            ], 404);
         }
 
+        $updatedProducts = [];
+
         foreach ($reqData as $key => $data) {
+
+            $isProductUpdated = false;
+
             $productID = property_exists($data, 'id') ? $data->id : null;
             $type = property_exists($data, 'type') ? $data->type : null;
             $sku = property_exists($data, 'sku') ? $data->sku : null;
@@ -186,10 +189,97 @@ class HookCallbacks {
                 continue;
             }
 
-            if ($sku) {
-                update_post_meta($productID, '_sku', $sku);
+            $woocmmerceInstance = wc_get_product($productID);
+
+            if (!$woocmmerceInstance) {
+                continue;
             }
+
+            // Update the product sku
+            if ($sku) {
+                if (update_post_meta($productID, '_sku', $sku)) {
+                    $isProductUpdated = true;
+                };
+            }
+
+            // Update the product name
+            if ($name) {
+                $args = [
+                    'ID'         => $productID,
+                    'post_type'  => 'product',
+                    'post_title' => $name
+                ];
+
+                if (!is_wp_error(wp_update_post($args))) {
+                    $isProductUpdated = true;
+                };
+            }
+
+            $postStatus = ['publish', 'draft'];
+
+            // Update the product status
+            if (in_array($published, $postStatus)) {
+                $args = [
+                    'ID'          => $productID,
+                    'post_type'   => 'product',
+                    'post_status' => $published
+                ];
+
+                if (!is_wp_error(wp_update_post($args))) {
+                    $isProductUpdated = true;
+                };
+            }
+
+            // Update the product stock quantity
+            if ($stock) {
+                $quantity = $stock;
+
+                $woocmmerceInstance->set_stock_quantity($quantity);
+
+                if ($quantity == 0) {
+                    $woocmmerceInstance->set_stock_status('outofstock');
+                }
+
+                $woocmmerceInstance->save();
+
+                $isProductUpdated = true;
+            }
+
+            // Update the product sale price
+            if ($salePrice) {
+                $woocmmerceInstance->set_sale_price($salePrice);
+                if ($woocmmerceInstance->save()) {
+                    $isProductUpdated = true;
+                };
+            }
+
+            // Update the product reguler price
+            if ($regularPrice) {
+                $woocmmerceInstance->set_regular_price($regularPrice);
+                if ($woocmmerceInstance->save()) {
+                    $isProductUpdated = true;
+                };
+            }
+
+            // If any of the field is updated than push that product ID to return value
+            if ($isProductUpdated) {
+                array_push($updatedProducts, $productID);
+            }
+
         }
+
+        // If there are no product id found in array that means no product updated
+        if (count($updatedProducts) < 1) {
+            return wp_send_json_error([
+                'status'  => 'error',
+                'message' => esc_html__('No data updated', WSMGS_TEXT_DOMAIN)
+            ], 400);
+        }
+
+        return wp_send_json_success([
+            'status'  => 'success',
+            'message' => esc_html__(count($updatedProducts) . ' product updated', WSMGS_TEXT_DOMAIN)
+        ], 200);
     }
 
 }

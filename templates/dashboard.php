@@ -133,18 +133,20 @@ function updateProduct(args) {
     let options = {
         method: "POST",
         contentType: "application/json",
+        muteHttpExceptions: true,
         payload: JSON.stringify(data),
     };
 
     try {
+
         let url = "<?php echo site_url() ?>/wp-json/wsmgs/v1/update-product";
         let result = UrlFetchApp.fetch(url, options);
         let response = JSON.parse(result.getContentText());
 
-        SpreadsheetApp.getActiveSpreadsheet().toast("Task started");
+        SpreadsheetApp.getActiveSpreadsheet().toast(response.data.message);
 
     } catch (error) {
-        Logger.log(error);
+        SpreadsheetApp.getActiveSpreadsheet().toast(error.message);
     }
 }
 </code>

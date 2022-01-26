@@ -34,7 +34,7 @@ class Hooks {
         add_action('rest_api_init', [$this->hookCallbacks, 'registerRoute']);
 
         // Update product in google sheet when user update products in WordPress
-        add_action('save_post_product', [$this->hookCallbacks, 'updateSheetProduct']);
+        add_action('wp_insert_post', [$this->hookCallbacks, 'updateSheetProduct'], 10, 3);
     }
 
     public function enqueueHooks() {

@@ -29,7 +29,7 @@ class GlobalClass {
      * @param  $products
      * @return mixed
      */
-    public function organizeInsertionValues(array $products) {
+    public function organizeInsertionValues(array $products, bool $skipExportCheck = false) {
         $organizedData = [];
 
         if (!is_array($products) || count($products) < 1) {
@@ -40,10 +40,13 @@ class GlobalClass {
 
             $wcProduct = wc_get_product($product->ID);
 
-            $isProductExported = $this->isProductExported($product->ID);
+            if ($skipExportCheck == false) {
 
-            if ($isProductExported) {
-                continue;
+                $isProductExported = $this->isProductExported($product->ID);
+
+                if ($isProductExported) {
+                    continue;
+                }
             }
 
             array_push($organizedData, [
@@ -118,7 +121,7 @@ class GlobalClass {
     }
 
     /**
-     * Get only the first column which is product id column
+     * Get only the first column from sheet which is product id column
      * @return mixed
      */
     public function getProductIDFromSheet() {
@@ -317,6 +320,52 @@ class GlobalClass {
         );
 
         $response = $service->spreadsheets_values->append(
+            $spreadsheetId,
+            $range,
+            $requestBody,
+            [
+                'valueInputOption'          => 'USER_ENTERED',
+                'responseValueRenderOption' => 'FORMATTED_VALUE'
+            ]
+        );
+
+        return $response;
+    }
+
+    /**
+     * @param  $args
+     * @return mixed
+     */
+    public function updateProducts($args) {
+
+        if (!isset($args['sheetID']) || !$args['sheetID']) {
+            trigger_error("Sheet ID is not found", E_USER_WARNING);
+            return;
+        }
+
+        if (!isset($args['tabName']) || !$args['tabName']) {
+            trigger_error("Sheet tab name is not found", E_USER_WARNING);
+            return;
+        }
+
+        if (!isset($args['rowIndex']) || !$args['rowIndex']) {
+            trigger_error("Row index is empty or not found", E_USER_WARNING);
+            return;
+        }
+
+        $client = $this->getClient();
+
+        $service = new \Google_Service_Sheets($client);
+
+        $spreadsheetId = $args['sheetID'];
+        $range = '' . $args['tabName'] . '!A' . $args['rowIndex'] . ':H' . $args['rowIndex'] . '';
+        $requestBody = new \Google_Service_Sheets_ValueRange();
+        $requestBody->setMajorDimension('ROWS');
+        $requestBody->setValues(
+            $args['values']
+        );
+
+        $response = $service->spreadsheets_values->update(
             $spreadsheetId,
             $range,
             $requestBody,

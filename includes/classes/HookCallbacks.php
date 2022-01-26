@@ -9,7 +9,7 @@ class HookCallbacks {
     /**
      * @var mixed
      */
-    public $methods;
+    private $methods;
 
     public function loadBackendAssets() {
         $this->loadExternalCss();
@@ -293,7 +293,53 @@ class HookCallbacks {
      * @param $productID
      * @param $post
      */
-    public function updateSheetProduct($productID, $post) {
-        # code...
+    public function updateSheetProduct($productID, $post, $update) {
+
+        if (get_post_type($productID) != 'product') {
+            return;
+        }
+
+        // if update is not equel to true that means product dont exits and don't proceed to next process
+        if ($update != true) {
+            return;
+        }
+
+        // global $wsmgsGlobal;
+        $this->methods = new GlobalClass;
+
+        $sheetID = $this->methods->getSheetId(get_option('sheetUrl'));
+        $tabName = get_option('tabName');
+
+        $args = [
+            'sheetID' => $sheetID,
+            'tabName' => $tabName
+        ];
+
+        $sheetProductIDs = $this->methods->getProductIDFromSheet();
+
+        if (!is_array($sheetProductIDs)) {
+            return;
+        }
+
+        $rowIndex = null;
+
+        foreach ($sheetProductIDs as $key => $sheetProductID) {
+            if (isset($sheetProductID[0]) && $sheetProductID[0] == $productID) {
+                $rowIndex = $key + 2;
+                break;
+            }
+        }
+
+        $products = [];
+
+        array_push($products, $post);
+
+        $values = $this->methods->organizeInsertionValues($products, true);
+
+        $args['rowIndex'] = $rowIndex;
+        $args['values'] = $values;
+
+        $this->methods->updateProducts($args);
+
     }
 }

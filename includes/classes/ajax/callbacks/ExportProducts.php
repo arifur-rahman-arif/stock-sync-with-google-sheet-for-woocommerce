@@ -1,6 +1,8 @@
 <?php
 namespace WSMGS\classes\ajax\callbacks;
 
+defined('ABSPATH') || wp_die(__('You can\'t access this page', 'wsmgs'));
+
 use WSMGS\classes\GlobalClass;
 
 class ExportProducts {
@@ -21,7 +23,7 @@ class ExportProducts {
     /**
      * @var mixed
      */
-    public $methods;
+    private $methods;
 
     public function exportProducts() {
 

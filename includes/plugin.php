@@ -11,16 +11,9 @@ use WSMGS\classes\Hooks;
 class Plugin {
     public function __construct() {
 
-        $this->includeGlobalObjects();
-
         $this->includeHooks();
 
         $this->includeFilters();
-
-    }
-
-    // Include the global class so its methods will be used across the plugin
-    public function includeGlobalObjects() {
     }
 
     // Include all the hooks for this plugin

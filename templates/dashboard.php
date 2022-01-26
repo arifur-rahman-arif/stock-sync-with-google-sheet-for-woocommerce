@@ -146,7 +146,7 @@ function updateProduct(args) {
         SpreadsheetApp.getActiveSpreadsheet().toast(response.data.message);
 
     } catch (error) {
-        SpreadsheetApp.getActiveSpreadsheet().toast(error.message);
+        Logger.log(error.message)
     }
 }
 </code>

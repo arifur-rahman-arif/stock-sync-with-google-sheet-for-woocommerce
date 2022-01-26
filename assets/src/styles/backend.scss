@@ -10,9 +10,11 @@
 @import "../../../node_modules/bootstrap/scss/root";
 @import "../../../node_modules/bootstrap/scss/transitions";
 
-// Import required modules
+// Import required bootstrap modules
 @import "../../../node_modules/bootstrap/scss/toasts";
+@import "../../../node_modules/bootstrap/scss/spinners";
 
 @import "./modules/utils/alert.scss";
 @import "./modules/dashboard.scss";
 @import "./modules/utils/export_btn.scss";
+@import "./modules/utils/spinner.scss";

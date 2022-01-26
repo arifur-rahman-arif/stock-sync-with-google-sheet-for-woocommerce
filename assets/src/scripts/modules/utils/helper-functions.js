@@ -56,3 +56,28 @@ const insertAlertToUi = () => {
         </div>
     `);
 };
+
+// Show loader in page
+export const showLoader = () => {
+    if ($("#wpcontent .wsmgs_overlay").length) {
+        $("#wpcontent .wsmgs_overlay").show();
+    } else {
+        $("#wpcontent").css({
+            position: "relative",
+        }).append(`
+            
+            <div class="wsmgs_overlay">
+                <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        `);
+    }
+};
+
+// Hide the loader from page
+export const closeLoader = () => {
+    if ($("#wpcontent .wsmgs_overlay").length) {
+        $("#wpcontent .wsmgs_overlay").hide();
+    }
+};

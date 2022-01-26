@@ -33,7 +33,10 @@ class ExportProducts {
                 wp_die();
             }
 
-            $this->reqData = $this->sanitizeData($_POST);
+            // Assigne the global class to use its methods
+            $this->methods = new GlobalClass();
+
+            $this->reqData = $this->methods->sanitizeData($_POST);
 
             if (!wp_verify_nonce($this->reqData['wpNonce'], 'wsmgs_nonce')) {
                 $this->output['status'] = 'error';
@@ -41,9 +44,6 @@ class ExportProducts {
                 wp_send_json_error($this->output, 403);
                 wp_die();
             };
-
-            // Assigne the global class to use its methods
-            $this->methods = new GlobalClass();
 
             $this->initExport();
 
@@ -132,24 +132,6 @@ class ExportProducts {
             $this->output['message'] = $error->getMessage();
             wp_send_json_error($this->output, $error->getCode());
         }
-    }
-
-    /**
-     * @param  array   $nonSanitzedData
-     * @return mixed
-     */
-    public function sanitizeData(array $nonSanitzedData) {
-        $sanitizedData = null;
-
-        $sanitizedData = array_map(function ($data) {
-            if (gettype($data) == 'array') {
-                return $this->sanitizeData($data);
-            } else {
-                return sanitize_text_field($data);
-            }
-        }, $nonSanitzedData);
-
-        return $sanitizedData;
     }
 
     /**

@@ -6,6 +6,11 @@ defined('ABSPATH') || wp_die(__('You can\'t access this page', 'wsmgs'));
 
 class HookCallbacks {
 
+    /**
+     * @var mixed
+     */
+    public $methods;
+
     public function loadBackendAssets() {
         $this->loadExternalCss();
         $this->loadBackendScripts();
@@ -138,7 +143,6 @@ class HookCallbacks {
             $requestBody = json_decode($requestBody);
 
             $token = $requestBody->token;
-            $reqData = $requestBody->reqData;
 
             if ($token !== get_option('wsmgsToken')) {
                 return wp_send_json_error([
@@ -146,6 +150,8 @@ class HookCallbacks {
                     'message' => esc_html__('Token is not valid', WSMGS_TEXT_DOMAIN)
                 ], 401);
             }
+
+            $reqData = $requestBody->reqData;
 
             return $this->updateProducts($reqData);
 
@@ -176,14 +182,14 @@ class HookCallbacks {
 
             $isProductUpdated = false;
 
-            $productID = property_exists($data, 'id') ? $data->id : null;
-            $type = property_exists($data, 'type') ? $data->type : null;
-            $sku = property_exists($data, 'sku') ? $data->sku : null;
-            $name = property_exists($data, 'name') ? $data->name : null;
-            $published = property_exists($data, 'published') ? $data->published : null;
-            $stock = property_exists($data, 'stock') ? $data->stock : null;
-            $salePrice = property_exists($data, 'salePrice') ? $data->salePrice : null;
-            $regularPrice = property_exists($data, 'regularPrice') ? $data->regularPrice : null;
+            $productID = property_exists($data, 'id') ? sanitize_text_field($data->id) : null;
+            $type = property_exists($data, 'type') ? sanitize_text_field($data->type) : null;
+            $sku = property_exists($data, 'sku') ? sanitize_text_field($data->sku) : null;
+            $name = property_exists($data, 'name') ? sanitize_text_field($data->name) : null;
+            $published = property_exists($data, 'published') ? sanitize_text_field($data->published) : null;
+            $stock = property_exists($data, 'stock') ? sanitize_text_field($data->stock) : null;
+            $salePrice = property_exists($data, 'salePrice') ? sanitize_text_field($data->salePrice) : null;
+            $regularPrice = property_exists($data, 'regularPrice') ? sanitize_text_field($data->regularPrice) : null;
 
             if (!$productID) {
                 continue;
@@ -203,7 +209,7 @@ class HookCallbacks {
             }
 
             // Update the product name
-            if ($name) {
+            if ($name && $type != 'variation') {
                 $args = [
                     'ID'         => $productID,
                     'post_type'  => 'product',
@@ -218,7 +224,7 @@ class HookCallbacks {
             $postStatus = ['publish', 'draft'];
 
             // Update the product status
-            if (in_array($published, $postStatus)) {
+            if (in_array($published, $postStatus) && $type != 'variation') {
                 $args = [
                     'ID'          => $productID,
                     'post_type'   => 'product',
@@ -231,18 +237,19 @@ class HookCallbacks {
             }
 
             // Update the product stock quantity
-            if ($stock) {
+            if ($stock || $stock == 0) {
                 $quantity = $stock;
 
+                $woocmmerceInstance->set_manage_stock(true);
                 $woocmmerceInstance->set_stock_quantity($quantity);
 
                 if ($quantity == 0) {
                     $woocmmerceInstance->set_stock_status('outofstock');
                 }
 
-                $woocmmerceInstance->save();
-
-                $isProductUpdated = true;
+                if ($woocmmerceInstance->save()) {
+                    $isProductUpdated = true;
+                };
             }
 
             // Update the product sale price
@@ -282,4 +289,11 @@ class HookCallbacks {
         ], 200);
     }
 
+    /**
+     * @param $productID
+     * @param $post
+     */
+    public function updateSheetProduct($productID, $post) {
+        # code...
+    }
 }

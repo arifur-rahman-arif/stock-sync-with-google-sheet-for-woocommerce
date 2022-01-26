@@ -7,6 +7,24 @@ defined('ABSPATH') || wp_die(__('You can\'t access this page', 'wsmgs'));
 class GlobalClass {
 
     /**
+     * @param  array   $nonSanitzedData
+     * @return mixed
+     */
+    public function sanitizeData(array $nonSanitzedData) {
+        $sanitizedData = null;
+
+        $sanitizedData = array_map(function ($data) {
+            if (gettype($data) == 'array') {
+                return $this->sanitizeData($data);
+            } else {
+                return sanitize_text_field($data);
+            }
+        }, $nonSanitzedData);
+
+        return $sanitizedData;
+    }
+
+    /**
      * Organize the WooCommerce products for exporting to google sheet
      * @param  $products
      * @return mixed
@@ -83,8 +101,8 @@ class GlobalClass {
         return $organizedData;
     }
 
-    // Add meta value for each product if its exported
     /**
+     * Add meta value for each product if its exported
      * @param $productID
      */
     public function isProductExported($productID) {

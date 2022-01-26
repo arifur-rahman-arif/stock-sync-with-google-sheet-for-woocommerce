@@ -1,4 +1,4 @@
-import { showAlert } from "./helperFunctions";
+import { closeLoader, showAlert, showLoader } from "./helper-functions";
 
 var $ = jQuery.noConflict();
 
@@ -43,6 +43,7 @@ $(function () {
                 beforeSend: () => {
                     $(e.currentTarget).addClass("disabled");
                     $(e.currentTarget).attr("disabled", true);
+                    showLoader();
                 },
 
                 success: (response) => {
@@ -62,6 +63,7 @@ $(function () {
                 complete: () => {
                     $(e.currentTarget).removeClass("disabled");
                     $(e.currentTarget).attr("disabled", false);
+                    closeLoader();
                 },
 
                 error: (error) => {
@@ -71,6 +73,8 @@ $(function () {
                         message: response.data.message,
                         type: `alert_${response.data.status}`,
                     });
+
+                    closeLoader();
                 },
             });
         }

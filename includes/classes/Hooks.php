@@ -32,6 +32,9 @@ class Hooks {
 
         // Register the rest route to recive webhook request from the sheet
         add_action('rest_api_init', [$this->hookCallbacks, 'registerRoute']);
+
+        // Update product in google sheet when user update products in WordPress
+        add_action('save_post_product', [$this->hookCallbacks, 'updateSheetProduct']);
     }
 
     public function enqueueHooks() {

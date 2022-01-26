@@ -1,4 +1,4 @@
-import { copyToClipboard } from "../utils/helperFunctions";
+import { copyToClipboard } from "../utils/helper-functions";
 
 var $ = jQuery.noConflict();
 

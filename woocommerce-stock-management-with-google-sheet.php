@@ -3,10 +3,10 @@
 /**
  * Plugin Name:       WooCommerce Stock Management with Google Sheet
  * Plugin URI:        https://wppool.dev/woocommerce-stock-management-with-google-sheet/
- * Description:       Manage your woocommerce product with google sheet. Activate and setup for once and manage your product with less efforts.
+ * Description:       Manage your WooCommerce products with google sheet. Activate and setup for once and manage your products with less efforts.
  * Version:           1.0.0
- * Requires at least: 5.0
- * Requires PHP:      5.4
+ * Requires at least: 5.4
+ * Requires PHP:      5.6
  * Author:            WPPOOL
  * Author URI:        https://wppool.dev/
  * Text Domain:       wsmgs
@@ -18,8 +18,7 @@
 defined('ABSPATH') || wp_die(__('You can\'t access this page', 'wsmgs'));
 
 if (!defined('WSMGS_VERSION')) {
-    // define('WSMGS_VERSION', '1.0.0');
-    define('WSMGS_VERSION', time());
+    define('WSMGS_VERSION', '1.0.0');
 }
 
 if (!defined('WSMGS_TEXT_DOMAIN')) {
@@ -39,7 +38,7 @@ if (!defined('WSMGS_PlUGIN_NAME')) {
 }
 
 if (!defined('WSMGS_PlUGIN_MODE')) {
-    $development = true;
+    $development = false;
 
     if ($development) {
         define('WSMGS_PlUGIN_MODE', 'dev');

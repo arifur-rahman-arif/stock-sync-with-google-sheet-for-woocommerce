@@ -1,14 +1,15 @@
 const path = require("path");
-const glob = require("glob-all");
+// const glob = require("glob-all");
 
 const PATHS = {
-    src: path.join(__dirname, "assets/src"),
+    src: path.join(__dirname, "assets/src/scripts"),
     includes: path.join(__dirname, "includes"),
+    templates: path.join(__dirname, "templates"),
 };
 
 const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const PurgecssPlugin = require("purgecss-webpack-plugin");
+// const PurgecssPlugin = require("purgecss-webpack-plugin");
 
 const config = (env, options) => {
     // scss loader based on prod or dev mode
@@ -27,13 +28,13 @@ const config = (env, options) => {
     let plugins = () => {
         if (options.mode == "production") {
             return [
-                new PurgecssPlugin({
-                    paths: glob.sync([`${PATHS.src}/**/*`, `${PATHS.includes}/**/*`], {
-                        nodir: true,
-                    }),
-                }),
+                // new PurgecssPlugin({
+                //     paths: glob.sync([`${PATHS.src}/**/*`, `${PATHS.includes}/**/*`, `${PATHS.templates}/**/*`], {
+                //         nodir: true,
+                //     }),
+                // }),
                 new MiniCssExtractPlugin({
-                    filename: "Styles/[name].min.css",
+                    filename: "styles/[name].min.css",
                 }),
             ];
         } else {

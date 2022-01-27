@@ -47,7 +47,7 @@ class HookCallbacks {
 
     // Load all the style files for admin panal
     public function loadBackendStyles() {
-        # code...
+        wp_enqueue_style('WSMGS_admin', WSMGS_BASE_URL . 'assets/public/styles/backend.min.css', [], WSMGS_VERSION, 'all');
     }
 
     // Load all the scripts for frontend

@@ -3,7 +3,17 @@ import { Toast } from "bootstrap";
 var $ = jQuery.noConflict();
 
 export const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text);
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text);
+    } else {
+        let input = document.createElement("textarea");
+        input.innerHTML = text;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+    }
+
     showAlert({
         message: "Text copied to clipboard",
         type: "alert_success",

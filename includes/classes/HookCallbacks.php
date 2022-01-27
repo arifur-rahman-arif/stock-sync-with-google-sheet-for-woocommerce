@@ -4,6 +4,8 @@ namespace WSMGS\classes;
 
 defined('ABSPATH') || wp_die(__('You can\'t access this page', 'wsmgs'));
 
+use WSMGS\classes\GlobalClass;
+
 class HookCallbacks {
 
     /**
@@ -290,8 +292,11 @@ class HookCallbacks {
     }
 
     /**
-     * @param $productID
-     * @param $post
+     * Update the exitsting product in google sheet when user clicks save or update
+     * @param  $productID
+     * @param  $post
+     * @param  $update
+     * @return null
      */
     public function updateSheetProduct($productID, $post, $update) {
 
@@ -330,6 +335,12 @@ class HookCallbacks {
             }
         }
 
+        // If row index is not found that means product don't exits in google sheet. So insert that product in sheet
+        if (!$rowIndex) {
+            $this->insertNewProduct($productID, $post, false);
+            return;
+        }
+
         $products = [];
 
         array_push($products, $post);
@@ -342,4 +353,68 @@ class HookCallbacks {
         $this->methods->updateProducts($args);
 
     }
+
+    /**
+     * Insert a single product in google sheet if user clicks save & that product is not found in google sheet
+     * @param  $productID
+     * @param  $post
+     * @param  $update
+     * @return null
+     */
+    public function insertNewProduct($productID, $post, $update) {
+
+        if (get_post_type($productID) != 'product') {
+            return;
+        }
+
+        // if update is true that means product exits in wp and don't proceed to next process
+        if ($update == true) {
+            return;
+        }
+
+        $sheetID = $this->methods->getSheetId(get_option('sheetUrl'));
+        $tabName = get_option('tabName');
+
+        $args = [
+            'sheetID' => $sheetID,
+            'tabName' => $tabName
+        ];
+
+        $products = [];
+
+        array_push($products, $post);
+
+        $values = $this->methods->organizeInsertionValues($products);
+
+        $args['values'] = $values;
+
+        $this->methods->insertData($args);
+    }
+
+    /**
+     * Update the product data after a prodcut is purchased from frontend
+     * @param $orderID
+     */
+    public function updateProductOnPurchase($orderID) {
+
+        if (!$orderID) {
+            return;
+        }
+
+        $order = wc_get_order($orderID);
+        $items = $order->get_items();
+
+        if (!$items) {
+            return;
+        }
+
+        //  Iterating through each order items (WC_Order_Item_Product objects in WC 3+)
+        foreach ($items as $itemID => $itemValues) {
+            $item_data = $itemValues->get_data();
+            $productID = $item_data['product_id'];
+            $this->updateSheetProduct($productID, get_post($productID), true);
+        }
+
+    }
+
 }

@@ -69,7 +69,7 @@ class ExportProducts {
     public function addSheetColumn() {
 
         $args = [
-            'sheetId' => $this->methods->getSheetId(get_option('sheetURL')),
+            'sheetID' => $this->methods->getSheetId(get_option('sheetURL')),
             'tabName' => get_option('tabName')
         ];
 
@@ -103,7 +103,7 @@ class ExportProducts {
         $productCount = count($insertionValues);
 
         $args = [
-            'sheetId' => $this->methods->getSheetId(get_option('sheetUrl')),
+            'sheetID' => $this->methods->getSheetId(get_option('sheetUrl')),
             'tabName' => get_option('tabName'),
             'values'  => $insertionValues
         ];

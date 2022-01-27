@@ -226,7 +226,7 @@ class GlobalClass {
      */
     public function getSheetColumn(array $args) {
 
-        if (!isset($args['sheetId']) || !$args['sheetId']) {
+        if (!isset($args['sheetID']) || !$args['sheetID']) {
             trigger_error("Sheet ID is not found", E_USER_WARNING);
             return;
         }
@@ -239,7 +239,7 @@ class GlobalClass {
         $client = $this->getClient();
         $service = new \Google_Service_Sheets($client);
 
-        $spreadsheetId = $args['sheetId'];
+        $spreadsheetId = $args['sheetID'];
         $range = '' . $args['tabName'] . '!A1:H1';
         $requestBody = new \Google_Service_Sheets_ValueRange();
         $requestBody->setMajorDimension('COLUMNS');
@@ -255,7 +255,7 @@ class GlobalClass {
      */
     public function updateColumn($args) {
 
-        if (!isset($args['sheetId']) || !$args['sheetId']) {
+        if (!isset($args['sheetID']) || !$args['sheetID']) {
             trigger_error("Sheet ID is not found", E_USER_WARNING);
             return;
         }
@@ -269,7 +269,7 @@ class GlobalClass {
 
         $service = new \Google_Service_Sheets($client);
 
-        $spreadsheetId = $args['sheetId'];
+        $spreadsheetId = $args['sheetID'];
         $range = '' . $args['tabName'] . '!A1:H1';
         $requestBody = new \Google_Service_Sheets_ValueRange();
         $requestBody->setMajorDimension('ROWS');
@@ -297,7 +297,7 @@ class GlobalClass {
      */
     public function insertData($args) {
 
-        if (!isset($args['sheetId']) || !$args['sheetId']) {
+        if (!isset($args['sheetID']) || !$args['sheetID']) {
             trigger_error("Sheet ID is not found", E_USER_WARNING);
             return;
         }
@@ -307,11 +307,15 @@ class GlobalClass {
             return;
         }
 
+        if (count($args['values']) < 1) {
+            return;
+        }
+
         $client = $this->getClient();
 
         $service = new \Google_Service_Sheets($client);
 
-        $spreadsheetId = $args['sheetId'];
+        $spreadsheetId = $args['sheetID'];
         $range = '' . $args['tabName'] . '!A2';
         $requestBody = new \Google_Service_Sheets_ValueRange();
         $requestBody->setMajorDimension('ROWS');

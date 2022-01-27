@@ -35,9 +35,16 @@ class Hooks {
 
         // Update product in google sheet when user update products in WordPress
         add_action('wp_insert_post', [$this->hookCallbacks, 'updateSheetProduct'], 10, 3);
+
+        // Add a new product in sheet when user clicks save or update if there is no product found in sheet
+        add_action('wp_insert_post', [$this->hookCallbacks, 'insertNewProduct'], 10, 3);
+
+        // Update the product data after a prodcut is purchased from frontend
+        add_action('woocommerce_thankyou', [$this->hookCallbacks, 'updateProductOnPurchase'], 10);
     }
 
     public function enqueueHooks() {
+        // Load the plugin admin menu necessary script
         add_action('admin_enqueue_scripts', [$this->hookCallbacks, 'loadBackendAssets']);
     }
 }

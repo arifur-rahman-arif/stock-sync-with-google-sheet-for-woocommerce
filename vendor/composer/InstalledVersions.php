@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'f41ff2f0756078edd5cfbbd5e71715b3e2002475',
+    'reference' => '21bc2839d8fe42be617eb00df4a681526474dfeb',
     'name' => 'ar.arif/woocommerce-stock-management-with-google-sheet',
   ),
   'versions' => 
@@ -44,7 +44,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'f41ff2f0756078edd5cfbbd5e71715b3e2002475',
+      'reference' => '21bc2839d8fe42be617eb00df4a681526474dfeb',
     ),
     'firebase/php-jwt' => 
     array (

@@ -10,9 +10,15 @@
 @import "../../../node_modules/bootstrap/scss/root";
 @import "../../../node_modules/bootstrap/scss/transitions";
 
-// Import required bootstrap modules
+/* Import required bootstrap modules */
 @import "../../../node_modules/bootstrap/scss/toasts";
 @import "../../../node_modules/bootstrap/scss/spinners";
+@import "../../../node_modules/bootstrap/scss/alert";
+/* Bootstrap module */
+
+/* Custom mixin */
+@import "./modules/utils/mixin/container.scss";
+/* End of custom mixin */
 
 @import "./modules/utils/alert.scss";
 @import "./modules/dashboard.scss";

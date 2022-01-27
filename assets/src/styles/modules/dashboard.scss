@@ -8,7 +8,6 @@
     position: relative;
 
     #wsmgs_script_code {
-        position: absolute;
         top: 0;
         right: 0;
         bottom: 0;
@@ -30,6 +29,124 @@
             cursor: copy;
             font-weight: bold;
             padding: 2px 15px;
+        }
+    }
+}
+
+.wsmgs_setting_form {
+    @include container-design;
+
+    margin-top: 70px;
+
+    table td {
+        padding-left: 0;
+    }
+
+    table tbody tr:nth-child(1) {
+        display: none;
+    }
+
+    .submit {
+        margin: 20px 0 0 0;
+        padding: 0;
+
+        input {
+            background-color: $primaryColor;
+            font-weight: bold;
+            padding: 5px 20px;
+            color: #fff;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            transition: $transition;
+
+            &:hover,
+            &:focus,
+            &:active {
+                background: transparent;
+                border-color: $primaryColor;
+                color: $primaryColor;
+            }
+        }
+    }
+
+    .wsmgs_inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .wsmgs_input_container {
+        --color-light: white;
+        --color-dark: #212121;
+        --color-signal: $primaryColor;
+
+        --color-background: var(--color-light);
+        --color-text: var(--color-dark);
+        --color-accent: var(--color-signal);
+
+        --size-bezel: 0.5rem;
+        --size-radius: 4px;
+
+        background: var(--color-background);
+
+        .input {
+            position: relative;
+
+            &__label {
+                position: absolute;
+                left: 0;
+                top: 0;
+                padding: calc(var(--size-bezel) * 0.75) calc(var(--size-bezel) * 0.5);
+                margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * 0.5);
+                white-space: nowrap;
+                transform: translate(0, 0);
+                transform-origin: 0 0;
+                background: var(--color-background);
+                transition: transform 120ms ease-in;
+                font-weight: bold;
+                line-height: 1.2;
+                font-size: 1.2rem;
+            }
+            &__field {
+                box-sizing: border-box;
+                display: block;
+                width: 100%;
+                padding: 1rem 0.8rem 0.8rem 0.8rem;
+                background: transparent;
+                border-radius: var(--size-radius);
+
+                &:focus {
+                    border-color: $primaryColor;
+                }
+
+                &:focus,
+                &:not(:placeholder-shown) {
+                    & + .input__label {
+                        transform: translate(0.25rem, -65%) scale(0.8);
+                        // color: var(--color-accent);
+                        color: $primaryColor;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.wsmgs_description {
+    @include container-design;
+
+    .bot_info {
+        font-size: 1rem;
+        color: #000;
+        font-weight: bold;
+
+        code {
+            font-size: 1.1rem;
+            background: #ff6b8173;
+        }
+
+        .tutorial_video {
+            text-transform: uppercase;
         }
     }
 }

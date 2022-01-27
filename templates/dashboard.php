@@ -1,41 +1,93 @@
 <?php settings_errors();?>
+<?php
+$sheetUrl = get_option('sheetUrl') ? sanitize_text_field(get_option('sheetUrl')) : null;
+$tabName = get_option('tabName') ? sanitize_text_field(get_option('tabName')) : null;
+?>
 
 
 <div class="wrap">
-    <form action="options.php" method="POST">
+    <form action="options.php" class="wsmgs_setting_form" method="POST">
         <?php settings_fields('wsmgs_general_setting')?>
+
+
+        <div class="wsmgs_inputs">
+
+            <div class="wsmgs_input_container">
+                <label class="input" for="sheetUrl">
+                    <input class="input__field" type="text" name="sheetUrl" value="<?php echo esc_attr($sheetUrl) ?>" />
+                    <span class="input__label">Sheet URL</span>
+                </label>
+            </div>
+
+            <div class="wsmgs_input_container">
+
+                <label class="input" for="tabName">
+                    <input class="input__field" type="text" name="tabName" value="<?php echo esc_attr($tabName) ?>" />
+                    <span class="input__label">Tab Name</span>
+                </label>
+
+            </div>
+
+        </div>
+
+
         <?php do_settings_sections('wsmgs-page')?>
-        <?php submit_button('Save Settings', 'primary');?>
+
+        <?php submit_button('Save Settings', 'wsmgs_save_setting_btn');?>
+
     </form>
-    <br>
+
 
 
     <?php if (get_option('tabName') && get_option('sheetURL')) {?>
 
-    <h3>
-        Save the google sheet and give this bot
-        <span class="bot_mail">
-            <code>wsmgs-plugin@wsmgs-plugin-338313.iam.gserviceaccount.com</code>
-        </span> ID editor
-        access in your google sheet.
-        <br>
-        <br>
-        <i>Note:</i> You have to give this bot ID editor access or your won't be in sync with your sheet.
-    </h3>
+    <div class="wsmgs_description">
 
-    <span>
-        <b>
-            Copy the code & paste it into your google sheet App Script
-        </b>
-    </span>
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+            </symbol>
+            <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                <path
+                    d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+            </symbol>
+            <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                <path
+                    d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+            </symbol>
+        </svg>
 
-    <br>
+        <div class="alert alert-primary d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                <use xlink:href="#info-fill" />
+            </svg>
+            <div class="bot_info">
+                Give this bot
+                <span class="bot_mail">
+                    <code>wsmgs-plugin@wsmgs-plugin-338313.iam.gserviceaccount.com</code>
+                </span> ID editor
+                access in your Google Sheet for WooCommerce products sync.
+            </div>
+        </div>
 
-    <div class="wsmgs_editor_container">
+        <div class="alert alert-primary d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                <use xlink:href="#info-fill" />
+            </svg>
+            <div class="bot_info">
+                After giving editor access to the bot, copy this code and add this in your Google Sheet AppScript
+                <a href="#" class="tutorial_video">Watch the tutorial video</a>
+            </div>
+        </div>
 
-        <div id="wsmgs_script_code">
-            <button class="code-box-copy__btn" data-clipboard-target="#example-html" title="Copy"></button>
-            <pre>
+        <!-- Script code here -->
+
+        <div class="wsmgs_editor_container">
+
+            <div id="wsmgs_script_code">
+                <button class="code-box-copy__btn" data-clipboard-target="#example-html" title="Copy"></button>
+                <pre>
 <code class="language-js">
 // Run on user edit
 function atEdit(e) {
@@ -151,7 +203,14 @@ function updateProduct(args) {
 }
 </code>
 </pre>
+            </div>
         </div>
+
     </div>
 
+
+
+
     <?php }?>
+
+</div>

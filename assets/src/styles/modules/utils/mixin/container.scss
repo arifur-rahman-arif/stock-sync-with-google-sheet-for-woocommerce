@@ -1,0 +1,7 @@
+@mixin container-design {
+    -webkit-box-shadow: 0px 4px 16px 0px rgba(179, 179, 179, 0.85);
+    box-shadow: 0px 4px 16px 0px rgba(179, 179, 179, 0.85);
+    background: #fff;
+    padding: 30px 20px 20px 20px;
+    margin-bottom: 25px;
+}

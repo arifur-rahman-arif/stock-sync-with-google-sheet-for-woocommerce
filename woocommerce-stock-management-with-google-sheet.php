@@ -88,14 +88,17 @@ final class WSMGS {
         }
 
         // Include the base file of this plugin
+        require_once WSMGS_BASE_PATH . 'includes/Plugin.php';
+
         new WSMGS\Plugin;
+
     }
 
     public function pluginsCheck() {
         require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
         if (!is_plugin_active(plugin_basename(__FILE__)) || !class_exists('WooCommerce')) {
-            $this->noticeMessage = "<b>" . WSMGS_PlUGIN_NAME . "</b>" . "&nbsp" . __("deactivated beacasue WooCommerce plugin is not active.", WSMGS_TEXT_DOMAIN);
+            $this->noticeMessage = "<b>" . WSMGS_PlUGIN_NAME . "</b>" . "&nbsp" . __("deactivated beacasue <b>WooCommerce</b> plugin is not active.", WSMGS_TEXT_DOMAIN);
             $this->deactivatePlugin();
             return false;
         }

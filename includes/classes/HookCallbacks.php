@@ -304,6 +304,11 @@ class HookCallbacks {
             return;
         }
 
+        // If the product is not in publish mode than dont insert a single product
+        if (get_post_status($productID) != 'publish') {
+            return;
+        }
+
         // if update is not equel to true that means product dont exits and don't proceed to next process
         if ($update != true) {
             return;
@@ -363,6 +368,11 @@ class HookCallbacks {
     public function insertNewProduct($productID, $post, $update) {
 
         if (get_post_type($productID) != 'product') {
+            return;
+        }
+
+        // If the product is not in publish mode than dont insert a single product
+        if (get_post_status($productID) != 'publish') {
             return;
         }
 

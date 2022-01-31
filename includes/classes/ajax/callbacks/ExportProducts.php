@@ -98,6 +98,13 @@ class ExportProducts {
 
         $products = $this->getProducts();
 
+        if (!$products || count($products) < 1) {
+            $this->output['status'] = 'error';
+            $this->output['message'] = esc_html__('Products not found to insert', WSMGS_TEXT_DOMAIN);
+            wp_send_json_error($this->output, 400);
+            wp_die();
+        }
+
         $insertionValues = $this->methods->organizeInsertionValues($products);
 
         $productCount = count($insertionValues);

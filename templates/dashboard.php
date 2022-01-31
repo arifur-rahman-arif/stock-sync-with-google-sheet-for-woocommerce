@@ -147,13 +147,15 @@ function collectData(e) {
         let tempIndex = 0;
 
         for (let i = startIndex; i <= endIndex; i++) {
+
+            // If there is no value than just simply break the loop and return;
+            if(!editedValue[tempIndex]) continue;
+
             if (!organizedData[columns[i - 1]]) {
                 organizedData[columns[i - 1]] = editedValue[tempIndex];
             }
 
-            if (!organizedData.id) {
-                organizedData[columns[0]] = aToBValues[0];
-            }else{
+            if (organizedData.id) {
               // Set the old ID value to that cell
               if(e.oldValue){
                 sheet.getRange(`A${row}`).setValue(e.oldValue);
@@ -163,20 +165,27 @@ function collectData(e) {
               return;
             }
 
-            if (!organizedData.type) {
-                organizedData[columns[1]] = aToBValues[1];
-            }else{
-              // Set the old Type value to that cell
-              if(e.oldValue){
-                sheet.getRange(`B${row}`).setValue(e.oldValue);
-              }
-              showAlert("Type column cannot be changed");
-              data.length = 0;
-              return;
+            if (organizedData.type) {
+                // Set the old Type value to that cell
+                if(e.oldValue){
+                  sheet.getRange(`B${row}`).setValue(e.oldValue);
+                }
+                showAlert("Type column cannot be changed");
+                data.length = 0;
+                return;
             }
-
             tempIndex++;
         }
+
+
+        // If there are no data inside the object skip this current loop
+        if(Object.keys(organizedData).length < 1){
+          return;
+        }
+
+        // Insert the id & type of that product
+        organizedData[columns[0]] = aToBValues[0];
+        organizedData[columns[1]] = aToBValues[1];
 
         data.push(organizedData);
     });

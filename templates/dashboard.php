@@ -153,10 +153,26 @@ function collectData(e) {
 
             if (!organizedData.id) {
                 organizedData[columns[0]] = aToBValues[0];
+            }else{
+              // Set the old ID value to that cell
+              if(e.oldValue){
+                sheet.getRange(`A${row}`).setValue(e.oldValue);
+              }
+              showAlert("ID column cannot be changed");
+              data.length = 0;
+              return;
             }
 
             if (!organizedData.type) {
                 organizedData[columns[1]] = aToBValues[1];
+            }else{
+              // Set the old Type value to that cell
+              if(e.oldValue){
+                sheet.getRange(`B${row}`).setValue(e.oldValue);
+              }
+              showAlert("Type column cannot be changed");
+              data.length = 0;
+              return;
             }
 
             tempIndex++;
@@ -171,7 +187,7 @@ function collectData(e) {
 // Update the product on wordpress when there is a new change in sheet
 function updateProduct(args) {
     if (!Array.isArray(args.data) || args.data.length < 1) {
-        SpreadsheetApp.getActiveSpreadsheet().toast("Data is not valid to send to WordPress");
+        showAlert('Data is not valid to send to WordPress');
         return "INVALID_DATA";
     }
 
@@ -198,8 +214,14 @@ function updateProduct(args) {
         SpreadsheetApp.getActiveSpreadsheet().toast(response.data.message);
 
     } catch (error) {
+        showAlert(error.message)
         Logger.log(error.message)
     }
+}
+
+// Show a popup alert on spreadsheet
+function showAlert(message){
+  SpreadsheetApp.getUi().alert(message);
 }
 </code>
 </pre>

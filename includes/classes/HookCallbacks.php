@@ -223,7 +223,7 @@ class HookCallbacks {
                 };
             }
 
-            $postStatus = ['publish', 'draft'];
+            $postStatus = ['publish', 'draft', 'pending'];
 
             // Update the product status
             if (in_array($published, $postStatus) && $type != 'variation') {
@@ -309,7 +309,6 @@ class HookCallbacks {
             return;
         }
 
-        // global $wsmgsGlobal;
         $this->methods = new GlobalClass;
 
         $sheetID = $this->methods->getSheetId(get_option('sheetUrl'));
@@ -371,6 +370,8 @@ class HookCallbacks {
         if ($update == true) {
             return;
         }
+
+        $this->methods = new GlobalClass;
 
         $sheetID = $this->methods->getSheetId(get_option('sheetUrl'));
         $tabName = get_option('tabName');

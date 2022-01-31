@@ -88,7 +88,7 @@ final class WSMGS {
         }
 
         // Include the base file of this plugin
-        require_once WSMGS_BASE_PATH . 'includes/Plugin.php';
+        require_once WSMGS_BASE_PATH . 'includes/plugin.php';
 
         new WSMGS\Plugin;
 

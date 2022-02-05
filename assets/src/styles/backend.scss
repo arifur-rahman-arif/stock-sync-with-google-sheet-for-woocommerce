@@ -14,10 +14,12 @@
 @import "../../../node_modules/bootstrap/scss/toasts";
 @import "../../../node_modules/bootstrap/scss/spinners";
 @import "../../../node_modules/bootstrap/scss/alert";
+@import "../../../node_modules/bootstrap/scss/modal";
 /* Bootstrap module */
 
 /* Custom mixin */
 @import "./modules/utils/mixin/container.scss";
+@import "./modules/utils/mixin/button.scss";
 /* End of custom mixin */
 
 @import "./modules/utils/alert.scss";

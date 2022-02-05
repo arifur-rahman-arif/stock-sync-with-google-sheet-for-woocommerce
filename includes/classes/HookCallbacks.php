@@ -120,7 +120,7 @@ class HookCallbacks {
     }
 
     public function loadFieldHTML() {
-        load_template(WSMGS_BASE_PATH . 'templates/dashboard_settings.php', true);
+        load_template(WSMGS_BASE_PATH . 'templates/dashboard-settings.php', true);
     }
 
     // Register the rest route in wordpress to receive the sheet request and act accordingly
@@ -239,7 +239,7 @@ class HookCallbacks {
             }
 
             // Update the product stock quantity
-            if ($stock || $stock == 0) {
+            if ($stock || $stock == "0") {
                 $quantity = $stock;
 
                 $woocmmerceInstance->set_manage_stock(true);

@@ -51,22 +51,18 @@
         padding: 0;
 
         input {
-            background-color: $primaryColor;
-            font-weight: bold;
-            padding: 5px 20px;
-            color: #fff;
-            letter-spacing: 1px;
-            font-size: 0.8rem;
-            transition: $transition;
-
-            &:hover,
-            &:focus,
-            &:active {
-                background: transparent;
-                border-color: $primaryColor;
-                color: $primaryColor;
-            }
+            @include button-design;
         }
+    }
+
+    .wsmgs_configure {
+        @include button-design;
+        outline: none;
+        padding: 12px 15px;
+    }
+
+    .hide {
+        display: none;
     }
 
     .wsmgs_inputs {
@@ -97,7 +93,7 @@
                 left: 0;
                 top: 0;
                 padding: calc(var(--size-bezel) * 0.75) calc(var(--size-bezel) * 0.5);
-                margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * 0.5);
+                margin: calc(var(--size-bezel) * 0.75 + 13px) calc(var(--size-bezel) * 0.5);
                 white-space: nowrap;
                 transform: translate(0, 0);
                 transform-origin: 0 0;
@@ -130,23 +126,49 @@
             }
         }
     }
+
+    .modal-dialog {
+        max-width: 600px;
+    }
 }
 
 .wsmgs_description {
     @include container-design;
+}
 
-    .bot_info {
-        font-size: 1rem;
-        color: #000;
-        font-weight: bold;
+.bot_info {
+    font-size: 1rem;
+    color: #000;
+    font-weight: bold;
 
-        code {
-            font-size: 1.1rem;
-            background: #ff6b8173;
-        }
-
-        .tutorial_video {
-            text-transform: uppercase;
-        }
+    code {
+        font-size: 1.1rem;
+        background: #ff6b8173;
     }
+
+    .tutorial_video {
+        text-transform: uppercase;
+    }
+}
+
+.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.inactive {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+    // pointer-events: none;
+}
+
+.wsmgs_btn {
+    @include button-design;
+}
+
+.btn-close {
+    cursor: pointer;
+}
+.btn-close:focus {
+    box-shadow: none;
 }

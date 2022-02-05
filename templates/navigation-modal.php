@@ -28,7 +28,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="wsmgs_btn modal_1 inactive" type="button" data-bs-target="#modal2">Next</button>
+                <button class="wsmgs_btn modal_next_btn modal_1 inactive" type="button" data-bs-target="#modal2">Next
+                </button>
             </div>
         </div>
     </div>
@@ -57,13 +58,40 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="wsmgs_btn" type="button" data-bs-target="#modal1" data-bs-toggle="modal"
+                <button class="wsmgs_btn modal_back_btn" type="button" data-bs-target="#modal1"
                     data-bs-dismiss="modal">Back</button>
-                <button class="wsmgs_btn" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+                <button class="wsmgs_btn modal_next_btn modal_2" type="button" data-bs-target="#modal3"
                     data-bs-dismiss="modal">Next</button>
             </div>
         </div>
     </div>
 </div>
+
+
+<!-- Modal #3 -->
+<div class="modal fade" id="modal3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    If you have successfully gave editor access, try clicking this button
+                </p>
+                <button class="wsmgs_btn" type="button">Sync with Google Sheet</button>
+            </div>
+            <div class="modal-footer">
+                <button class="wsmgs_btn modal_back_btn" type="button" data-bs-target="#modal2"
+                    data-bs-dismiss="modal">Back</button>
+                <button class="wsmgs_btn modal_next_btn modal_2" type="button" data-bs-target="#exampleModalToggle"
+                    data-bs-dismiss="modal">Next</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <a class="wsmgs_configure" data-bs-toggle="modal" href="#modal1" role="button" type="button">Configure
     Plugin</a>

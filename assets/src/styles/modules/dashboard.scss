@@ -172,3 +172,15 @@
 .btn-close:focus {
     box-shadow: none;
 }
+.btn-loading {
+    background: transparent;
+    color: $primaryColor;
+    width: 60px;
+    pointer-events: none;
+
+    .spinner-border {
+        width: 1rem !important;
+        height: 1rem !important;
+        color: $primaryColor !important;
+    }
+}

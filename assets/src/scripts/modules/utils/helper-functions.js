@@ -91,3 +91,37 @@ export const closeLoader = () => {
         $("#wpcontent .wsmgs_overlay").hide();
     }
 };
+
+// Check if a given url is valid or not
+export const isValidHttpUrl = (string) => {
+    if (!string.length) return false;
+
+    let url;
+
+    try {
+        url = new URL(string);
+    } catch (_) {
+        return false;
+    }
+
+    return url.protocol === "http:" || url.protocol === "https:";
+};
+
+// Show loading button
+export const showLoadingButton = (target) => {
+    target.addClass("btn-loading");
+    target.html(`
+        <div class="spinner-border text-success" role="status">
+            <span class="sr-only"></span>
+        </div>
+    `);
+};
+
+// Show loading button
+export const closeLoadingButton = (target, text) => {
+    target.removeClass("btn-loading");
+
+    if (!text) text = "Default";
+
+    target.html(text);
+};

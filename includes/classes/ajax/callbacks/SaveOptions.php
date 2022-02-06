@@ -35,21 +35,14 @@ class SaveOptions {
                 wp_die();
             };
 
-            $sheetUrlUpdated = update_option('sheetUrl', $this->reqData['sheetUrl']);
-            $tabNameUpdated = update_option('tabName', $this->reqData['tabName']);
-            $configureModeUpdated = delete_option('configureMode');
+            update_option('sheetUrl', $this->reqData['sheetUrl']);
+            update_option('tabName', $this->reqData['tabName']);
+            delete_option('configureMode');
 
-            if ($sheetUrlUpdated && $tabNameUpdated && $configureModeUpdated) {
-                $this->output['status'] = 'success';
-                $this->output['redirectUrl'] = admin_url('edit.php?post_type=product');
-                $this->output['message'] = esc_html__('Thanks for passing all of these process. Your products will be synchronized from now on', WSMGS_TEXT_DOMAIN);
-                wp_send_json_success($this->output, 200);
-                wp_die();
-            }
-
-            $this->output['status'] = 'error';
-            $this->output['message'] = esc_html__('Input data can\'t be saved. Try again', WSMGS_TEXT_DOMAIN);
-            wp_send_json_error($this->output, 400);
+            $this->output['status'] = 'success';
+            $this->output['redirectUrl'] = admin_url('edit.php?post_type=product');
+            $this->output['message'] = esc_html__('Thanks for passing all of these process. Your products will be synchronized from now on', WSMGS_TEXT_DOMAIN);
+            wp_send_json_success($this->output, 200);
             wp_die();
 
         } catch (\Throwable $error) {

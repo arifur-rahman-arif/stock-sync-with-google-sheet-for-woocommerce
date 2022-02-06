@@ -62,7 +62,7 @@ class TestBot {
 
                 if ($response) {
                     $this->output['status'] = 'success';
-                    $this->output['message'] = esc_html__('Thanks for giving bot access successfully. Go to next process', WSMGS_TEXT_DOMAIN);
+                    $this->output['message'] = esc_html__('Thanks for giving the bot editor access successfully. Go to next process', WSMGS_TEXT_DOMAIN);
                     wp_send_json_success($this->output, 200);
                     wp_die();
                 };

@@ -11,7 +11,7 @@ $disabled = get_option('configureMode') ? 'disabled' : null;
         <?php settings_fields('wsmgs_general_setting')?>
 
 
-        <div class="wsmgs_inputs <?php echo esc_attr($disabled) ?>">
+        <div class="wsmgs_inputs <?php echo $disabled ? 'wsmgs_disabled' : null ?>">
 
             <div class="wsmgs_input_container">
                 <label class="input" for="sheetUrl">

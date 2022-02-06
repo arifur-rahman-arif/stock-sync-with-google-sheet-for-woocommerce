@@ -93,9 +93,10 @@
                 left: 0;
                 top: 0;
                 padding: calc(var(--size-bezel) * 0.75) calc(var(--size-bezel) * 0.5);
-                margin: calc(var(--size-bezel) * 0.75 + 13px) calc(var(--size-bezel) * 0.5);
+                transform: translate(10px, -15px) scale(0.8) !important;
+                -webkit-transform: translate(10px, -15px) scale(0.8) !important;
+                -moz-transform: translate(10px, -2px) scale(0.8) !important;
                 white-space: nowrap;
-                transform: translate(0, 0);
                 transform-origin: 0 0;
                 background: var(--color-background);
                 transition: transform 120ms ease-in;
@@ -118,8 +119,6 @@
                 &:focus,
                 &:not(:placeholder-shown) {
                     & + .input__label {
-                        transform: translate(0.25rem, -65%) scale(0.8);
-                        // color: var(--color-accent);
                         color: $primaryColor;
                     }
                 }
@@ -151,15 +150,14 @@
     }
 }
 
-.disabled {
+.wsmgs_disabled {
     opacity: 0.4;
     pointer-events: none;
 }
 
-.inactive {
+.wsmgs_inactive {
     opacity: 0.5;
     cursor: not-allowed !important;
-    // pointer-events: none;
 }
 
 .wsmgs_btn {
@@ -183,4 +181,19 @@
         height: 1rem !important;
         color: $primaryColor !important;
     }
+}
+
+#modal3 {
+    .alert:nth-of-type(1) {
+        display: none !important;
+    }
+
+    #wsmgs_script_code {
+        height: 200px !important;
+    }
+}
+
+// Design the export button
+.wsmgs_export_btn.wsmgs_export_btn {
+    @include button-design;
 }

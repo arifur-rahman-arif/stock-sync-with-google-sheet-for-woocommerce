@@ -1,5 +1,3 @@
-<?php if (get_option('tabName') && get_option('sheetURL')) {?>
-
 <div class="wsmgs_description">
 
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -35,7 +33,7 @@
             <use xlink:href="#info-fill" />
         </svg>
         <div class="bot_info">
-            After giving editor access to the bot, copy this code and add this in your Google Sheet AppScript
+            Copy this script code & add this in your Google Sheet AppScript
             <a href="#" class="tutorial_video">Watch the tutorial video</a>
         </div>
     </div>
@@ -197,8 +195,3 @@ function showAlert(message){
     </div>
 
 </div>
-
-
-
-
-<?php }?>

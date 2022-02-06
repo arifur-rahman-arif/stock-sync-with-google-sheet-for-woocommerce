@@ -10,6 +10,7 @@ class WooCommerceStockManagementWithSheet {
     public function deleteOptions() {
         $savedOptions = [
             'wsmgsToken',
+            'configureMode',
             'sheetUrl',
             'tabName'
         ];

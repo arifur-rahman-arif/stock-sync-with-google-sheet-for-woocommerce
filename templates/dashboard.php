@@ -2,6 +2,7 @@
 <?php
 $sheetUrl = get_option('sheetUrl') ? sanitize_text_field(get_option('sheetUrl')) : null;
 $tabName = get_option('tabName') ? sanitize_text_field(get_option('tabName')) : null;
+$disabled = get_option('configureMode') ? 'disabled' : null;
 ?>
 
 
@@ -10,7 +11,7 @@ $tabName = get_option('tabName') ? sanitize_text_field(get_option('tabName')) : 
         <?php settings_fields('wsmgs_general_setting')?>
 
 
-        <div class="wsmgs_inputs disabled">
+        <div class="wsmgs_inputs <?php echo esc_attr($disabled) ?>">
 
             <div class="wsmgs_input_container">
                 <label class="input" for="sheetUrl">
@@ -33,9 +34,11 @@ $tabName = get_option('tabName') ? sanitize_text_field(get_option('tabName')) : 
 
         <?php do_settings_sections('wsmgs-page')?>
 
+        <?php if (!$disabled) {?>
 
+        <?php submit_button('Save Settings', 'wsmgs_save_setting_btn');?>
 
-        <?php submit_button('Save Settings', 'wsmgs_save_setting_btn hide');?>
+        <?php }?>
 
 
         <!-- Load the configure modal template -->
@@ -43,7 +46,12 @@ $tabName = get_option('tabName') ? sanitize_text_field(get_option('tabName')) : 
 
     </form>
 
+    <?php if (!$disabled && $tabName && $sheetUrl) {?>
+
     <!-- Load the script template -->
-    <?php load_template(WSMGS_BASE_PATH . 'templates/template-script.php')?>
+    <?php load_template(WSMGS_BASE_PATH . 'templates/template-script.php', false)?>
+
+    <?php }?>
+
 
 </div>

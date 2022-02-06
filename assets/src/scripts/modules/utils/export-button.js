@@ -25,7 +25,7 @@ $(function () {
 
         // Set the auth button after woocommerce export button
         setButtton() {
-            $(this.btn).after(`<button href="#" class="page-title-action wsmgs_export_btn">Export To Sheet</button>`);
+            $(this.btn).after(`<button href="#" class="page-title-action wsmgs_export_btn">Sync with sheet</button>`);
         }
 
         // Authenticate user google sheet by sending request to backend
@@ -41,7 +41,7 @@ $(function () {
                 },
 
                 beforeSend: () => {
-                    $(e.currentTarget).addClass("disabled");
+                    $(e.currentTarget).addClass("wsmgs_disabled");
                     $(e.currentTarget).attr("disabled", true);
                     showLoader();
                 },
@@ -61,7 +61,7 @@ $(function () {
                 },
 
                 complete: () => {
-                    $(e.currentTarget).removeClass("disabled");
+                    $(e.currentTarget).removeClass("wsmgs_disabled");
                     $(e.currentTarget).attr("disabled", false);
                     closeLoader();
                 },

@@ -1,3 +1,8 @@
+<?php
+$disabled = get_option('configureMode') ? 'disabled' : null;
+?>
+
+
 <!-- Modal #1 -->
 <div class="modal fade" id="modal1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -28,7 +33,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="wsmgs_btn modal_next_btn modal_1 inactive" type="button" data-bs-target="#modal2">Next
+                <button class="wsmgs_btn modal_next_btn modal_1 wsmgs_inactive" type="button" data-bs-target="#modal2">Next
                 </button>
             </div>
         </div>
@@ -76,16 +81,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>
-                    If you have successfully gave editor access, try clicking this button
-                </p>
-                <button class="wsmgs_btn" type="button">Sync with Google Sheet</button>
+                <!-- Load the script template -->
+                <?php load_template(WSMGS_BASE_PATH . 'templates/template-script.php', false)?>
             </div>
             <div class="modal-footer">
                 <button class="wsmgs_btn modal_back_btn" type="button" data-bs-target="#modal2"
                     data-bs-dismiss="modal">Back</button>
-                <button class="wsmgs_btn modal_next_btn modal_2" type="button" data-bs-target="#exampleModalToggle"
-                    data-bs-dismiss="modal">Next</button>
+                <button class="wsmgs_btn modal_next_btn modal_3" type="button" data-bs-dismiss="modal">Done</button>
             </div>
         </div>
     </div>
@@ -93,5 +95,13 @@
 
 
 
-<a class="wsmgs_configure" data-bs-toggle="modal" href="#modal1" role="button" type="button">Configure
-    Plugin</a>
+<?php if ($disabled) {?>
+
+
+<p class="submit">
+
+    <a class="wsmgs_configure" data-bs-toggle="modal" href="#modal1" role="button" type="button">Configure
+        Plugin</a>
+</p>
+
+<?php }?>

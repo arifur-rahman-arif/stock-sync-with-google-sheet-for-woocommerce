@@ -22,7 +22,7 @@
         <div class="bot_info">
             Give this bot
             <span class="bot_mail">
-                <code>wsmgs-plugin@wsmgs-plugin-338313.iam.gserviceaccount.com</code>
+                <code>wcsmgs@wc-stock-management-with-sheet.iam.gserviceaccount.com</code>
             </span> ID editor
             access in your Google Sheet for WooCommerce products sync.
         </div>

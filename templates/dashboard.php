@@ -11,7 +11,7 @@ $disabled = get_option('configureMode') ? 'disabled' : null;
         <?php settings_fields('wsmgs_general_setting')?>
 
 
-        <div class="wsmgs_inputs <?php echo $disabled ? 'wsmgs_disabled' : null ?>">
+        <div class="wsmgs_inputs">
 
             <div class="wsmgs_input_container">
                 <label class="input" for="sheetUrl">
@@ -34,12 +34,7 @@ $disabled = get_option('configureMode') ? 'disabled' : null;
 
         <?php do_settings_sections('wsmgs-page')?>
 
-        <?php if (!$disabled) {?>
-
         <?php submit_button('Save Settings', 'wsmgs_save_setting_btn');?>
-
-        <?php }?>
-
 
         <!-- Load the configure modal template -->
         <?php load_template(WSMGS_BASE_PATH . 'templates/navigation-modal.php')?>

@@ -119,23 +119,16 @@ class ExportProducts {
 
             $response = $this->methods->insertData($args);
 
-            if ($response) {
-                $this->output['status'] = 'success';
+            $this->output['status'] = 'success';
 
-                $this->output['message'] = esc_html__($productCount . ' products exported in google sheet', WSMGS_TEXT_DOMAIN);
+            $this->output['message'] = esc_html__($productCount . ' products exported in google sheet', WSMGS_TEXT_DOMAIN);
 
-                if ($productCount === 0) {
-                    $this->output['message'] = esc_html__('All products are already found in google sheet.', WSMGS_TEXT_DOMAIN);
-                }
-
-                wp_send_json_success($this->output, 201);
-                wp_die();
-            } else {
-                $this->output['status'] = 'error';
-                $this->output['message'] = esc_html__('Products could not be inserted. Try again', WSMGS_TEXT_DOMAIN);
-                wp_send_json_error($this->output, 400);
-                wp_die();
+            if ($productCount === 0) {
+                $this->output['message'] = esc_html__('All products are already found in google sheet.', WSMGS_TEXT_DOMAIN);
             }
+
+            wp_send_json_success($this->output, 201);
+            wp_die();
 
         } catch (\Throwable $error) {
             $this->output['message'] = $error->getMessage();

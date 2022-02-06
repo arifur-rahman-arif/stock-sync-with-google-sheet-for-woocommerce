@@ -25,7 +25,7 @@ $(function () {
 
         // Set the auth button after woocommerce export button
         setButtton() {
-            $(this.btn).after(`<button href="#" class="page-title-action wsmgs_export_btn">Sync with sheet</button>`);
+            $(this.btn).after(`<button class="page-title-action wsmgs_export_btn">Sync with sheet</button>`);
         }
 
         // Authenticate user google sheet by sending request to backend

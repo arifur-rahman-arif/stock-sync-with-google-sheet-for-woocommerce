@@ -35,8 +35,6 @@ class SaveOptions {
                 wp_die();
             };
 
-            update_option('sheetUrl', $this->reqData['sheetUrl']);
-            update_option('tabName', $this->reqData['tabName']);
             delete_option('configureMode');
 
             $this->output['status'] = 'success';

@@ -6,11 +6,22 @@ export const copyToClipboard = (text) => {
     if (navigator.clipboard) {
         navigator.clipboard.writeText(text);
     } else {
-        let input = document.createElement("textarea");
-        input.innerHTML = text;
+        // Create a "hidden" input
+        let input = document.createElement("input");
+
+        // Assign it the value of the specified element
+        input.setAttribute("value", text);
+
+        // Append it to the body
         document.body.appendChild(input);
+
+        // Highlight its content
         input.select();
+
+        // Copy the highlighted text
         document.execCommand("copy");
+
+        // Remove it from the body
         document.body.removeChild(input);
     }
 

@@ -40,8 +40,8 @@ class TestBot {
             };
 
             $args = [
-                'sheetID' => $this->methods->getSheetId($this->reqData['sheetUrl']),
-                'tabName' => $this->reqData['tabName']
+                'sheetID' => $this->methods->getSheetId(get_option('sheetUrl')),
+                'tabName' => get_option('tabName')
             ];
 
             $columns = $this->methods->sheetColumns();
@@ -76,7 +76,7 @@ class TestBot {
             }
 
             $this->output['status'] = 'error';
-            $this->output['message'] = esc_html__('Try again. Bot ID still didn\'t got access to your sheet', WSMGS_TEXT_DOMAIN);
+            $this->output['message'] = esc_html__('Bot do not have access. Check your sheet URL and & name is Ok or check if bot has editor access', WSMGS_TEXT_DOMAIN);
             wp_send_json_error($this->output, 400);
             wp_die();
 

@@ -63,7 +63,7 @@ $disabled = get_option('configureMode') ? 'disabled' : null;
 <?php if ($disabled && $tabName && $sheetUrl) {?>
 
 <p class="submit">
-    <a class="wsmgs_configure" data-bs-toggle="modal" href="#modal2" role="button" type="button">Next</a>
+    <a class="wsmgs_configure" data-bs-toggle="modal" href="#modal2" role="button" type="button">Configure Plugin</a>
 </p>
 
 <?php }?>

@@ -197,4 +197,8 @@
 // Design the export button
 .wsmgs_export_btn.wsmgs_export_btn {
     @include button-design;
+    &:hover,
+    &:active {
+        padding: 8px 15px;
+    }
 }

@@ -11,6 +11,7 @@ $(function () {
             this.settingsInput = $(".modal_sheet_url, .modal_tab_name");
             this.modalNextButton = $(".modal_next_btn");
             this.modalBackButton = $(".modal_back_btn");
+            this.getStartedBtn = $(".get_started_btn");
 
             this.events();
             this.callMethods();
@@ -26,6 +27,17 @@ $(function () {
             this.settingsInput.on("input", this.handleNavigationButton);
             this.modalNextButton.on("click", this.showNextModal.bind(this));
             this.modalBackButton.on("click", this.showPrevModal.bind(this));
+            this.getStartedBtn.on("click", this.showWizard.bind(this));
+
+            $("#smartwizard").smartWizard({
+                selected: 0,
+                autoAdjustHeight: true,
+                transition: {
+                    animation: "slide", // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
+                    speed: "100", // Transion animation speed
+                },
+                showStepURLhash: false,
+            });
         }
 
         callMethods() {
@@ -209,6 +221,9 @@ $(function () {
                 });
             }
         }
+
+        // Show the wizard modal upon clicking next button
+        showWizard(e) {}
     }
 
     new Dashboard();

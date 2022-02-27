@@ -18,8 +18,8 @@
 defined('ABSPATH') || wp_die(__('You can\'t access this page', 'wsmgs'));
 
 if (!defined('WSMGS_VERSION')) {
-    define('WSMGS_VERSION', '1.0.0');
-    // define('WSMGS_VERSION', time());
+    // define('WSMGS_VERSION', '1.0.0');
+    define('WSMGS_VERSION', time());
 }
 
 if (!defined('WSMGS_TEXT_DOMAIN')) {
@@ -157,5 +157,5 @@ register_activation_hook(__FILE__, function () {
         add_option('wsmgsToken', wp_generate_uuid4());
     }
     add_option('wsmgsRedirect', true);
-    add_option('configureMode', true);
+    update_option('configureMode', true);
 });

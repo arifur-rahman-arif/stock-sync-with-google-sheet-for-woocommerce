@@ -64,7 +64,7 @@ export const showAlert = (args) => {
 
 const insertAlertToUi = () => {
     $("#wpwrap").append(`
-        <div class="position-fixed bottom-0 start-50 translate-middle-x mb-3" style="z-index: 99999">
+        <div class="position-fixed top-0 end-0 me-2 mt-5" style="z-index: 99999">
             <div class="toast hide wsmgs_alert" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
                     <strong class="me-auto message_type">Bootstrap</strong>

@@ -1,11 +1,5 @@
-<?php
-$sheetUrl = get_option('sheetUrl') ? sanitize_text_field(get_option('sheetUrl')) : null;
-$tabName = get_option('tabName') ? sanitize_text_field(get_option('tabName')) : null;
-$disabled = get_option('configureMode') ? 'disabled' : null;
-?>
-
 <!-- Modal #2 -->
-<div class="modal fade" id="modal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+<!-- <div class="modal fade" id="modal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -35,19 +29,18 @@ $disabled = get_option('configureMode') ? 'disabled' : null;
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
 <!-- Modal #3 -->
-<div class="modal fade" id="modal3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+<!-- <div class="modal fade" id="modal3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Load the script template -->
-                <?php load_template(WSMGS_BASE_PATH . 'templates/template-script.php', false)?>
+
             </div>
             <div class="modal-footer">
                 <button class="wsmgs_btn modal_back_btn" type="button" data-bs-target="#modal2"
@@ -60,10 +53,81 @@ $disabled = get_option('configureMode') ? 'disabled' : null;
 
 
 
-<?php if ($disabled && $tabName && $sheetUrl) {?>
-
 <p class="submit">
     <a class="wsmgs_configure" data-bs-toggle="modal" href="#modal2" role="button" type="button">Configure Plugin</a>
-</p>
+</p> -->
 
-<?php }?>
+<div class="container wsmgs_welcome_container">
+
+    <h2 class="text-center">Welcome to</h2>
+    <h1 class="text-center"><?php echo WSMGS_PlUGIN_NAME ?></h1>
+    <a class="wsmgs_button video_link" href="#">Watch video tutorial</a>
+
+    <div class="get_started_container">
+        <p>Press the button and follow the steps to sync your product with Google Sheet</p>
+        <button class="wsmgs_button get_started_btn">Get started</button>
+    </div>
+</div>
+
+<div class="container wsmgs_wizard_container">
+
+    <div id="smartwizard">
+        <ul class="nav">
+            <li>
+                <a class="nav-link" href="#step-1">
+                    Set URL
+                </a>
+            </li>
+            <li>
+                <a class="nav-link" href="#step-2">
+                    Set ID
+                </a>
+            </li>
+            <li>
+                <a class="nav-link" href="#step-3">
+
+                    Set Script Code
+                </a>
+            </li>
+            <li>
+                <a class="nav-link" href="#step-4">
+                    Done
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="step-1" class="tab-pane" role="tabpanel">
+                <div class="wsmgs_inputs">
+
+                    <div class="wsmgs_input_container">
+                        <label class="input" for="sheetUrl">
+                            <input class="input__field" type="text" name="sheetUrl" value="" />
+                            <span class="input__label">Sheet URL</span>
+                        </label>
+                    </div>
+
+                    <div class="wsmgs_input_container">
+
+                        <label class="input" for="tabName">
+                            <input class="input__field" type="text" name="tabName" value="" />
+                            <span class="input__label">Tab Name</span>
+                        </label>
+
+                    </div>
+
+                </div>
+            </div>
+            <div id="step-2" class="tab-pane" role="tabpanel">
+                Step content 2
+            </div>
+            <div id="step-3" class="tab-pane" role="tabpanel">
+                Step content 3
+            </div>
+            <div id="step-4" class="tab-pane" role="tabpanel">
+                Step content 4
+            </div>
+        </div>
+    </div>
+
+</div>

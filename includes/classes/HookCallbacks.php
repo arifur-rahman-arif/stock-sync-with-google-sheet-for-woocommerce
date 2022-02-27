@@ -26,15 +26,15 @@ class HookCallbacks {
 
     public function loadExternalCss() {
         wp_enqueue_style('WSMGS_prism', WSMGS_BASE_URL . 'assets/public/syntex-highlight/prism.css', [], WSMGS_VERSION, 'all');
+        wp_enqueue_style('WSMGS_wizerd', WSMGS_BASE_URL . 'assets/public/smartwizard/css/smart_wizard_all.min.css', [], WSMGS_VERSION, 'all');
     }
 
     // Load all the scripts for admin panal
     public function loadBackendScripts() {
         wp_enqueue_script('jquery');
-
         wp_enqueue_script('WSMGS_prism', WSMGS_BASE_URL . 'assets/public/syntex-highlight/prism.js', [], WSMGS_VERSION, true);
-
         wp_enqueue_script('WSMGS_admin', WSMGS_BASE_URL . 'assets/public/scripts/backend.min.js', ['jquery'], WSMGS_VERSION, true);
+        wp_enqueue_script('WSMGS_wizerd', WSMGS_BASE_URL . 'assets/public/smartwizard/js/jquery.smartWizard.min.js', ['jquery'], WSMGS_VERSION, true);
     }
 
     // Localize javascript files

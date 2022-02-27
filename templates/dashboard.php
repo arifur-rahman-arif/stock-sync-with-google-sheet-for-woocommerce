@@ -2,10 +2,17 @@
 <?php
 $sheetUrl = get_option('sheetUrl') ? sanitize_text_field(get_option('sheetUrl')) : null;
 $tabName = get_option('tabName') ? sanitize_text_field(get_option('tabName')) : null;
-$disabled = get_option('configureMode') ? 'disabled' : null;
+$configureMode = get_option('configureMode') ? true : false;
 ?>
 
 
+<!-- If configure mode is active show the navigation template -->
+<?php if ($configureMode) {?>
+
+<!-- Load the configure modal template -->
+<?php load_template(WSMGS_BASE_PATH . 'templates/navigation-modal.php')?>
+
+<?php } else {?>
 <div class="wrap">
     <form action="options.php" class="wsmgs_setting_form" method="POST">
         <?php settings_fields('wsmgs_general_setting')?>
@@ -36,9 +43,6 @@ $disabled = get_option('configureMode') ? 'disabled' : null;
 
         <?php submit_button('Save Settings', 'wsmgs_save_setting_btn');?>
 
-        <!-- Load the configure modal template -->
-        <?php load_template(WSMGS_BASE_PATH . 'templates/navigation-modal.php')?>
-
     </form>
 
     <?php if (!$disabled && $tabName && $sheetUrl) {?>
@@ -50,3 +54,4 @@ $disabled = get_option('configureMode') ? 'disabled' : null;
 
 
 </div>
+<?php }?>

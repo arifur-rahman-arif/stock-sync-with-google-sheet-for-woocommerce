@@ -84,6 +84,17 @@
     width: calc(100% - 1px);
 }
 
+.tooltip-inner {
+    padding: 0.55rem 0.7rem;
+    letter-spacing: 0.3px;
+    font-size: 0.99rem;
+    background-color: $primaryColor;
+    max-width: 300px;
+}
+
+.tooltip-arrow::before {
+    border-left-color: $primaryColor !important;
+}
 .wsmgs_input_container {
     --color-light: white;
     --color-dark: #212121;
@@ -187,7 +198,7 @@
     .spinner-border {
         width: 1rem !important;
         height: 1rem !important;
-        color: $primaryColor !important;
+        color: #fff !important;
     }
 }
 

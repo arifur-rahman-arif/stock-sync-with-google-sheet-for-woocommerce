@@ -14,6 +14,7 @@ class SaveOptions {
      */
     private $methods;
 
+    // Save sheet data to wordpress settings API
     public function saveOptions() {
         try {
             if (sanitize_text_field($_POST['action']) !== 'wsmgs_save_options') {
@@ -35,11 +36,11 @@ class SaveOptions {
                 wp_die();
             };
 
-            delete_option('configureMode');
+            update_option('sheetUrl', $this->reqData['sheetUrl']);
+            update_option('tabName', $this->reqData['tabName']);
 
             $this->output['status'] = 'success';
-            $this->output['redirectUrl'] = admin_url('edit.php?post_type=product');
-            $this->output['message'] = esc_html__('Thanks for passing all of these process. Your products will be synchronized from now on', WSMGS_TEXT_DOMAIN);
+            $this->output['message'] = esc_html__('Data saved successfully', WSMGS_TEXT_DOMAIN);
             wp_send_json_success($this->output, 200);
             wp_die();
 

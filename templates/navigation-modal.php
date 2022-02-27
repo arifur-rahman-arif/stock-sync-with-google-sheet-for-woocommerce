@@ -102,7 +102,7 @@
 
                     <div class="wsmgs_input_container">
                         <label class="input" for="sheetUrl">
-                            <input class="input__field" type="text" name="sheetUrl" value="" />
+                            <input class="input__field modal_sheet_url" type="text" name="sheetUrl" value="" />
                             <span class="input__label">Sheet URL</span>
                         </label>
                     </div>
@@ -110,7 +110,7 @@
                     <div class="wsmgs_input_container">
 
                         <label class="input" for="tabName">
-                            <input class="input__field" type="text" name="tabName" value="" />
+                            <input class="input__field modal_tab_name" type="text" name="tabName" value="" />
                             <span class="input__label">Tab Name</span>
                         </label>
 

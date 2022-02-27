@@ -19,5 +19,9 @@
         background: transparent;
         color: $primaryColor;
         font-weight: bold;
+
+        * {
+            color: $primaryColor !important;
+        }
     }
 }

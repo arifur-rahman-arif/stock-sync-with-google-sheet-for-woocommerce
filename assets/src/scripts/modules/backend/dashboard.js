@@ -1,5 +1,11 @@
-import { Modal } from "bootstrap";
-import { closeLoadingButton, copyToClipboard, isValidHttpUrl, showAlert, showLoadingButton } from "../utils/helper-functions";
+import { Modal, Tooltip } from "bootstrap";
+import {
+    closeLoadingButton,
+    copyToClipboard,
+    isValidHttpUrl,
+    showAlert,
+    showLoadingButton,
+} from "../utils/helper-functions";
 
 var $ = jQuery.noConflict();
 
@@ -12,6 +18,8 @@ $(function () {
             this.modalNextButton = $(".modal_next_btn");
             this.modalBackButton = $(".modal_back_btn");
             this.getStartedBtn = $(".get_started_btn");
+            this.smartWizard = $("#smartwizard");
+            this.optionSaved = false;
 
             this.events();
             this.callMethods();
@@ -25,19 +33,24 @@ $(function () {
             });
 
             this.settingsInput.on("input", this.handleNavigationButton);
-            this.modalNextButton.on("click", this.showNextModal.bind(this));
-            this.modalBackButton.on("click", this.showPrevModal.bind(this));
+            // this.modalNextButton.on("click", this.showNextModal.bind(this));
+            // this.modalBackButton.on("click", this.showPrevModal.bind(this));
             this.getStartedBtn.on("click", this.showWizard.bind(this));
 
-            $("#smartwizard").smartWizard({
-                selected: 0,
-                autoAdjustHeight: true,
-                transition: {
-                    animation: "slide", // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
-                    speed: "100", // Transion animation speed
-                },
-                showStepURLhash: false,
-            });
+            this.smartWizard.length &&
+                this.smartWizard.smartWizard({
+                    selected: 0,
+                    autoAdjustHeight: true,
+                    transition: {
+                        animation: "slide", // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
+                        speed: "100", // Transition animation speed
+                    },
+                });
+
+            this.smartWizard.length &&
+                this.smartWizard.smartWizard("stepState", [1, 2, 3], "disable");
+
+            $(".btn.sw-btn-next").on("click", this.saveOptionsValue.bind(this));
         }
 
         callMethods() {
@@ -50,9 +63,20 @@ $(function () {
             let tabName = $(".modal_tab_name").val();
 
             if (!sheetUrl || !tabName) {
-                $(".modal_1").addClass("wsmgs_inactive");
+                $(".btn.sw-btn-next")
+                    .addClass("wsmgs_inactive")
+                    .attr("title", "Please fill up all input fields")
+                    .attr("original-title", "Please fill up all input fields")
+                    .attr("data-bs-toggle", "tooltip")
+                    .attr("data-bs-placement", "bottom");
+                let tooltip = new Tooltip($(".wsmgs_inactive"));
             } else {
-                $(".modal_1").removeClass("wsmgs_inactive");
+                if (!$(".btn.sw-btn-next").hasClass("wsmgs_inactive")) return;
+
+                let tooltip = Tooltip.getInstance($(".wsmgs_inactive"));
+                tooltip.dispose();
+
+                $(".btn.sw-btn-next").removeClass("wsmgs_inactive").attr("disabled", false);
             }
         }
 
@@ -172,7 +196,14 @@ $(function () {
         }
 
         // Save options to database
-        saveOptionsValue(e) {
+        saveOptionsValue(e, anchorObject, currentStepIndex, nextStepIndex, stepDirection) {
+            if (!this.checkRequiredFields()) return false;
+
+            if (this.optionSaved) return false;
+
+            let sheetUrl = $(".modal_sheet_url").val();
+            let tabName = $(".modal_tab_name").val();
+
             try {
                 $.ajax({
                     type: "POST",
@@ -180,11 +211,13 @@ $(function () {
                     data: {
                         action: "wsmgs_save_options",
                         wpNonce: wsmgsLocal.wpNonce,
+                        sheetUrl,
+                        tabName,
                     },
 
                     beforeSend: () => {
-                        showLoadingButton($(e.currentTarget));
-                        $(e.currentTarget).attr("disabled", true);
+                        showLoadingButton($(".btn.sw-btn-next"));
+                        $(".btn.sw-btn-next").attr("disabled", true);
                     },
 
                     success: (response) => {
@@ -193,20 +226,20 @@ $(function () {
                             type: `alert_success`,
                         });
 
-                        setTimeout(() => {
-                            window.location.href = response.data.redirectUrl;
-                        }, 1500);
+                        this.optionSaved = true;
+                        this.smartWizard.smartWizard("stepState", [1], "enable");
+                        this.smartWizard.smartWizard("next");
                     },
 
                     complete: () => {
-                        closeLoadingButton($(e.currentTarget), "Next");
-                        $(e.currentTarget).attr("disabled", false);
+                        closeLoadingButton($(".btn.sw-btn-next"), "Next");
+                        $(".btn.sw-btn-next").attr("disabled", false);
                     },
 
                     error: (error) => {
                         let response = error.responseJSON;
 
-                        let message = JSON.parse(response.data.message).error.message + ". Please give bot ID editor access first";
+                        let message = response.data.message;
 
                         showAlert({
                             message,
@@ -216,10 +249,12 @@ $(function () {
                 });
             } catch (error) {
                 showAlert({
-                    message: error,
+                    message: error.message,
                     type: `alert_error`,
                 });
             }
+
+            // return false;
         }
 
         // Show the wizard modal upon clicking next button

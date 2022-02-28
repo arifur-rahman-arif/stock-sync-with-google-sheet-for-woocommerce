@@ -45,7 +45,7 @@ $configureMode = get_option('configureMode') ? true : false;
 
     </form>
 
-    <?php if (!$disabled && $tabName && $sheetUrl) {?>
+    <?php if ($tabName && $sheetUrl) {?>
 
     <!-- Load the script template -->
     <?php load_template(WSMGS_BASE_PATH . 'templates/template-script.php', false)?>

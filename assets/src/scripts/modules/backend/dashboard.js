@@ -13,9 +13,10 @@ var $ = jQuery.noConflict();
 $(function () {
     class Dashboard {
         constructor() {
-            // Grab the element
+            // Grab the elements
             this.botMail = $(".bot_mail");
             this.botCopyBtn = $(".bot_copy_btn");
+            this.scriptCopyBtn = $(".script_copy_btn");
             this.settingsInput = $(".modal_sheet_url, .modal_tab_name");
             this.modalNextButton = $(".modal_next_btn");
             this.modalBackButton = $(".modal_back_btn");
@@ -38,15 +39,9 @@ $(function () {
                 copyToClipboard(text);
             });
 
-            this.botCopyBtn.on("click", (e) => {
-                let target = $(e.currentTarget);
-                let text = target.parent().find("code").text().trim();
-                copyToClipboard(text);
-            });
+            this.botCopyBtn.on("click", this.copyScriptCode.bind(this));
 
             this.settingsInput.on("input", this.handleNavigationButton.bind(this));
-            // this.modalNextButton.on("click", this.showNextModal.bind(this));
-            // this.modalBackButton.on("click", this.showPrevModal.bind(this));
             this.getStartedBtn.on("click", this.showWizard.bind(this));
 
             this.smartWizard.length &&
@@ -63,7 +58,7 @@ $(function () {
                 this.smartWizard.smartWizard("stepState", [1, 2, 3], "disable");
 
             $(".btn.sw-btn-next").on("click", this.saveOptionsValue.bind(this));
-            $(".btn.sw-btn-next").on("click", this.doesBotHasEditorAccees.bind(this));
+            $(".btn.sw-btn-next").on("click", this.doesBotHasEditorAccess.bind(this));
 
             this.gaveEditorAccess.on("change", this.checkNextButton.bind(this));
         }
@@ -72,17 +67,25 @@ $(function () {
             this.handleNavigationButton();
 
             // Initiate all tooltip
-            new Tooltip($(".wsmgs_tooltip_element1"), {
-                html: true,
-            });
+            $(".wsmgs_tooltip_element1").length &&
+                new Tooltip($(".wsmgs_tooltip_element1"), {
+                    html: true,
+                });
 
-            new Tooltip($(".wsmgs_tooltip_element2"), {
-                html: true,
-            });
+            $(".wsmgs_tooltip_element2").length &&
+                new Tooltip($(".wsmgs_tooltip_element2"), {
+                    html: true,
+                });
 
-            new Tooltip($(".wsmgs_tooltip_element3"), {
-                html: true,
-            });
+            $(".wsmgs_tooltip_element3").length &&
+                new Tooltip($(".wsmgs_tooltip_element3"), {
+                    html: true,
+                });
+
+            $(".wsmgs_tooltip_element4").length &&
+                new Tooltip($(".wsmgs_tooltip_element4"), {
+                    html: true,
+                });
         }
 
         // Disable the modal navigation button if input field values are empty
@@ -90,7 +93,8 @@ $(function () {
             let sheetUrl = $(".modal_sheet_url").val();
             let tabName = $(".modal_tab_name").val();
 
-            this.smartWizard.smartWizard("stepState", [1, 2, 3], "disable");
+            this.smartWizard.length &&
+                this.smartWizard.smartWizard("stepState", [1, 2, 3], "disable");
             this.optionSaved = false;
             this.hasEditorAccess = false;
 
@@ -106,7 +110,7 @@ $(function () {
                     .attr("data-bs-toggle", "tooltip")
                     .attr("data-bs-placement", "left");
 
-                new Tooltip($(".wsmgs_inactive"));
+                $(".wsmgs_inactive").length && new Tooltip($(".wsmgs_inactive"));
             } else {
                 if (!$(".btn.sw-btn-next").hasClass("wsmgs_inactive")) return;
 
@@ -115,37 +119,6 @@ $(function () {
 
                 $(".btn.sw-btn-next").removeClass("wsmgs_inactive").attr("disabled", false);
             }
-        }
-
-        // Show the next modal
-        showNextModal(e) {
-            let target = $(e.currentTarget);
-
-            if (target.hasClass("modal_2")) {
-                this.doesBotHasEditorAccees(e);
-                return;
-            }
-
-            if (target.hasClass("modal_3")) {
-                $(target.parents(".modal")).modal("hide");
-                this.saveOptionsValue(e);
-                return;
-            }
-
-            $(target.parents(".modal")).modal("hide");
-
-            let modal = new Modal($(target.attr("data-bs-target")));
-            modal.show();
-        }
-
-        // Go back to the previous modal
-        showPrevModal(e) {
-            let target = $(e.currentTarget);
-
-            $(target.parents(".modal")).modal("hide");
-
-            let modal = new Modal($(target.attr("data-bs-target")));
-            modal.show();
         }
 
         // If one of required input field is empty than restrict the user to go to next page
@@ -182,7 +155,7 @@ $(function () {
         }
 
         // Check if user gave access to boi
-        doesBotHasEditorAccees(e) {
+        doesBotHasEditorAccess(e) {
             let target = $(e.currentTarget);
             // If its not the first step than return false
             if (getURLHashValue() !== "#step-2") return false;
@@ -331,6 +304,24 @@ $(function () {
 
                 new Tooltip($(".wsmgs_inactive"));
             }
+        }
+
+        // Copy the script code to user clipboard
+        copyScriptCode(e) {
+            let target = $(e.currentTarget);
+
+            let sheetUrl = $(".modal_sheet_url").val();
+            let tabName = $(".modal_tab_name").val();
+
+            let text = `
+            `;
+        }
+
+        // The App Script code
+        appScriptCode(args) {
+            const { tabName } = args;
+
+            return tabName || null;
         }
     }
 

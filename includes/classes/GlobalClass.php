@@ -418,4 +418,159 @@ class GlobalClass {
         }
     }
 
+    // Defining the raw app script to use in Google Sheet
+    /**
+     * @return mixed
+     */
+    public function rawAppScript() {
+        $rawScript = '
+        // Run on user edit
+        function atEdit(e) {
+            let sheet = e.range.getSheet();
+
+            let currentTab = sheet.getName();
+
+            if (currentTab !== "' . get_option('tabName') . '") return "INVALID_SHEET";
+
+            let data = collectData(e);
+
+            updateProduct({
+                data,
+            });
+        }
+
+        // Collect the data from sheet and organize those based on their column position.
+        function collectData(e) {
+            let sheet = e.range.getSheet();
+
+            let column = e.range.getColumn();
+
+            if (column > 8) return "INVALID_COLUMN";
+
+            let range = sheet.getActiveRange();
+
+            let editedValues = range.getValues();
+
+            if (!editedValues) return "NO_VALUES";
+
+            let data = [];
+
+            editedValues.forEach((editedValue, rowIndex) => {
+                let row = e.range.getRow() + rowIndex;
+
+                let aToBValues = sheet.getRange(`A${row}:B${row}`).getValues()[0];
+
+                // The start index of the user column selection in the row
+                let startIndex = column;
+                // The end index of user current selection in the row
+                let endIndex = column + (editedValue.length - 1);
+
+                // The colum place
+                let columns = [
+                    "id", // Col A
+                    "type", // Col B
+                    "sku", // Col C
+                    "name", // Col D
+                    "published", // Col E
+                    "stock", // Col F
+                    "salePrice", // Col G
+                    "regularPrice", // Col H
+                ];
+
+                let organizedData = {};
+
+                let tempIndex = 0;
+
+                for (let i = startIndex; i <= endIndex; i++) {
+
+                    // If there is no value than just simply break the loop and return;
+                    if(!editedValue[tempIndex]) continue;
+
+                    if (!organizedData[columns[i - 1]]) {
+                        organizedData[columns[i - 1]] = editedValue[tempIndex];
+                    }
+
+                    if (organizedData.id) {
+                    // Set the old ID value to that cell
+                    if(e.oldValue){
+                        sheet.getRange(`A${row}`).setValue(e.oldValue);
+                    }
+                    showAlert("ID column cannot be changed");
+                    data.length = 0;
+                    return;
+                    }
+
+                    if (organizedData.type) {
+                        // Set the old Type value to that cell
+                        if(e.oldValue){
+                        sheet.getRange(`B${row}`).setValue(e.oldValue);
+                        }
+                        showAlert("Type column cannot be changed");
+                        data.length = 0;
+                        return;
+                    }
+                    tempIndex++;
+                }
+
+
+                // If there are no data inside the object skip this current loop
+                if(Object.keys(organizedData).length < 1){
+                return;
+                }
+
+                // Insert the id & type of that product
+                organizedData[columns[0]] = aToBValues[0];
+                organizedData[columns[1]] = aToBValues[1];
+
+                data.push(organizedData);
+            });
+
+            return data;
+        }
+
+        // Update the product on wordpress when there is a new change in sheet
+        function updateProduct(args) {
+            if (!Array.isArray(args.data) || args.data.length < 1) {
+                SpreadsheetApp.getActiveSpreadsheet().toast("Data is not valid to send to WordPress");
+                return "INVALID_DATA";
+            }
+
+            //Request body
+            let data = {
+                token: "' . get_option('wsmgsToken') . '",
+                reqData: args.data,
+            };
+
+            // Request options
+            let options = {
+                method: "POST",
+                contentType: "application/json",
+                muteHttpExceptions: true,
+                payload: JSON.stringify(data),
+            };
+
+            try {
+
+                let url = "' . site_url() . '/wp-json/wsmgs/v1/update-product";
+                let result = UrlFetchApp.fetch(url, options);
+                let response = JSON.parse(result.getContentText());
+
+                SpreadsheetApp.getActiveSpreadsheet().toast(response.data.message);
+
+            } catch (error) {
+                showAlert(error.message)
+                Logger.log(error.message)
+            }
+        }
+
+        // Show a popup alert on spreadsheet
+        function showAlert(message){
+            SpreadsheetApp.getUi().alert(message);
+        }
+        ';
+
+        return $rawScript;
+
+    }
+
 }

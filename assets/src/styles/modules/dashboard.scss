@@ -5,7 +5,6 @@
 }
 
 .bot_mail {
-    color: #2271b1;
     font-size: 1.2rem;
     cursor: copy;
 }
@@ -87,54 +86,51 @@
 .tooltip-inner {
     padding: 0.55rem 0.7rem;
     letter-spacing: 0.3px;
-    font-size: 0.99rem;
-    background-color: $primaryColor;
-    max-width: 300px;
+    font-size: 0.98rem;
+    max-width: 600px;
+
+    img {
+        width: 100%;
+    }
+
+    .tooltip_image_container {
+        p {
+            margin: 0 0 1rem 0;
+            font-weight: bold;
+            font-style: italic;
+        }
+    }
 }
 
-.tooltip-arrow::before {
-    border-left-color: $primaryColor !important;
-}
 .wsmgs_input_container {
-    --color-light: white;
-    --color-dark: #212121;
-    --color-signal: $primaryColor;
+    & > h3,
+    p {
+        font-weight: bold;
+    }
 
-    --color-background: var(--color-light);
-    --color-text: var(--color-dark);
-    --color-accent: var(--color-signal);
-
-    --size-bezel: 0.5rem;
-    --size-radius: 4px;
-
-    background: var(--color-background);
+    & > p {
+        font-style: italic;
+    }
 
     .input {
         position: relative;
 
         &__label {
-            position: absolute;
-            left: 0;
-            top: 0;
-            padding: calc(var(--size-bezel) * 0.75) calc(var(--size-bezel) * 0.5);
-            transform: translate(10px, -15px) scale(0.8) !important;
-            -webkit-transform: translate(10px, -15px) scale(0.8) !important;
-            -moz-transform: translate(10px, -2px) scale(0.8) !important;
             white-space: nowrap;
-            transform-origin: 0 0;
-            background: var(--color-background);
-            transition: transform 120ms ease-in;
+            color: $primaryColor;
             font-weight: bold;
             line-height: 1.2;
-            font-size: 1.2rem;
+            font-size: 0.9rem;
         }
         &__field {
             box-sizing: border-box;
             display: block;
             width: 100%;
-            padding: 1rem 0.8rem 0.8rem 0.8rem;
+            margin-top: 10px;
+            padding: 1rem 0.8rem;
             background: transparent;
-            border-radius: var(--size-radius);
+            border-radius: $borderRadius;
+            border: 1px solid $primaryColor;
 
             &:focus {
                 border-color: $primaryColor;
@@ -156,12 +152,10 @@
 
 .bot_info {
     font-size: 1rem;
-    color: #000;
     font-weight: bold;
 
     code {
         font-size: 1.1rem;
-        background: #ff6b8173;
     }
 
     .tutorial_video {
@@ -326,5 +320,68 @@
 
     .tab-pane {
         padding: 20px 0 !important;
+    }
+
+    .toolbar.toolbar-bottom {
+        text-align: right;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0;
+        margin-top: 1rem;
+    }
+
+    .step2_content_wrapper {
+        max-width: 735px;
+        & > h2 {
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        & > p {
+            font-weight: bold;
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        .bot_guidelines {
+            margin: 2rem 0 2rem 3rem;
+
+            li {
+                font-weight: bold;
+                list-style-type: decimal;
+                font-size: 0.9rem;
+            }
+        }
+
+        .bot_copy_btn {
+            @include button-design;
+        }
+
+        .bot_id_container {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 1rem;
+            background: #80808030;
+            padding: 1rem;
+            border-radius: $borderRadius;
+        }
+
+        .checkbhox {
+            margin-top: 3rem;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 0.7rem;
+            padding-left: 1px;
+            label {
+                font-weight: bold;
+                font-style: italic;
+            }
+
+            input {
+                margin: 0;
+            }
+        }
     }
 }

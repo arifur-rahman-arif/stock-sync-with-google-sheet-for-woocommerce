@@ -136,3 +136,9 @@ export const closeLoadingButton = (target, text) => {
 
     target.html(text);
 };
+
+// Get the url hash value from current browser url
+export const getURLHashValue = () => {
+    let url = new URL(window.location);
+    return url.hash || false;
+};

@@ -35,6 +35,7 @@ class HookCallbacks {
         wp_enqueue_script('WSMGS_prism', WSMGS_BASE_URL . 'assets/public/syntex-highlight/prism.js', [], WSMGS_VERSION, true);
         wp_enqueue_script('WSMGS_admin', WSMGS_BASE_URL . 'assets/public/scripts/backend.min.js', ['jquery'], WSMGS_VERSION, true);
         wp_enqueue_script('WSMGS_wizerd', WSMGS_BASE_URL . 'assets/public/smartwizard/js/jquery.smartWizard.min.js', ['jquery'], WSMGS_VERSION, true);
+        wp_enqueue_script('WSMGS_fontawesome', WSMGS_BASE_URL . 'assets/public/fontawesome/fontawesome.js', [], WSMGS_VERSION, true);
     }
 
     // Localize javascript files

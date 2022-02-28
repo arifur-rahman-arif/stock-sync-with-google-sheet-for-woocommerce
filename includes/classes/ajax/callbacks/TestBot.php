@@ -76,12 +76,12 @@ class TestBot {
             }
 
             $this->output['status'] = 'error';
-            $this->output['message'] = esc_html__('Bot do not have access. Check your sheet URL and & name is Ok or check if bot has editor access', WSMGS_TEXT_DOMAIN);
+            $this->output['message'] = esc_html__('Bot do not have access. Check your sheet URL and and name is Ok or check if bot has editor access', WSMGS_TEXT_DOMAIN);
             wp_send_json_error($this->output, 400);
             wp_die();
 
         } catch (\Throwable $error) {
-            $this->output['message'] = $error->getMessage();
+            $this->output['message'] = esc_html__('Bot do not have access. Check your sheet URL and and name is Ok or check if bot has editor access', WSMGS_TEXT_DOMAIN);
             wp_send_json_error($this->output, $error->getCode());
             wp_die();
         }

@@ -2,6 +2,7 @@ import { Modal, Tooltip } from "bootstrap";
 import {
     closeLoadingButton,
     copyToClipboard,
+    getURLHashValue,
     isValidHttpUrl,
     showAlert,
     showLoadingButton,
@@ -12,14 +13,19 @@ var $ = jQuery.noConflict();
 $(function () {
     class Dashboard {
         constructor() {
-            // Define the properties of this class
+            // Grab the element
             this.botMail = $(".bot_mail");
+            this.botCopyBtn = $(".bot_copy_btn");
             this.settingsInput = $(".modal_sheet_url, .modal_tab_name");
             this.modalNextButton = $(".modal_next_btn");
             this.modalBackButton = $(".modal_back_btn");
             this.getStartedBtn = $(".get_started_btn");
             this.smartWizard = $("#smartwizard");
+            this.gaveEditorAccess = $("#gave_editor_access");
+
+            // Properties of this class
             this.optionSaved = false;
+            this.hasEditorAccess = false;
 
             this.events();
             this.callMethods();
@@ -32,7 +38,13 @@ $(function () {
                 copyToClipboard(text);
             });
 
-            this.settingsInput.on("input", this.handleNavigationButton);
+            this.botCopyBtn.on("click", (e) => {
+                let target = $(e.currentTarget);
+                let text = target.parent().find("code").text().trim();
+                copyToClipboard(text);
+            });
+
+            this.settingsInput.on("input", this.handleNavigationButton.bind(this));
             // this.modalNextButton.on("click", this.showNextModal.bind(this));
             // this.modalBackButton.on("click", this.showPrevModal.bind(this));
             this.getStartedBtn.on("click", this.showWizard.bind(this));
@@ -51,10 +63,26 @@ $(function () {
                 this.smartWizard.smartWizard("stepState", [1, 2, 3], "disable");
 
             $(".btn.sw-btn-next").on("click", this.saveOptionsValue.bind(this));
+            $(".btn.sw-btn-next").on("click", this.doesBotHasEditorAccees.bind(this));
+
+            this.gaveEditorAccess.on("change", this.checkNextButton.bind(this));
         }
 
         callMethods() {
             this.handleNavigationButton();
+
+            // Initiate all tooltip
+            new Tooltip($(".wsmgs_tooltip_element1"), {
+                html: true,
+            });
+
+            new Tooltip($(".wsmgs_tooltip_element2"), {
+                html: true,
+            });
+
+            new Tooltip($(".wsmgs_tooltip_element3"), {
+                html: true,
+            });
         }
 
         // Disable the modal navigation button if input field values are empty
@@ -62,14 +90,23 @@ $(function () {
             let sheetUrl = $(".modal_sheet_url").val();
             let tabName = $(".modal_tab_name").val();
 
+            this.smartWizard.smartWizard("stepState", [1, 2, 3], "disable");
+            this.optionSaved = false;
+            this.hasEditorAccess = false;
+
+            this.gaveEditorAccess.prop("checked", false);
+
+            if (getURLHashValue() !== "#step-1") return false;
+
             if (!sheetUrl || !tabName) {
                 $(".btn.sw-btn-next")
                     .addClass("wsmgs_inactive")
                     .attr("title", "Please fill up all input fields")
                     .attr("original-title", "Please fill up all input fields")
                     .attr("data-bs-toggle", "tooltip")
-                    .attr("data-bs-placement", "bottom");
-                let tooltip = new Tooltip($(".wsmgs_inactive"));
+                    .attr("data-bs-placement", "left");
+
+                new Tooltip($(".wsmgs_inactive"));
             } else {
                 if (!$(".btn.sw-btn-next").hasClass("wsmgs_inactive")) return;
 
@@ -113,6 +150,9 @@ $(function () {
 
         // If one of required input field is empty than restrict the user to go to next page
         checkRequiredFields() {
+            // If its not the first step than return false
+            if (getURLHashValue() !== "#step-1") return false;
+
             let sheetUrl = $(".modal_sheet_url").val();
             let tabName = $(".modal_tab_name").val();
 
@@ -144,6 +184,11 @@ $(function () {
         // Check if user gave access to boi
         doesBotHasEditorAccees(e) {
             let target = $(e.currentTarget);
+            // If its not the first step than return false
+            if (getURLHashValue() !== "#step-2") return false;
+            if (target.hasClass("disabled") || target.hasClass("wsmgs_inactive")) return false;
+            if (!this.gaveEditorAccess.prop("checked")) return false;
+            if (this.hasEditorAccess) return false;
 
             try {
                 $.ajax({
@@ -155,8 +200,8 @@ $(function () {
                     },
 
                     beforeSend: () => {
-                        showLoadingButton(target);
-                        target.attr("disabled", true);
+                        showLoadingButton($(".btn.sw-btn-next"));
+                        $(".btn.sw-btn-next").attr("disabled", true);
                     },
 
                     success: (response) => {
@@ -165,15 +210,14 @@ $(function () {
                             type: `alert_success`,
                         });
 
-                        $(target.parents(".modal")).modal("hide");
-
-                        let modal = new Modal($(target.attr("data-bs-target")));
-                        modal.show();
+                        this.smartWizard.smartWizard("stepState", [2], "enable");
+                        this.smartWizard.smartWizard("next");
+                        this.hasEditorAccess = true;
                     },
 
                     complete: () => {
-                        closeLoadingButton(target, "Next");
-                        target.attr("disabled", false);
+                        closeLoadingButton($(".btn.sw-btn-next"), "Next");
+                        $(".btn.sw-btn-next").attr("disabled", false);
                     },
 
                     error: (error) => {
@@ -185,6 +229,8 @@ $(function () {
                             message,
                             type: `alert_error`,
                         });
+
+                        this.gaveEditorAccess.prop("checked", false);
                     },
                 });
             } catch (error) {
@@ -229,6 +275,14 @@ $(function () {
                         this.optionSaved = true;
                         this.smartWizard.smartWizard("stepState", [1], "enable");
                         this.smartWizard.smartWizard("next");
+
+                        $(".btn.sw-btn-next")
+                            .addClass("wsmgs_inactive")
+                            .attr("title", "Please give this ID editor access in your sheet")
+                            .attr("data-bs-toggle", "tooltip")
+                            .attr("data-bs-placement", "left");
+
+                        new Tooltip($(".wsmgs_inactive"));
                     },
 
                     complete: () => {
@@ -253,12 +307,31 @@ $(function () {
                     type: `alert_error`,
                 });
             }
-
-            // return false;
         }
 
         // Show the wizard modal upon clicking next button
         showWizard(e) {}
+
+        // Enable or disable the next button upon changing of gave editor access checkbox
+        checkNextButton(e) {
+            let nextBtn = $(".btn.sw-btn-next");
+            if ($(e.currentTarget).prop("checked")) {
+                if ($(".wsmgs_inactive").length) {
+                    let tooltip = Tooltip.getInstance($(".wsmgs_inactive"));
+                    tooltip.dispose();
+                }
+                nextBtn.removeClass("disabled").removeClass("wsmgs_inactive");
+            } else {
+                nextBtn.addClass("disabled").addClass("wsmgs_inactive");
+
+                $(".btn.sw-btn-next")
+                    .attr("title", "Please give this ID editor access in your sheet")
+                    .attr("data-bs-toggle", "tooltip")
+                    .attr("data-bs-placement", "left");
+
+                new Tooltip($(".wsmgs_inactive"));
+            }
+        }
     }
 
     new Dashboard();

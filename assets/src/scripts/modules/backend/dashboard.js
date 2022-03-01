@@ -106,7 +106,9 @@ $(function () {
             } else {
                 if (!$(".btn.sw-btn-next").hasClass("wsmgs_inactive")) return;
 
-                let tooltip = Tooltip.getInstance($(".wsmgs_inactive"));
+                let tooltip = new Tooltip($(".wsmgs_inactive"), {
+                    html: true,
+                });
                 tooltip.dispose();
 
                 $(".btn.sw-btn-next").removeClass("wsmgs_inactive").attr("disabled", false);
@@ -281,7 +283,9 @@ $(function () {
             let nextBtn = $(".btn.sw-btn-next");
             if ($(e.currentTarget).prop("checked")) {
                 if ($(".wsmgs_inactive").length) {
-                    let tooltip = Tooltip.getInstance($(".wsmgs_inactive"));
+                    let tooltip = new Tooltip($(".wsmgs_inactive"), {
+                        html: true,
+                    });
                     tooltip.dispose();
                 }
                 nextBtn.removeClass("disabled").removeClass("wsmgs_inactive");
@@ -298,14 +302,18 @@ $(function () {
 
             if ($(e.currentTarget).prop("checked")) {
                 if ($(".wsmgs_inactive").length) {
-                    let tooltip = Tooltip.getInstance($(".wsmgs_inactive"));
+                    let tooltip = new Tooltip($(".wsmgs_inactive"), {
+                        html: true,
+                    });
                     tooltip.dispose();
                 }
                 nextBtn.removeClass("disabled").removeClass("wsmgs_inactive");
+                this.smartWizard.length && this.smartWizard.smartWizard("stepState", [3], "enable");
             } else {
                 nextBtn.addClass("disabled").addClass("wsmgs_inactive");
 
                 this.setTheTooltip({ title: "Are you sure you have pasted Script Code correctly?" });
+                this.smartWizard.length && this.smartWizard.smartWizard("stepState", [3], "disable");
             }
         }
 

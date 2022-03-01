@@ -17,11 +17,6 @@
 /* if accessed directly exit from plugin */
 defined('ABSPATH') || wp_die(__('You can\'t access this page', 'wsmgs'));
 
-if (!defined('WSMGS_VERSION')) {
-    // define('WSMGS_VERSION', '1.0.0');
-    define('WSMGS_VERSION', time());
-}
-
 if (!defined('WSMGS_TEXT_DOMAIN')) {
     define('WSMGS_TEXT_DOMAIN', 'wsmgs');
 }
@@ -39,12 +34,20 @@ if (!defined('WSMGS_PlUGIN_NAME')) {
 }
 
 if (!defined('WSMGS_PlUGIN_MODE')) {
-    $development = true;
+    $development = false;
 
     if ($development) {
         define('WSMGS_PlUGIN_MODE', 'dev');
     } else {
         define('WSMGS_PlUGIN_MODE', 'prod');
+    }
+}
+
+if (!defined('WSMGS_VERSION')) {
+    if (WSMGS_PlUGIN_MODE === 'prod') {
+        define('WSMGS_VERSION', '1.0.0');
+    } else {
+        define('WSMGS_VERSION', time());
     }
 }
 

@@ -418,11 +418,18 @@ class GlobalClass {
         }
     }
 
-    // Defining the raw app script to use in Google Sheet
     /**
+     * Defining the raw app script to use in Google Sheet
      * @return mixed
      */
     public function rawAppScript() {
+
+        $tabName = get_option('tabName');
+
+        if (!$tabName || $tabName == "") {
+            return null;
+        }
+
         $rawScript = '
         // Run on user edit
         function atEdit(e) {
@@ -569,8 +576,7 @@ class GlobalClass {
         }
         ';
 
-        return $rawScript;
-
+        return $rawScript ? $rawScript : null;
     }
 
 }

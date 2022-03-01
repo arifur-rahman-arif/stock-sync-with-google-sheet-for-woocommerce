@@ -1,62 +1,3 @@
-<!-- Modal #2 -->
-<!-- <div class="modal fade" id="modal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="alert alert-primary d-flex align-items-center" role="alert">
-
-                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
-                        <use xlink:href="#info-fill" />
-                    </svg>
-                    <div class="bot_info">
-                        Copy this bot ID by clicking on it & give editor access in your Google Sheet.
-                        <span class="bot_mail d-block pt-2">
-                            <code>wcsmgs@wc-stock-management-with-sheet.iam.gserviceaccount.com</code>
-                        </span>
-                    </div>
-
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="wsmgs_btn modal_back_btn" type="button" data-bs-target="#modal1"
-                    data-bs-dismiss="modal">Back</button>
-                <button class="wsmgs_btn modal_next_btn modal_2" type="button" data-bs-target="#modal3"
-                    data-bs-dismiss="modal">Next
-                </button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-
-<!-- Modal #3 -->
-<!-- <div class="modal fade" id="modal3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-            </div>
-            <div class="modal-footer">
-                <button class="wsmgs_btn modal_back_btn" type="button" data-bs-target="#modal2"
-                    data-bs-dismiss="modal">Back</button>
-                <button class="wsmgs_btn modal_next_btn modal_3" type="button" data-bs-dismiss="modal">Done</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<p class="submit">
-    <a class="wsmgs_configure" data-bs-toggle="modal" href="#modal2" role="button" type="button">Configure Plugin</a>
-</p> -->
-
 <div class="container wsmgs_welcome_container">
     <h2 class="text-center">Welcome to</h2>
     <h1 class="text-center"><?php echo WSMGS_PlUGIN_NAME ?></h1>
@@ -107,7 +48,7 @@
                             all your WooCoommerce Products into it.</p>
                         <label class="input" for="sheetUrl">
                             <span class="input__label">Google Sheet URL&nbsp;
-                                <i class="fa-solid fa-circle-info wsmgs_tooltip_element1" data-bs-toggle="tooltip"
+                                <i class="fa-solid fa-circle-info wsmgs_tooltip_element" data-bs-toggle="tooltip"
                                     data-bs-placement="right" title="
                                     <div class='tooltip_image_container'>
                                         <p>
@@ -132,7 +73,7 @@
 
                         <label class="input" for="tabName">
                             <span class="input__label">Tab Name&nbsp;
-                                <i class="fa-solid fa-circle-info wsmgs_tooltip_element2" data-bs-toggle="tooltip"
+                                <i class="fa-solid fa-circle-info wsmgs_tooltip_element" data-bs-toggle="tooltip"
                                     data-bs-placement="right" title="
                                     <div class='tooltip_image_container'>
                                         <p>
@@ -144,7 +85,8 @@
                                     ">
                                 </i>
                             </span>
-                            <input class="input__field modal_tab_name" type="text" name="tabName" value="" />
+                            <input class="input__field modal_tab_name" type="text" name="tabName" value=""
+                                placeholder="Enter your Tab Name" />
                         </label>
 
                     </div>
@@ -176,7 +118,7 @@
                             </span>
                         </div>
 
-                        <button class="bot_copy_btn wsmgs_tooltip_element3" data-bs-toggle="tooltip"
+                        <button class="bot_copy_btn wsmgs_tooltip_element" data-bs-toggle="tooltip"
                             data-bs-placement="top" title="
                             <div class='tooltip_image_container'>
                                 <p>
@@ -238,7 +180,7 @@
                             <div class="code_placeholder" style="width: 80%;"></div>
                         </div>
 
-                        <button class="script_copy_btn wsmgs_tooltip_element4" data-bs-toggle="tooltip"
+                        <button class="script_copy_btn wsmgs_tooltip_element" data-bs-toggle="tooltip"
                             data-bs-placement="top" title="
                             <div class='tooltip_image_container'>
                                 <p>
@@ -261,8 +203,19 @@
                 </div>
 
             </div>
+
+            <!-- Step 4 -->
             <div id="step-4" class="tab-pane" role="tabpanel">
-                Step content 4
+                <div class="step4_content_wrapper">
+                    <h1 class="text-center">Sync with Google Sheet</h1>
+                    <p>
+                        Press the button to Sync your WooCommerce Products with your given Google Sheet. Thus, all
+                        products will be stored
+                        in your Google Sheet automatically.
+                    </p>
+
+                    <button class="wsmgs_button sync_button">Sync with Google Sheet</button>
+                </div>
             </div>
         </div>
     </div>

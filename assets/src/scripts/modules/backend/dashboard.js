@@ -18,11 +18,11 @@ $(function () {
             this.botCopyBtn = $(".bot_copy_btn");
             this.scriptCopyBtn = $(".script_copy_btn");
             this.settingsInput = $(".modal_sheet_url, .modal_tab_name");
-            this.modalNextButton = $(".modal_next_btn");
-            this.modalBackButton = $(".modal_back_btn");
             this.getStartedBtn = $(".get_started_btn");
             this.smartWizard = $("#smartwizard");
             this.gaveEditorAccess = $("#gave_editor_access");
+            this.pastedAppScript = $("#pasted_app_script");
+            this.syncButton = $(".sync_button");
 
             // Properties of this class
             this.optionSaved = false;
@@ -39,7 +39,13 @@ $(function () {
                 copyToClipboard(text);
             });
 
-            this.botCopyBtn.on("click", this.copyScriptCode.bind(this));
+            this.botCopyBtn.on("click", (e) => {
+                let target = $(e.currentTarget);
+                let text = target.parent().find(".bot_mail code").text().trim();
+                copyToClipboard(text);
+            });
+
+            this.scriptCopyBtn.on("click", this.copyScriptCode.bind(this));
 
             this.settingsInput.on("input", this.handleNavigationButton.bind(this));
             this.getStartedBtn.on("click", this.showWizard.bind(this));
@@ -48,43 +54,35 @@ $(function () {
                 this.smartWizard.smartWizard({
                     selected: 0,
                     autoAdjustHeight: true,
+                    enableURLhash: true,
                     transition: {
                         animation: "slide", // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
                         speed: "100", // Transition animation speed
                     },
                 });
 
-            this.smartWizard.length &&
-                this.smartWizard.smartWizard("stepState", [1, 2, 3], "disable");
+            this.smartWizard.length && this.smartWizard.smartWizard("stepState", [1, 2, 3], "disable");
 
             $(".btn.sw-btn-next").on("click", this.saveOptionsValue.bind(this));
             $(".btn.sw-btn-next").on("click", this.doesBotHasEditorAccess.bind(this));
 
             this.gaveEditorAccess.on("change", this.checkNextButton.bind(this));
+            this.pastedAppScript.on("change", this.activateStep4.bind(this));
+            this.syncButton.on("click", this.exportProducts.bind(this));
+
+            $(document).on("click", ".redirection_button", this.redirectUser.bind(this));
         }
 
         callMethods() {
             this.handleNavigationButton();
 
             // Initiate all tooltip
-            $(".wsmgs_tooltip_element1").length &&
-                new Tooltip($(".wsmgs_tooltip_element1"), {
-                    html: true,
-                });
-
-            $(".wsmgs_tooltip_element2").length &&
-                new Tooltip($(".wsmgs_tooltip_element2"), {
-                    html: true,
-                });
-
-            $(".wsmgs_tooltip_element3").length &&
-                new Tooltip($(".wsmgs_tooltip_element3"), {
-                    html: true,
-                });
-
-            $(".wsmgs_tooltip_element4").length &&
-                new Tooltip($(".wsmgs_tooltip_element4"), {
-                    html: true,
+            let tooltips = $(".wsmgs_tooltip_element");
+            tooltips.length &&
+                $.each(tooltips, function (i, element) {
+                    new Tooltip($(element), {
+                        html: true,
+                    });
                 });
         }
 
@@ -93,24 +91,18 @@ $(function () {
             let sheetUrl = $(".modal_sheet_url").val();
             let tabName = $(".modal_tab_name").val();
 
-            this.smartWizard.length &&
-                this.smartWizard.smartWizard("stepState", [1, 2, 3], "disable");
+            this.smartWizard.length && this.smartWizard.smartWizard("stepState", [1, 2, 3], "disable");
+
             this.optionSaved = false;
             this.hasEditorAccess = false;
 
             this.gaveEditorAccess.prop("checked", false);
+            this.pastedAppScript.prop("checked", false);
 
             if (getURLHashValue() !== "#step-1") return false;
 
             if (!sheetUrl || !tabName) {
-                $(".btn.sw-btn-next")
-                    .addClass("wsmgs_inactive")
-                    .attr("title", "Please fill up all input fields")
-                    .attr("original-title", "Please fill up all input fields")
-                    .attr("data-bs-toggle", "tooltip")
-                    .attr("data-bs-placement", "left");
-
-                $(".wsmgs_inactive").length && new Tooltip($(".wsmgs_inactive"));
+                this.setTheTooltip({ title: "Please fill up all input fields" });
             } else {
                 if (!$(".btn.sw-btn-next").hasClass("wsmgs_inactive")) return;
 
@@ -186,6 +178,8 @@ $(function () {
                         this.smartWizard.smartWizard("stepState", [2], "enable");
                         this.smartWizard.smartWizard("next");
                         this.hasEditorAccess = true;
+
+                        this.setTheTooltip({ title: "Are you sure you have pasted Script Code correctly?" });
                     },
 
                     complete: () => {
@@ -249,13 +243,7 @@ $(function () {
                         this.smartWizard.smartWizard("stepState", [1], "enable");
                         this.smartWizard.smartWizard("next");
 
-                        $(".btn.sw-btn-next")
-                            .addClass("wsmgs_inactive")
-                            .attr("title", "Please give this ID editor access in your sheet")
-                            .attr("data-bs-toggle", "tooltip")
-                            .attr("data-bs-placement", "left");
-
-                        new Tooltip($(".wsmgs_inactive"));
+                        this.setTheTooltip({ title: "Please give this ID editor access in your sheet" });
                     },
 
                     complete: () => {
@@ -283,7 +271,10 @@ $(function () {
         }
 
         // Show the wizard modal upon clicking next button
-        showWizard(e) {}
+        showWizard(e) {
+            $(".container.wsmgs_welcome_container").addClass("d-none");
+            $(".container.wsmgs_wizard_container").addClass("active");
+        }
 
         // Enable or disable the next button upon changing of gave editor access checkbox
         checkNextButton(e) {
@@ -297,12 +288,24 @@ $(function () {
             } else {
                 nextBtn.addClass("disabled").addClass("wsmgs_inactive");
 
-                $(".btn.sw-btn-next")
-                    .attr("title", "Please give this ID editor access in your sheet")
-                    .attr("data-bs-toggle", "tooltip")
-                    .attr("data-bs-placement", "left");
+                this.setTheTooltip({ title: "Please give this ID editor access in your sheet" });
+            }
+        }
 
-                new Tooltip($(".wsmgs_inactive"));
+        // Activate step 4
+        activateStep4(e) {
+            let nextBtn = $(".btn.sw-btn-next");
+
+            if ($(e.currentTarget).prop("checked")) {
+                if ($(".wsmgs_inactive").length) {
+                    let tooltip = Tooltip.getInstance($(".wsmgs_inactive"));
+                    tooltip.dispose();
+                }
+                nextBtn.removeClass("disabled").removeClass("wsmgs_inactive");
+            } else {
+                nextBtn.addClass("disabled").addClass("wsmgs_inactive");
+
+                this.setTheTooltip({ title: "Are you sure you have pasted Script Code correctly?" });
             }
         }
 
@@ -310,18 +313,191 @@ $(function () {
         copyScriptCode(e) {
             let target = $(e.currentTarget);
 
-            let sheetUrl = $(".modal_sheet_url").val();
-            let tabName = $(".modal_tab_name").val();
+            try {
+                $.ajax({
+                    type: "POST",
+                    url: wsmgsLocal.ajaxUrl,
+                    data: {
+                        action: "wsmgs_copy_script",
+                        wpNonce: wsmgsLocal.wpNonce,
+                    },
 
-            let text = `
-            `;
+                    beforeSend: () => {
+                        showLoadingButton(target);
+                        target.attr("disabled", true).addClass("wsmgs_inactive");
+                    },
+
+                    success: (response) => {
+                        let text = response.data.scriptCode;
+                        copyToClipboard(text);
+
+                        showAlert({
+                            message: response.data.message,
+                            type: `alert_success`,
+                        });
+
+                        this.smartWizard.length && this.smartWizard.smartWizard("stepState", [3], "enable");
+                    },
+
+                    complete: () => {
+                        closeLoadingButton(target, "Copy Script");
+                        target.attr("disabled", false).removeClass("wsmgs_inactive");
+                    },
+
+                    error: (error) => {
+                        let response = error.responseJSON;
+
+                        let message = response.data.message;
+
+                        showAlert({
+                            message,
+                            type: `alert_error`,
+                        });
+                    },
+                });
+            } catch (error) {
+                showAlert({
+                    message: error.message,
+                    type: `alert_error`,
+                });
+            }
         }
 
-        // The App Script code
-        appScriptCode(args) {
-            const { tabName } = args;
+        // Set the tooltip for next step
+        setTheTooltip(args) {
+            const { title } = args;
 
-            return tabName || null;
+            $(".btn.sw-btn-next")
+                .addClass("wsmgs_inactive")
+                .attr("title", title)
+                .attr("data-bs-toggle", "tooltip")
+                .attr("data-bs-placement", "left");
+
+            new Tooltip($(".wsmgs_inactive"));
+        }
+
+        // Export all WordPress products to google sheet
+        exportProducts(e) {
+            let target = $(e.currentTarget);
+
+            // Send ajax request to server for user authentication
+            $.ajax({
+                type: "POST",
+                url: wsmgsLocal.ajaxUrl,
+
+                data: {
+                    action: "wsmgs_export_product",
+                    wpNonce: wsmgsLocal.wpNonce,
+                },
+
+                beforeSend: () => {
+                    showLoadingButton(target);
+                    $(".btn.sw-btn-next").removeClass("redirection_btn");
+                    this.setTheTooltip({
+                        title: "Please wait. Products are still exporting into your Google Sheet",
+                    });
+                },
+
+                success: (response) => {
+                    try {
+                        showAlert({
+                            message: response.data.message,
+                            type: `alert_${response.data.status}`,
+                        });
+
+                        $(".step4_content_wrapper").html(`
+                            <div class="congratulation_box">
+                                <span class="congratulation_icon">
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+                                <h1>Congratulations!</h1>
+                                <p>Successfully Synced in your Google Sheet</p>
+
+                                <button class="redirection_button">Done</button>
+
+                            </div>
+                        `);
+
+                        $(".btn.sw-btn-next").remove();
+                    } catch (error) {
+                        showAlert({
+                            message: error,
+                            type: `alert_error`,
+                        });
+                    }
+                },
+
+                complete: () => {
+                    closeLoadingButton(target, "Sync with Google Sheet");
+                    target.attr("disabled", false).removeClass("wsmgs_inactive");
+                },
+
+                error: (error) => {
+                    let response = JSON.parse(error.responseText);
+
+                    showAlert({
+                        message: response.data.message,
+                        type: `alert_${response.data.status}`,
+                    });
+
+                    target.attr("disabled", true).addClass("wsmgs_inactive");
+                },
+            });
+        }
+
+        // Redirect the user to product page and
+        redirectUser(e) {
+            if (getURLHashValue() !== "#step-4") return false;
+
+            let target = $(e.currentTarget);
+
+            try {
+                $.ajax({
+                    type: "POST",
+                    url: wsmgsLocal.ajaxUrl,
+                    data: {
+                        action: "wsmgs_exit_wizard_mode",
+                        wpNonce: wsmgsLocal.wpNonce,
+                    },
+
+                    beforeSend: () => {
+                        showLoadingButton(target);
+                        target.attr("disabled", true).addClass("wsmgs_inactive");
+                    },
+
+                    success: (response) => {
+                        showAlert({
+                            message: response.data.message,
+                            type: `alert_success`,
+                        });
+
+                        setTimeout(() => {
+                            window.location.href = response.data.redirectUrl;
+                        }, 1300);
+                    },
+
+                    complete: () => {
+                        closeLoadingButton(target, "Done");
+                        target.attr("disabled", false).removeClass("wsmgs_inactive");
+                    },
+
+                    error: (error) => {
+                        let response = error.responseJSON;
+
+                        let message = response.data.message;
+
+                        showAlert({
+                            message,
+                            type: `alert_error`,
+                        });
+                    },
+                });
+            } catch (error) {
+                showAlert({
+                    message: error.message,
+                    type: `alert_error`,
+                });
+            }
         }
     }
 

@@ -40,6 +40,7 @@
 
 .wsmgs_setting_form {
     @include container-design;
+    width: 100%;
 
     margin-top: 70px;
 
@@ -147,12 +148,24 @@
                     color: $primaryColor;
                 }
             }
+
+            &::placeholder {
+                opacity: 0.5;
+            }
         }
     }
 }
 
 .wsmgs_description {
     @include container-design;
+    width: 100%;
+
+    max-width: 785px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-evenly;
+    gap: 1.5rem;
 }
 
 .bot_info {
@@ -161,10 +174,6 @@
 
     code {
         font-size: 1.1rem;
-    }
-
-    .tutorial_video {
-        text-transform: uppercase;
     }
 }
 
@@ -201,16 +210,6 @@
     }
 }
 
-#modal3 {
-    .alert:nth-of-type(1) {
-        display: none !important;
-    }
-
-    #wsmgs_script_code {
-        height: 200px !important;
-    }
-}
-
 // Design the export button
 .wsmgs_export_btn.wsmgs_export_btn {
     @include button-design;
@@ -232,6 +231,10 @@
     h2 {
         font-size: 1.4rem;
         margin-bottom: 0.5rem;
+        line-height: 2rem;
+    }
+
+    h1 {
         line-height: 2rem;
     }
 
@@ -263,7 +266,50 @@
     }
 }
 
+.bot_copy_btn,
+.script_copy_btn {
+    @include button-design;
+}
+
+.bot_id_container,
+.script_code_container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 1rem;
+    background: #80808030;
+    padding: 1rem;
+    border-radius: $borderRadius;
+
+    .placeholder {
+        flex: auto;
+    }
+}
+
+.script_code_container {
+    .code_placeholder {
+        height: 15px;
+        margin: 5px 0;
+        background-color: grey;
+        border-radius: $borderRadius;
+        &:first-child {
+            margin-top: 0;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.script_code_container {
+    align-items: flex-start;
+}
+
 .wsmgs_wizard_container {
+    visibility: hidden;
+    &.active {
+        visibility: visible;
+    }
     @include container-design;
 
     #smartwizard {
@@ -282,6 +328,10 @@
 
         .btn.sw-btn-prev.disabled {
             cursor: not-allowed !important;
+        }
+
+        .toolbar.toolbar-bottom button {
+            margin: 0 !important;
         }
     }
 
@@ -337,7 +387,8 @@
     }
 
     .step2_content_wrapper,
-    .step3_content_wrapper {
+    .step3_content_wrapper,
+    .step4_content_wrapper {
         max-width: 735px;
         & > h2 {
             font-weight: bold;
@@ -412,6 +463,80 @@
 
             input {
                 margin: 0;
+            }
+        }
+    }
+
+    .step4_content_wrapper {
+        max-width: 700px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        min-height: 300px;
+        h1 {
+            font-weight: bold;
+        }
+
+        & > p {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .sync_button {
+            @include button-design;
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .congratulation_box {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            background-color: rgba(128, 128, 128, 0.18824);
+            padding: 2rem 1.5rem;
+            border-radius: $borderRadius;
+
+            .congratulation_icon {
+                font-size: 5rem;
+                color: #00cc9d;
+            }
+
+            h1 {
+                font-size: 3rem;
+                padding: 1rem 0 2rem 0;
+                margin: 0;
+                text-align: center;
+            }
+
+            p {
+                font-weight: bold;
+                font-size: 1.3rem;
+                margin-top: 0;
+                text-align: center;
+            }
+
+            .redirection_button {
+                @include button-design;
+                margin-top: 1rem;
+            }
+
+            @media screen and (max-width: 560px) {
+                h1 {
+                    font-size: 7vw;
+                }
+
+                p {
+                    font-size: 4vw;
+                }
+
+                .congratulation_icon {
+                    font-size: 17vw;
+                }
             }
         }
     }

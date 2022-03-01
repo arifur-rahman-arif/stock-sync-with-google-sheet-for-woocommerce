@@ -22,16 +22,42 @@ $configureMode = get_option('configureMode') ? true : false;
 
             <div class="wsmgs_input_container">
                 <label class="input" for="sheetUrl">
-                    <input class="input__field" type="text" name="sheetUrl" value="<?php echo esc_attr($sheetUrl) ?>" />
-                    <span class="input__label">Sheet URL</span>
+                    <span class="input__label">Google Sheet URL&nbsp;
+                        <i class="fa-solid fa-circle-info wsmgs_tooltip_element" data-bs-toggle="tooltip"
+                            data-bs-placement="right" title="
+                                    <div class='tooltip_image_container'>
+                                        <p>
+                                            Copy your Google Sheet URL & paste it below to get access your products into it
+                                        </p>
+                                        <img
+                                            src='<?php echo WSMGS_BASE_URL . 'assets/public/images/tooltips/url-screenshot.png' ?>' />
+                                        </div>
+                                    ">
+                        </i>
+                    </span>
+                    <input class="input__field" type="text" name="sheetUrl" value="<?php echo esc_attr($sheetUrl) ?>"
+                        placeholder="Enter your google sheet URL" />
                 </label>
             </div>
 
             <div class="wsmgs_input_container">
 
                 <label class="input" for="tabName">
-                    <input class="input__field" type="text" name="tabName" value="<?php echo esc_attr($tabName) ?>" />
-                    <span class="input__label">Tab Name</span>
+                    <span class="input__label">Tab Name&nbsp;
+                        <i class="fa-solid fa-circle-info wsmgs_tooltip_element" data-bs-toggle="tooltip"
+                            data-bs-placement="right" title="
+                                    <div class='tooltip_image_container'>
+                                        <p>
+                                            Copy the Tab Name & paste it here. Thus your products will be stored in this tab
+                                        </p>
+                                        <img
+                                            src='<?php echo WSMGS_BASE_URL . 'assets/public/images/tooltips/tab-name.png' ?>' />
+                                        </div>
+                                    ">
+                        </i>
+                    </span>
+                    <input class="input__field" type="text" name="tabName" value="<?php echo esc_attr($tabName) ?>"
+                        placeholder="Enter your Tab Name" />
                 </label>
 
             </div>

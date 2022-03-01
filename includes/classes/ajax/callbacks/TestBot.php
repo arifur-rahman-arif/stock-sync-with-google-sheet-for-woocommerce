@@ -62,7 +62,7 @@ class TestBot {
 
                 if ($response) {
                     $this->output['status'] = 'success';
-                    $this->output['message'] = esc_html__('Thanks for giving the bot editor access successfully. Go to next process', WSMGS_TEXT_DOMAIN);
+                    $this->output['message'] = esc_html__('Thanks for giving the ID editor access successfully. Go to next process', WSMGS_TEXT_DOMAIN);
                     wp_send_json_success($this->output, 200);
                     wp_die();
                 };
@@ -70,7 +70,7 @@ class TestBot {
 
             if ($sheetColumn) {
                 $this->output['status'] = 'success';
-                $this->output['message'] = esc_html__('Thanks. You already gave editor access to bot ID in your sheet', WSMGS_TEXT_DOMAIN);
+                $this->output['message'] = esc_html__('Thanks. You already gave editor access to the ID in your sheet', WSMGS_TEXT_DOMAIN);
                 wp_send_json_success($this->output, 200);
                 wp_die();
             }

@@ -47,7 +47,7 @@ $(function () {
 
             this.scriptCopyBtn.on("click", this.copyScriptCode.bind(this));
 
-            this.settingsInput.on("input", this.handleNavigationButton.bind(this));
+            this.settingsInput.on("change", this.handleNavigationButton.bind(this));
             this.getStartedBtn.on("click", this.showWizard.bind(this));
 
             this.smartWizard.length &&

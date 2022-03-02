@@ -26,7 +26,7 @@ export const copyToClipboard = (text) => {
     }
 
     showAlert({
-        message: "Text copied to clipboard",
+        message: "Text copied",
         type: "alert_success",
     });
 };

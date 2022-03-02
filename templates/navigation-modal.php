@@ -1,6 +1,8 @@
 <div class="container wsmgs_welcome_container">
     <h2 class="text-center">Welcome to</h2>
-    <h1 class="text-center"><?php echo WSMGS_PlUGIN_NAME ?></h1>
+    <h1 class="text-center">WooCommerce Stock Management</h1>
+    <h2 class="text-center">with <span class="extra_text">Google Sheet</span></h2>
+
     <a class="wsmgs_button video_link" href="#">Watch video tutorial</a>
 
     <div class="get_started_container">
@@ -67,7 +69,7 @@
 
                     <div class="wsmgs_input_container">
 
-                        <h3>Add Tab Name</h3>
+                        <h2>Add Tab Name</h2>
                         <p>Copy a Tab Name <code>(ex: Sheet1)</code> from your Google Sheet & paste it below. So that,
                             all your products can be stored in this tab.</p>
 

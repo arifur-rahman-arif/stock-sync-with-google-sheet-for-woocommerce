@@ -34,7 +34,7 @@ if (!defined('WSMGS_PlUGIN_NAME')) {
 }
 
 if (!defined('WSMGS_PlUGIN_MODE')) {
-    $development = false;
+    $development = true;
 
     if ($development) {
         define('WSMGS_PlUGIN_MODE', 'dev');

@@ -14,7 +14,7 @@ $(function () {
     class Dashboard {
         constructor() {
             // Grab the elements
-            this.botMail = $(".bot_mail");
+            this.botMail = $(".bot_id_container");
             this.botCopyBtn = $(".bot_copy_btn");
             this.scriptCopyBtn = $(".script_copy_btn");
             this.settingsInput = $(".modal_sheet_url, .modal_tab_name");
@@ -27,9 +27,10 @@ $(function () {
             // Properties of this class
             this.optionSaved = false;
             this.hasEditorAccess = false;
+            this.step = "step-1";
 
-            this.events();
             this.callMethods();
+            this.events();
         }
 
         events() {
@@ -50,6 +51,31 @@ $(function () {
             this.settingsInput.on("change", this.handleNavigationButton.bind(this));
             this.getStartedBtn.on("click", this.showWizard.bind(this));
 
+            $(".btn.sw-btn-next").on("click", this.saveOptionsValue.bind(this));
+            $(".btn.sw-btn-next").on("click", this.doesBotHasEditorAccess.bind(this));
+
+            this.gaveEditorAccess.on("change", this.checkNextButton.bind(this));
+            this.pastedAppScript.on("change", this.activateStep4.bind(this));
+            this.syncButton.on("click", this.exportProducts.bind(this));
+
+            $(document).on("click", ".redirection_button", this.redirectUser.bind(this));
+            $(document).on("click", ".btn.sw-btn-prev", this.handleNextButtonStyle.bind(this));
+        }
+
+        callMethods() {
+            // Initiate all tooltip
+            let tooltips = $(".wsmgs_tooltip_element");
+            tooltips.length &&
+                $.each(tooltips, function (i, element) {
+                    new Tooltip($(element), {
+                        html: true,
+                    });
+                });
+
+            // Remove the hash from url if browser reloaded
+            // history.pushState("", document.title, window.location.pathname + window.location.search);
+
+            // Initialize the wizard step if element is active
             this.smartWizard.length &&
                 this.smartWizard.smartWizard({
                     selected: 0,
@@ -63,27 +89,7 @@ $(function () {
 
             this.smartWizard.length && this.smartWizard.smartWizard("stepState", [1, 2, 3], "disable");
 
-            $(".btn.sw-btn-next").on("click", this.saveOptionsValue.bind(this));
-            $(".btn.sw-btn-next").on("click", this.doesBotHasEditorAccess.bind(this));
-
-            this.gaveEditorAccess.on("change", this.checkNextButton.bind(this));
-            this.pastedAppScript.on("change", this.activateStep4.bind(this));
-            this.syncButton.on("click", this.exportProducts.bind(this));
-
-            $(document).on("click", ".redirection_button", this.redirectUser.bind(this));
-        }
-
-        callMethods() {
             this.handleNavigationButton();
-
-            // Initiate all tooltip
-            let tooltips = $(".wsmgs_tooltip_element");
-            tooltips.length &&
-                $.each(tooltips, function (i, element) {
-                    new Tooltip($(element), {
-                        html: true,
-                    });
-                });
         }
 
         // Disable the modal navigation button if input field values are empty
@@ -99,7 +105,7 @@ $(function () {
             this.gaveEditorAccess.prop("checked", false);
             this.pastedAppScript.prop("checked", false);
 
-            if (getURLHashValue() !== "#step-1") return false;
+            if (this.step !== "step-1") return false;
 
             if (!sheetUrl || !tabName) {
                 this.setTheTooltip({ title: "Please fill up all input fields" });
@@ -381,7 +387,7 @@ $(function () {
                 .attr("data-bs-toggle", "tooltip")
                 .attr("data-bs-placement", "left");
 
-            new Tooltip($(".wsmgs_inactive"));
+            $(".btn.sw-btn-next").length && new Tooltip($(".wsmgs_inactive"));
         }
 
         // Export all WordPress products to google sheet
@@ -455,7 +461,7 @@ $(function () {
 
         // Redirect the user to product page and
         redirectUser(e) {
-            if (getURLHashValue() !== "#step-4") return false;
+            if (getURLHashValue() !== "step-4") return false;
 
             let target = $(e.currentTarget);
 
@@ -505,6 +511,17 @@ $(function () {
                     message: error.message,
                     type: `alert_error`,
                 });
+            }
+        }
+
+        // Handle next button style
+        handleNextButtonStyle() {
+            this.gaveEditorAccess.prop("checked", false);
+            this.pastedAppScript.prop("checked", false);
+            if ($(".btn.sw-btn-next").hasClass("wsmgs_inactive")) {
+                let tooltip = new Tooltip($(".wsmgs_inactive"));
+                tooltip.dispose();
+                $(".btn.sw-btn-next").removeClass("wsmgs_inactive");
             }
         }
     }

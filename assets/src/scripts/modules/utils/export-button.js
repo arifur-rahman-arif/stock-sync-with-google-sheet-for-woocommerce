@@ -52,6 +52,8 @@ $(function () {
                             message: response.data.message,
                             type: `alert_${response.data.status}`,
                         });
+                        $(".wsmgs_export_btn").removeClass("wsmgs_disabled");
+                        $(".wsmgs_export_btn").attr("disabled", false);
                     } catch (error) {
                         showAlert({
                             message: error,
@@ -61,8 +63,8 @@ $(function () {
                 },
 
                 complete: () => {
-                    $(e.currentTarget).removeClass("wsmgs_disabled");
-                    $(e.currentTarget).attr("disabled", false);
+                    $(".wsmgs_export_btn").removeClass("wsmgs_disabled");
+                    $(".wsmgs_export_btn").attr("disabled", false);
                     closeLoader();
                 },
 
@@ -73,6 +75,9 @@ $(function () {
                         message: response.data.message,
                         type: `alert_${response.data.status}`,
                     });
+
+                    $(".wsmgs_export_btn").removeClass("wsmgs_disabled");
+                    $(".wsmgs_export_btn").attr("disabled", false);
 
                     closeLoader();
                 },

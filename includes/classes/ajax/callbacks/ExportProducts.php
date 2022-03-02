@@ -143,7 +143,8 @@ class ExportProducts {
 
         $args = [
             'post_type'      => 'product',
-            'posts_per_page' => -1
+            'posts_per_page' => -1,
+            'post_status'    => 'any'
         ];
 
         $products = get_posts($args);

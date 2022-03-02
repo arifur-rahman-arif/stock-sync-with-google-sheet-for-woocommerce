@@ -5,4 +5,7 @@
     box-shadow: $boxShadow;
     margin-top: 3rem;
     padding: $containerPadding;
+    @media screen and (max-width: 560px) {
+        width: calc(100% - 10px);
+    }
 }

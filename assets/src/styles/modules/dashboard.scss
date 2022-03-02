@@ -7,6 +7,11 @@
 .bot_mail {
     font-size: 1.2rem;
     cursor: copy;
+
+    code {
+        background: none;
+        background-color: none;
+    }
 }
 
 .wsmgs_editor_container {
@@ -84,6 +89,10 @@
     width: calc(100% - 1px);
 }
 
+.tooltip.show {
+    opacity: 1;
+}
+
 .tooltip-inner {
     padding: 0.55rem 0.7rem;
     letter-spacing: 0.3px;
@@ -106,16 +115,16 @@
 .wsmgs_input_container {
     & > h3,
     p {
-        font-weight: bold;
         font-size: 1rem;
     }
     & > h2 {
         font-weight: bold;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
     }
 
     & > p {
-        font-style: italic;
+        margin-top: 0;
     }
 
     .input {
@@ -123,7 +132,7 @@
 
         &__label {
             white-space: nowrap;
-            color: $primaryColor;
+            color: #000;
             font-weight: bold;
             line-height: 1.2;
             font-size: 0.9rem;
@@ -133,7 +142,7 @@
             display: block;
             width: 100%;
             margin-top: 10px;
-            padding: 1rem 0.8rem;
+            padding: 0.5rem 0.8rem;
             background: transparent;
             border-radius: $borderRadius;
             border: 1px solid $primaryColor;
@@ -182,9 +191,21 @@
     pointer-events: none;
 }
 
-.wsmgs_inactive {
+.wsmgs_inactive,
+.sw-btn-next.disabled {
     opacity: 0.5;
     cursor: not-allowed !important;
+    background-color: #8080808a !important;
+    outline: none !important;
+    border: none !important;
+
+    &:hover,
+    &:active,
+    &:focus {
+        border: none !important;
+        outline: none !important;
+        color: #000 !important;
+    }
 }
 
 .wsmgs_btn {
@@ -222,6 +243,8 @@
 // Design the welocome container
 .wsmgs_welcome_container {
     @include container-design;
+    height: calc(100vh - 120px);
+    min-height: 450px;
 
     display: flex;
     justify-content: center;
@@ -232,14 +255,41 @@
         font-size: 1.4rem;
         margin-bottom: 0.5rem;
         line-height: 2rem;
+        font-weight: bolder;
+
+        .extra_text {
+            position: relative;
+            &::before {
+                position: absolute;
+                content: "";
+                width: 100%;
+                height: 8px;
+                background-color: rgba(255, 166, 0, 0.582);
+                bottom: 0;
+                border-radius: $borderRadius;
+            }
+        }
+        @media screen and (max-width: 560px) {
+            font-size: 6vw;
+        }
     }
 
     h1 {
         line-height: 2rem;
+        font-size: 2.5rem;
+        font-weight: bolder;
+        margin-bottom: 0;
+        @media screen and (max-width: 560px) {
+            font-size: 10vw;
+        }
     }
 
     .wsmgs_button {
         @include button-design;
+    }
+
+    .get_started_btn {
+        padding: 12px 15px;
     }
 
     .video_link {
@@ -260,8 +310,8 @@
 
         p {
             text-align: center;
-            font-weight: bold;
             font-size: 0.9rem;
+            margin-bottom: 0.5rem;
         }
     }
 }
@@ -278,12 +328,20 @@
     align-items: center;
     gap: 1rem;
     background: #80808030;
-    padding: 1rem;
     border-radius: $borderRadius;
 
     .placeholder {
         flex: auto;
     }
+}
+
+.script_code_container {
+    padding: 1rem;
+}
+
+.bot_id_container {
+    padding: 0.1rem 0.1rem 0.15rem 0.5rem;
+    max-width: 700px;
 }
 
 .script_code_container {
@@ -306,11 +364,15 @@
 }
 
 .wsmgs_wizard_container {
+    @include container-design;
     visibility: hidden;
+    position: absolute;
+    top: 0;
+    padding: 3rem 3.5rem;
     &.active {
         visibility: visible;
+        position: relative;
     }
-    @include container-design;
 
     #smartwizard {
         border: none !important;
@@ -326,12 +388,24 @@
             @include button-design;
         }
 
+        .btn.sw-btn-prev {
+            background: transparent;
+            color: #686de0;
+            font-weight: bold;
+            border: 1px solid #686de0;
+        }
+
         .btn.sw-btn-prev.disabled {
             cursor: not-allowed !important;
+            display: none !important;
         }
 
         .toolbar.toolbar-bottom button {
             margin: 0 !important;
+        }
+
+        .btn.sw-btn-next.btn.sw-btn-next {
+            margin-left: auto !important;
         }
     }
 
@@ -345,6 +419,9 @@
         }
     }
 
+    .nav-link {
+        font-size: 1rem !important;
+    }
     .nav-link.active.nav-link.active {
         color: $primaryColor !important;
     }
@@ -357,20 +434,21 @@
     .nav-link::after,
     .nav-link::before,
     .nav-link.active::after,
-    .nav-link.done,
-    .nav-link.done,
     .nav-link.done::before,
     .nav-link.done::after {
         color: $primaryColor !important;
     }
 
     .sw-theme-default > .nav .nav-link.done {
-        color: $primaryColor !important;
+        color: #000 !important;
     }
 
-    .nav-link.active.nav-link.active::after,
-    .nav-link.done.nav-link.done::after {
+    .nav-link.active.nav-link.active::after {
         background-color: $primaryColor !important;
+    }
+
+    .nav-link.done.nav-link.done::after {
+        background-color: #000 !important;
     }
 
     .tab-pane {
@@ -414,15 +492,22 @@
         .script_copy_btn {
             @include button-design;
         }
+        .script_copy_btn {
+            margin-right: -1rem;
+            margin-top: -1rem;
+        }
+
+        .bot_id_container {
+            cursor: copy;
+        }
 
         .bot_id_container,
         .script_code_container {
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-between;
             align-items: center;
             gap: 1rem;
             background: #80808030;
-            padding: 1rem;
             border-radius: $borderRadius;
 
             .placeholder {
@@ -450,7 +535,7 @@
         }
 
         .checkbhox {
-            margin-top: 3rem;
+            margin-top: 0.5rem;
             display: flex;
             justify-content: flex-start;
             align-items: center;
@@ -463,6 +548,7 @@
 
             input {
                 margin: 0;
+                outline: 1px solid $primaryColor;
             }
         }
     }

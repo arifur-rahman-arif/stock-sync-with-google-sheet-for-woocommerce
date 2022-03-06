@@ -41,7 +41,7 @@
                         Copy your Google Sheet URL & paste it below to get access your products into it
                     </p>
                     <img
-                        src='<?php echo WSMGS_BASE_URL . 'assets/public/images/tooltips/app-script.png' ?>' />
+                        src='<?php echo WSMGS_BASE_URL . 'assets/public/images/tooltips/app-script.gif' ?>' />
                     </div>
             ">
             Copy Script

@@ -124,7 +124,7 @@ class ExportProducts {
             $this->output['message'] = esc_html__($productCount . ' products exported in google sheet', WSMGS_TEXT_DOMAIN);
 
             if ($productCount === 0) {
-                $this->output['message'] = esc_html__('All products are already exported in google sheet.', WSMGS_TEXT_DOMAIN);
+                $this->output['message'] = esc_html__('Successful', WSMGS_TEXT_DOMAIN);
             }
 
             wp_send_json_success($this->output, 201);

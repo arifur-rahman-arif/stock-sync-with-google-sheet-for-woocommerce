@@ -1,4 +1,4 @@
-import { Modal, Tooltip } from "bootstrap";
+import { Tooltip } from "bootstrap";
 import {
     closeLoadingButton,
     copyToClipboard,
@@ -23,11 +23,11 @@ $(function () {
             this.gaveEditorAccess = $("#gave_editor_access");
             this.pastedAppScript = $("#pasted_app_script");
             this.syncButton = $(".sync_button");
+            this.accordion = $(".tutorial_accordion");
 
             // Properties of this class
             this.optionSaved = false;
             this.hasEditorAccess = false;
-            this.step = "step-1";
 
             this.callMethods();
             this.events();
@@ -35,15 +35,11 @@ $(function () {
 
         events() {
             this.botMail.on("click", (e) => {
-                let target = $(e.currentTarget);
-                let text = target.text().trim();
-                copyToClipboard(text);
+                copyToClipboard("wcsmgs@wc-stock-management-with-sheet.iam.gserviceaccount.com");
             });
 
             this.botCopyBtn.on("click", (e) => {
-                let target = $(e.currentTarget);
-                let text = target.parent().find(".bot_mail code").text().trim();
-                copyToClipboard(text);
+                copyToClipboard("wcsmgs@wc-stock-management-with-sheet.iam.gserviceaccount.com");
             });
 
             this.scriptCopyBtn.on("click", this.copyScriptCode.bind(this));
@@ -57,6 +53,7 @@ $(function () {
             this.gaveEditorAccess.on("change", this.checkNextButton.bind(this));
             this.pastedAppScript.on("change", this.activateStep4.bind(this));
             this.syncButton.on("click", this.exportProducts.bind(this));
+            this.accordion.on("click", this.increaseHeightOfWizard.bind(this));
 
             $(document).on("click", ".redirection_button", this.redirectUser.bind(this));
             $(document).on("click", ".btn.sw-btn-prev", this.handleNextButtonStyle.bind(this));
@@ -105,10 +102,11 @@ $(function () {
             this.gaveEditorAccess.prop("checked", false);
             this.pastedAppScript.prop("checked", false);
 
-            if (this.step !== "step-1") return false;
+            if (getURLHashValue() !== "#step-1") return false;
 
             if (!sheetUrl || !tabName) {
                 this.setTheTooltip({ title: "Please fill up all input fields" });
+                $(".btn.sw-btn-next").addClass("disabled");
             } else {
                 if (!$(".btn.sw-btn-next").hasClass("wsmgs_inactive")) return;
 
@@ -117,7 +115,10 @@ $(function () {
                 });
                 tooltip.dispose();
 
-                $(".btn.sw-btn-next").removeClass("wsmgs_inactive").attr("disabled", false);
+                $(".btn.sw-btn-next")
+                    .removeClass("wsmgs_inactive")
+                    .removeClass("disabled")
+                    .attr("disabled", false);
             }
         }
 
@@ -282,6 +283,7 @@ $(function () {
         showWizard(e) {
             $(".container.wsmgs_welcome_container").addClass("d-none");
             $(".container.wsmgs_wizard_container").addClass("active");
+            $(".btn.sw-btn-next").addClass("disabled");
         }
 
         // Enable or disable the next button upon changing of gave editor access checkbox
@@ -407,6 +409,7 @@ $(function () {
                 beforeSend: () => {
                     showLoadingButton(target);
                     $(".btn.sw-btn-next").removeClass("redirection_btn");
+                    $(".btn.sw-btn-prev").addClass("disabled");
                     this.setTheTooltip({
                         title: "Please wait. Products are still exporting into your Google Sheet",
                     });
@@ -433,6 +436,7 @@ $(function () {
                         `);
 
                         $(".btn.sw-btn-next").remove();
+                        $(".btn.sw-btn-prev").remove();
                     } catch (error) {
                         showAlert({
                             message: error,
@@ -455,13 +459,14 @@ $(function () {
                     });
 
                     target.attr("disabled", true).addClass("wsmgs_inactive");
+                    $(".btn.sw-btn-prev").removeClass("disabled");
                 },
             });
         }
 
         // Redirect the user to product page and
         redirectUser(e) {
-            if (getURLHashValue() !== "step-4") return false;
+            if (getURLHashValue() !== "#step-4") return false;
 
             let target = $(e.currentTarget);
 
@@ -487,7 +492,7 @@ $(function () {
 
                         setTimeout(() => {
                             window.location.href = response.data.redirectUrl;
-                        }, 1300);
+                        }, 1000);
                     },
 
                     complete: () => {
@@ -516,12 +521,29 @@ $(function () {
 
         // Handle next button style
         handleNextButtonStyle() {
-            this.gaveEditorAccess.prop("checked", false);
-            this.pastedAppScript.prop("checked", false);
+            if (getURLHashValue() == "#step-1") {
+                this.gaveEditorAccess.prop("checked", false);
+            }
+            // this.pastedAppScript.prop("checked", false);
             if ($(".btn.sw-btn-next").hasClass("wsmgs_inactive")) {
                 let tooltip = new Tooltip($(".wsmgs_inactive"));
                 tooltip.dispose();
                 $(".btn.sw-btn-next").removeClass("wsmgs_inactive");
+            }
+        }
+
+        // Increase height of of wizard upon clicking on accordion
+        increaseHeightOfWizard(e) {
+            let target = $(e.currentTarget);
+
+            if (target.find("#flush-collapseOne").hasClass("show")) {
+                $(".tab-content").css({
+                    height: "800px",
+                });
+            } else {
+                $(".tab-content").css({
+                    height: "auto",
+                });
             }
         }
     }

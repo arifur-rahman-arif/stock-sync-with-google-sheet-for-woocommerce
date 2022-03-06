@@ -8,6 +8,8 @@
     <div class="get_started_container">
         <p>Press the button and follow the steps to sync your product with Google Sheet</p>
         <button class="wsmgs_button get_started_btn">Get started</button>
+        <a class="settings_screen" href="<?php echo esc_url(admin_url('admin.php?page=wsmgs-page')) ?>">Back to settings
+            page</a>
     </div>
 </div>
 
@@ -106,10 +108,11 @@
                         can control your sheet to sync your WooCommerce products.</p>
                     <ul class="bot_guidelines">
                         <li>Copy the ID below</li>
-                        <li>Then, go to your Google Sheet & click <code>Share</code> button at the top-right position
+                        <li>Then, go to your Google Sheet & click <button class="share_btn_1">Share</button> button at
+                            the top-right position
                         </li>
                         <li>Paste the ID and give <code>editor</code> access</li>
-                        <li>Then click the <code>Share</code> button to confirm</li>
+                        <li>Then click the <button class="share_btn_2">Share</button> button to confirm</li>
                     </ul>
 
                     <div class="bot_id_container">
@@ -157,19 +160,45 @@
                         Please follow the steps mentioned below
                     </p>
 
-                    <ul class="bot_guidelines">
-                        <li>Copy the Script Code below</li>
-                        <li>Then, got to <code>Extension</code> menu of your Google Sheet</li>
-                        <li>Click on <code>Apps Script</code></li>
-                        <li>Now remove the existing one and paste the code on it</li>
-                        <li>Go to <code>Triggers</code> & click <code>Add Trigger</code></li>
-                        <li>Select <code>atEdit</code> option from <code>Choose which function to run</code> dropdown
-                        </li>
-                        <li>Select <code>On edit</code> option from <code>Select event type dropdown</code> dropdown
-                        </li>
-                        <li>Click save. If you are doing it for first time than Google will ask you for permission</li>
-                        <li>Click advance & give the script permission to work properly</li>
-                    </ul>
+
+
+
+                    <div class="accordion accordion-flush tutorial_accordion" id="tutorial_accordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                    aria-controls="flush-collapseOne">
+                                    How to set up script
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#tutorial_accordion">
+                                <div class="accordion-body">
+                                    <ul class="bot_guidelines">
+                                        <li>Copy the Script Code below</li>
+                                        <li>Then, got to <code>Extension</code> menu of your Google Sheet</li>
+                                        <li>Click on <code>Apps Script</code></li>
+                                        <li>Now remove the existing one and paste the code on it</li>
+                                        <li>Go to <code>Triggers</code> & click <code>Add Trigger</code></li>
+                                        <li>Select <code>atEdit</code> option from
+                                            <code>Choose which function to run</code> dropdown
+                                        </li>
+                                        <li>Select <code>On edit</code> option from
+                                            <code>Select event type dropdown</code> dropdown
+                                        </li>
+                                        <li>Click save. If you are doing it for first time than Google will ask you for
+                                            permission</li>
+                                        <li>Click advance & give the script permission to work properly</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
 
                     <div class="script_code_container">
 
@@ -189,7 +218,7 @@
                                     Copy your Google Sheet URL & paste it below to get access your products into it
                                 </p>
                                 <img
-                                    src='<?php echo WSMGS_BASE_URL . 'assets/public/images/tooltips/app-script.png' ?>' />
+                                    src='<?php echo WSMGS_BASE_URL . 'assets/public/images/tooltips/app-script.gif' ?>' />
                                 </div>
                         ">
                             Copy Script

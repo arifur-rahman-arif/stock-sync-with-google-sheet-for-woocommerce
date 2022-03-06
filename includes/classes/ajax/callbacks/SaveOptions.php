@@ -40,7 +40,7 @@ class SaveOptions {
             update_option('tabName', $this->reqData['tabName']);
 
             $this->output['status'] = 'success';
-            $this->output['message'] = esc_html__('Data saved successfully', WSMGS_TEXT_DOMAIN);
+            $this->output['message'] = esc_html__('Successfull', WSMGS_TEXT_DOMAIN);
             wp_send_json_success($this->output, 200);
             wp_die();
 

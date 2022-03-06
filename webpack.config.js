@@ -112,7 +112,7 @@ const config = (env, options) => {
             ],
         },
         plugins: plugins(),
-        devtool: "source-map",
+        devtool: options.mode !== "production" && "source-map",
         watch: true,
         watchOptions: {
             ignored: ["node_modules/**"],

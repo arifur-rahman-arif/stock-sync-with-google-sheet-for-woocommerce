@@ -3,11 +3,12 @@
 $sheetUrl = get_option('sheetUrl') ? sanitize_text_field(get_option('sheetUrl')) : null;
 $tabName = get_option('tabName') ? sanitize_text_field(get_option('tabName')) : null;
 $configureMode = get_option('configureMode') ? true : false;
+$welcomeScreen = isset($_GET['welcome-screen']) ? true : false;
 ?>
 
 
 <!-- If configure mode is active show the navigation template -->
-<?php if ($configureMode) {?>
+<?php if ($configureMode || $welcomeScreen) {?>
 
 <!-- Load the configure modal template -->
 <?php load_template(WSMGS_BASE_PATH . 'templates/navigation-modal.php')?>
@@ -67,7 +68,12 @@ $configureMode = get_option('configureMode') ? true : false;
 
         <?php do_settings_sections('wsmgs-page')?>
 
-        <?php submit_button('Save Settings', 'wsmgs_save_setting_btn');?>
+        <div class="button_section">
+            <?php submit_button('Save Settings', 'wsmgs_save_setting_btn');?>
+            <a class="welcome_screen_link"
+                href="<?php echo esc_url(admin_url('admin.php?page=wsmgs-page&welcome-screen=1')) ?>">Back to welcome
+                page</a>
+        </div>
 
     </form>
 

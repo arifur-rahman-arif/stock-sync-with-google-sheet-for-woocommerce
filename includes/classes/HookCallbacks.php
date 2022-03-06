@@ -250,6 +250,29 @@ class HookCallbacks {
                     $woocmmerceInstance->set_stock_status('outofstock');
                 }
 
+                $inStockText = [
+                    'instock',
+                    'in stock',
+                    'In stock',
+                    'In Stock'
+                ];
+
+                if (in_array($stock, $inStockText)) {
+                    $woocmmerceInstance->set_manage_stock(false);
+                    $woocmmerceInstance->set_stock_status();
+                }
+
+                $outOfStockText = [
+                    'outofstock',
+                    'out of stock',
+                    'Out of stock',
+                    'Out Of Stock'
+                ];
+
+                if (in_array($stock, $outOfStockText)) {
+                    $woocmmerceInstance->set_stock_status('outofstock');
+                }
+
                 if ($woocmmerceInstance->save()) {
                     $isProductUpdated = true;
                 };

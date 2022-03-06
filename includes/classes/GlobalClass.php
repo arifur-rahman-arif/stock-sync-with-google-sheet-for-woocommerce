@@ -61,7 +61,7 @@ class GlobalClass {
 
                 $product->post_status ? $product->post_status : '', /*  Column E*/
 
-                $wcProduct->get_stock_quantity() ? $wcProduct->get_stock_quantity() : '', /* Column F*/
+                $wcProduct->get_stock_quantity() ? $wcProduct->get_stock_quantity() : $wcProduct->get_stock_status(), /* Column F*/
 
                 $wcProduct->get_sale_price() ? $wcProduct->get_sale_price() : '', /* Column G*/
 

@@ -53,7 +53,7 @@ class CopyScript {
 
             if ($rawScript) {
                 $this->output['status'] = 'success';
-                $this->output['message'] = esc_html__('Script Code copied to your clipboard. Please paste it in your Apps Script file', WSMGS_TEXT_DOMAIN);
+                $this->output['message'] = esc_html__('Script copied', WSMGS_TEXT_DOMAIN);
                 $this->output['scriptCode'] = $rawScript;
                 wp_send_json_success($this->output, 200);
                 wp_die();

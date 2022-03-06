@@ -277,7 +277,7 @@
                 width: 100%;
                 height: 8px;
                 background-color: rgba(255, 166, 0, 0.582);
-                bottom: 0;
+                bottom: -10px;
                 border-radius: $borderRadius;
             }
         }
@@ -347,7 +347,7 @@
 .bot_id_container,
 .script_code_container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     gap: 1rem;
     background: #80808030;
@@ -364,7 +364,7 @@
 
 .bot_id_container {
     padding: 0.1rem 0.1rem 0.15rem 0.5rem;
-    max-width: 700px;
+    max-width: 100%;
 }
 
 .script_code_container {
@@ -387,6 +387,59 @@
     .script_copy_btn {
         margin-right: -1rem;
         margin-top: -1rem;
+    }
+}
+
+#gave_editor_access,
+#pasted_app_script {
+    -webkit-appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: $borderRadius;
+    vertical-align: sub;
+    outline: none;
+    position: relative;
+    border-color: $primaryColor;
+
+    &:checked {
+        background-color: $primaryColor;
+        border-color: $primaryColor;
+
+        &:focus,
+        &:hover {
+            border-color: $primaryColor;
+        }
+    }
+
+    &:after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9JzMwMHB4JyB3aWR0aD0nMzAwcHgnICBmaWxsPSIjZmZmZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgdmVyc2lvbj0iMS4xIiB4PSIwcHgiIHk9IjBweCI+PHRpdGxlPmljb25fYnlfUG9zaGx5YWtvdjEwPC90aXRsZT48ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz48ZyBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48ZyBmaWxsPSIjZmZmZmZmIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNi4wMDAwMDAsIDI2LjAwMDAwMCkiPjxwYXRoIGQ9Ik0xNy45OTk5ODc4LDMyLjQgTDEwLjk5OTk4NzgsMjUuNCBDMTAuMjI2Nzg5MSwyNC42MjY4MDE0IDguOTczMTg2NDQsMjQuNjI2ODAxNCA4LjE5OTk4Nzc5LDI1LjQgTDguMTk5OTg3NzksMjUuNCBDNy40MjY3ODkxNCwyNi4xNzMxOTg2IDcuNDI2Nzg5MTQsMjcuNDI2ODAxNCA4LjE5OTk4Nzc5LDI4LjIgTDE2LjU4NTc3NDIsMzYuNTg1Nzg2NCBDMTcuMzY2ODIyOCwzNy4zNjY4MzUgMTguNjMzMTUyOCwzNy4zNjY4MzUgMTkuNDE0MjAxNCwzNi41ODU3ODY0IEw0MC41OTk5ODc4LDE1LjQgQzQxLjM3MzE4NjQsMTQuNjI2ODAxNCA0MS4zNzMxODY0LDEzLjM3MzE5ODYgNDAuNTk5OTg3OCwxMi42IEw0MC41OTk5ODc4LDEyLjYgQzM5LjgyNjc4OTEsMTEuODI2ODAxNCAzOC41NzMxODY0LDExLjgyNjgwMTQgMzcuNzk5OTg3OCwxMi42IEwxNy45OTk5ODc4LDMyLjQgWiI+PC9wYXRoPjwvZz48L2c+PC9nPjwvc3ZnPg==");
+        background-size: 40px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    &:focus,
+    &:hover {
+        border-color: $primaryColor;
+    }
+}
+
+.bottom_back_settings_button {
+    margin-top: 1.1rem;
+
+    .settings_screen {
+        &:focus,
+        &:active {
+            border: none;
+            outline: none;
+            box-shadow: none;
+        }
     }
 }
 
@@ -417,9 +470,9 @@
 
         .btn.sw-btn-prev {
             background: transparent;
-            color: #686de0;
+            color: $primaryColor;
             font-weight: bold;
-            border: 1px solid #686de0;
+            border: 1px solid $primaryColor;
         }
 
         .btn.sw-btn-prev.disabled {
@@ -434,6 +487,9 @@
         .btn.sw-btn-next.btn.sw-btn-next {
             margin-left: auto !important;
         }
+        .btn.sw-btn-next.disabled {
+            display: none !important;
+        }
 
         .share_btn_1,
         .share_btn_2 {
@@ -444,7 +500,7 @@
             padding: 9px 24px 11px 24px;
             background: #188038;
             color: #fff;
-            padding: 9px 16px;
+            padding: 5px 16px;
             text-transform: capitalize;
         }
         .share_btn_2 {
@@ -482,6 +538,15 @@
         color: $primaryColor !important;
     }
 
+    .nav-link.full_width::after {
+        width: 100% !important;
+        background: #ddd !important;
+    }
+    .nav-link.inactive::after {
+        width: 100% !important;
+        background: #ddd !important;
+    }
+
     .sw-theme-default > .nav .nav-link.done {
         color: #000 !important;
     }
@@ -491,7 +556,7 @@
     }
 
     .nav-link.done.nav-link.done::after {
-        background-color: #000 !important;
+        background-color: #ddd !important;
     }
 
     .tab-pane {
@@ -514,6 +579,15 @@
         & > h2 {
             font-weight: bold;
             font-size: 1.7rem;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            line-height: 20px;
+            gap: 7px;
+
+            code {
+                margin-top: 5px;
+            }
         }
         & > p {
             font-size: 1rem;
@@ -596,7 +670,7 @@
             .accordion-button {
                 font-weight: bold;
                 border-radius: $borderRadius;
-                cursor: row-resize;
+                cursor: pointer;
             }
         }
     }

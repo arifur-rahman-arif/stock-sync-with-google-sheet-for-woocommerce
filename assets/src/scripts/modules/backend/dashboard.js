@@ -44,7 +44,7 @@ $(function () {
 
             this.scriptCopyBtn.on("click", this.copyScriptCode.bind(this));
 
-            this.settingsInput.on("change", this.handleNavigationButton.bind(this));
+            this.settingsInput.on("input", this.handleNavigationButton.bind(this));
             this.getStartedBtn.on("click", this.showWizard.bind(this));
 
             $(".btn.sw-btn-next").on("click", this.saveOptionsValue.bind(this));
@@ -66,11 +66,12 @@ $(function () {
                 $.each(tooltips, function (i, element) {
                     new Tooltip($(element), {
                         html: true,
+                        trigger: "hover",
                     });
                 });
 
             // Remove the hash from url if browser reloaded
-            // history.pushState("", document.title, window.location.pathname + window.location.search);
+            history.pushState("", document.title, window.location.pathname + window.location.search);
 
             // Initialize the wizard step if element is active
             this.smartWizard.length &&
@@ -87,6 +88,8 @@ $(function () {
             this.smartWizard.length && this.smartWizard.smartWizard("stepState", [1, 2, 3], "disable");
 
             this.handleNavigationButton();
+
+            this.resetAnimatedGif();
         }
 
         // Disable the modal navigation button if input field values are empty
@@ -317,11 +320,15 @@ $(function () {
                 }
                 nextBtn.removeClass("disabled").removeClass("wsmgs_inactive");
                 this.smartWizard.length && this.smartWizard.smartWizard("stepState", [3], "enable");
+                this.smartWizard.length &&
+                    this.smartWizard.find(".nav li:nth-child(4) a").addClass("full_width");
             } else {
                 nextBtn.addClass("disabled").addClass("wsmgs_inactive");
 
                 this.setTheTooltip({ title: "Are you sure you have pasted Script Code correctly?" });
                 this.smartWizard.length && this.smartWizard.smartWizard("stepState", [3], "disable");
+                this.smartWizard.length &&
+                    this.smartWizard.find(".nav li:nth-child(4) a").removeClass("full_width");
             }
         }
 
@@ -340,7 +347,7 @@ $(function () {
 
                     beforeSend: () => {
                         showLoadingButton(target);
-                        target.attr("disabled", true).addClass("wsmgs_inactive");
+                        target.addClass("wsmgs_inactive");
                     },
 
                     success: (response) => {
@@ -389,7 +396,11 @@ $(function () {
                 .attr("data-bs-toggle", "tooltip")
                 .attr("data-bs-placement", "left");
 
-            $(".btn.sw-btn-next").length && new Tooltip($(".wsmgs_inactive"));
+            $(".btn.sw-btn-next").length &&
+                new Tooltip($(".wsmgs_inactive"), {
+                    html: true,
+                    trigger: "hover",
+                });
         }
 
         // Export all WordPress products to google sheet
@@ -520,15 +531,15 @@ $(function () {
         }
 
         // Handle next button style
-        handleNextButtonStyle() {
-            if (getURLHashValue() == "#step-1") {
-                this.gaveEditorAccess.prop("checked", false);
-            }
-            // this.pastedAppScript.prop("checked", false);
-            if ($(".btn.sw-btn-next").hasClass("wsmgs_inactive")) {
-                let tooltip = new Tooltip($(".wsmgs_inactive"));
-                tooltip.dispose();
-                $(".btn.sw-btn-next").removeClass("wsmgs_inactive");
+        handleNextButtonStyle(e) {
+            let target = $(e.currentTarget);
+
+            if (target.hasClass(".sw-btn-prev")) {
+                if ($(".btn.sw-btn-next").hasClass("wsmgs_inactive")) {
+                    let tooltip = new Tooltip($(".wsmgs_inactive"));
+                    tooltip.dispose();
+                    $(".btn.sw-btn-next").removeClass("wsmgs_inactive");
+                }
             }
         }
 
@@ -545,6 +556,18 @@ $(function () {
                     height: "auto",
                 });
             }
+        }
+
+        // Reset animated gif
+        resetAnimatedGif() {
+            this.scriptCopyBtn.on({
+                mouseenter: () => {
+                    $(".copy_script_animated_gif").prop("src", $(".copy_script_animated_gif").attr("src"));
+                },
+                mouseleave: () => {
+                    $(".copy_script_animated_gif").prop("src", $(".copy_script_animated_gif").attr("src"));
+                },
+            });
         }
     }
 

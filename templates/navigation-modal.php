@@ -1,3 +1,5 @@
+<?php $configureMode = get_option('configureMode') ? true : false;?>
+
 <div class="container wsmgs_welcome_container">
     <h2 class="text-center">Welcome to</h2>
     <h1 class="text-center">WooCommerce Stock Management</h1>
@@ -8,8 +10,11 @@
     <div class="get_started_container">
         <p>Press the button and follow the steps to sync your product with Google Sheet</p>
         <button class="wsmgs_button get_started_btn">Get started</button>
+
+        <?php if (!$configureMode) {?>
         <a class="settings_screen" href="<?php echo esc_url(admin_url('admin.php?page=wsmgs-page')) ?>">Back to settings
             page</a>
+        <?php }?>
     </div>
 </div>
 
@@ -117,7 +122,7 @@
 
                     <div class="bot_id_container">
 
-                        <div class="bot_info">
+                        <div class="bot_info" title="Click to copy">
                             <span class="bot_mail">
                                 <code>wcsmgs@wc-stock-management-with-sheet.iam.gserviceaccount.com</code>
                             </span>
@@ -127,7 +132,7 @@
                             data-bs-placement="top" title="
                             <div class='tooltip_image_container'>
                                 <p>
-                                    Copy your Google Sheet URL & paste it below to get access your products into it
+                                    Copy the ID & paste it here. Give it editor access. So that, WordPress system can export your products automatically
                                 </p>
                                 <img
                                     src='<?php echo WSMGS_BASE_URL . 'assets/public/images/tooltips/editor-access.png' ?>' />
@@ -215,9 +220,9 @@
                             data-bs-placement="top" title="
                             <div class='tooltip_image_container'>
                                 <p>
-                                    Copy your Google Sheet URL & paste it below to get access your products into it
+                                   Copy the script code & paste it here
                                 </p>
-                                <img
+                                <img class='copy_script_animated_gif'
                                     src='<?php echo WSMGS_BASE_URL . 'assets/public/images/tooltips/app-script.gif' ?>' />
                                 </div>
                         ">
@@ -249,6 +254,16 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="bottom_back_settings_button">
+            <?php if (!$configureMode) {?>
+            <a class="settings_screen" href="<?php echo esc_url(admin_url('admin.php?page=wsmgs-page')) ?>">Back to
+                settings
+                page</a>
+            <?php }?>
+        </div>
+
     </div>
 
 </div>

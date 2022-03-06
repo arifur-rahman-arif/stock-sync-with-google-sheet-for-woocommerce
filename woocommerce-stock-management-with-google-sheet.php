@@ -102,7 +102,7 @@ final class WSMGS {
         require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
         if (!is_plugin_active(plugin_basename(__FILE__)) || !class_exists('WooCommerce')) {
-            $this->noticeMessage = "<b>" . WSMGS_PlUGIN_NAME . "</b>" . "&nbsp" . __("deactivated beacasue <b>WooCommerce</b> plugin is not active.", WSMGS_TEXT_DOMAIN);
+            $this->noticeMessage = "<b>" . WSMGS_PlUGIN_NAME . "</b>" . "&nbsp" . __("deactivated because <b>WooCommerce</b> plugin is not active.", WSMGS_TEXT_DOMAIN);
             $this->deactivatePlugin();
             return false;
         }

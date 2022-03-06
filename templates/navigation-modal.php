@@ -120,9 +120,9 @@
                         <li>Then click the <button class="share_btn_2">Share</button> button to confirm</li>
                     </ul>
 
-                    <div class="bot_id_container">
+                    <div class="bot_id_container" title="Click to copy">
 
-                        <div class="bot_info" title="Click to copy">
+                        <div class="bot_info">
                             <span class="bot_mail">
                                 <code>wcsmgs@wc-stock-management-with-sheet.iam.gserviceaccount.com</code>
                             </span>

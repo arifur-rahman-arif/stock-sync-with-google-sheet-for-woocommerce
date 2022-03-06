@@ -3,7 +3,7 @@
 <div class="container wsmgs_welcome_container">
     <h2 class="text-center">Welcome to</h2>
     <h1 class="text-center">WooCommerce Stock Management</h1>
-    <h2 class="text-center">with <span class="extra_text">Google Sheet</span></h2>
+    <h2 class="text-center">with <span class="extra_text">Google Sheet</h2>
 
     <a class="wsmgs_button video_link" href="#">Watch video tutorial</a>
 

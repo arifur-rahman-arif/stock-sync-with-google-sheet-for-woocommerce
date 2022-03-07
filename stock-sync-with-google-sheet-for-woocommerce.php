@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Plugin Name:       WooCommerce Stock Management with Google Sheet
- * Plugin URI:        https://wppool.dev/woocommerce-stock-management-with-google-sheet/
+ * Plugin Name:       Stock Sync with Google Sheet for WooCommerce
+ * Plugin URI:        https://wppool.dev/stock-sync-with-google-sheet-for-woocommerce/
  * Description:       Manage your WooCommerce products with google sheet. Activate and setup for once and manage your products with less efforts.
  * Version:           1.0.0
  * Requires at least: 5.4
@@ -30,7 +30,7 @@ if (!defined('WSMGS_BASE_URL')) {
 }
 
 if (!defined('WSMGS_PlUGIN_NAME')) {
-    define('WSMGS_PlUGIN_NAME', 'WooCommerce Stock Management with Google Sheet');
+    define('WSMGS_PlUGIN_NAME', 'Stock Sync with Google Sheet for WooCommerce');
 }
 
 if (!defined('WSMGS_PlUGIN_MODE')) {

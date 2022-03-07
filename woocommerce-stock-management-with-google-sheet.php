@@ -119,7 +119,7 @@ final class WSMGS {
 
             if (is_plugin_active(plugin_basename(__FILE__))) {
 
-                $this->noticeMessage = "<b>" . WSMGS_PlUGIN_NAME . "</b>" . "&nbsp" . __("cannot be activated. Requires at least PHP 5.4. Plugin automatically deactivated.", WSMGS_TEXT_DOMAIN);
+                $this->noticeMessage = "<b>" . WSMGS_PlUGIN_NAME . "</b>" . "&nbsp" . __("cannot be activated. Requires at least PHP 5.6. Plugin automatically deactivated.", WSMGS_TEXT_DOMAIN);
                 $this->deactivatePlugin();
                 return 'version_low';
             }

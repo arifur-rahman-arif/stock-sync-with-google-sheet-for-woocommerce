@@ -20,4 +20,4 @@ That means either you change your data in WordPress or in Google Sheet, the data
 == Changelog ==
 
 = 1.0.0 =
-* Fixed: Fixed tab management db update
+* Initial Release

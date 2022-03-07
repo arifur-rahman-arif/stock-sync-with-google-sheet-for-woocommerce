@@ -1,0 +1,26 @@
+{
+    "name": "ar.arif/woocommerce-stock-management-with-google-sheet",
+    "type": "project",
+    "authors": [
+        {
+            "name": "AR. Arif",
+            "email": "dev.ar.arif@gmail.com"
+        }
+    ],
+    "require": {
+        "google/apiclient": "2.12.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "WSMGS\\": "includes/"
+        }
+    },
+    "scripts": {
+        "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
+    },
+    "extra": {
+        "google/apiclient-services": [
+            "Sheets"
+        ]
+    }
+}

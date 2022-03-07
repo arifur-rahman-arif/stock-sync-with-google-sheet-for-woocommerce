@@ -2,7 +2,7 @@
 
 <div class="wsmgs_description">
 
-    <div class="bot_id_container">
+    <div class="bot_id_container" title="Click to copy">
 
         <div class="bot_info">
             <span class="bot_mail">

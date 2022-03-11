@@ -583,7 +583,7 @@
     .step2_content_wrapper,
     .step3_content_wrapper,
     .step4_content_wrapper {
-        max-width: 735px;
+        max-width: 770px;
         & > h2 {
             font-weight: bold;
             font-size: 1.7rem;
@@ -677,6 +677,23 @@
                 font-weight: bold;
                 border-radius: $borderRadius;
                 cursor: pointer;
+                color: #0c63e4;
+                background-color: #e7f1ff;
+                box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
+
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 1rem;
+
+                a {
+                    &:focus,
+                    &:active {
+                        outline: none;
+                        border: none;
+                        box-shadow: none;
+                    }
+                }
             }
         }
     }

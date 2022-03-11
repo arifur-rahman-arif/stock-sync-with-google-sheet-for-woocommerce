@@ -64,8 +64,8 @@ class HookCallbacks {
     // Add admin menus to worpdress backend
     public function addAdminMenus() {
         add_menu_page(
-            __('WooCommerce To Google Sheet', WSMGS_TEXT_DOMAIN),
-            __('WooCommerce To Google Sheet', WSMGS_TEXT_DOMAIN),
+            __('Stock Sync With Google Sheet', WSMGS_TEXT_DOMAIN),
+            __('Stock Sync With Google Sheet', WSMGS_TEXT_DOMAIN),
             'manage_options',
             'wsmgs-page',
             [$this, 'dashboardTemplate'],
@@ -158,7 +158,7 @@ class HookCallbacks {
 
             return $this->updateProducts($reqData);
 
-        } catch (\Throwable $error) {
+        } catch (\Throwable$error) {
             return wp_send_json_error([
                 'status'  => 'error',
                 'message' => esc_html__($error->getMessage(), WSMGS_TEXT_DOMAIN)

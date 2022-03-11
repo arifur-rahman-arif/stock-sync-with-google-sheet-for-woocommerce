@@ -47,7 +47,7 @@ const config = (env, options) => {
                     reloadOnRestart: true,
                     files: ["./**/*.php"],
                     watchEvents: ["change", "add", "unlink", "addDir", "unlinkDir"],
-                    proxy: "http://wsmgs.local.com/wp-admin/",
+                    proxy: "http://localhost:10005/wp-admin/",
                 }),
             ];
         }

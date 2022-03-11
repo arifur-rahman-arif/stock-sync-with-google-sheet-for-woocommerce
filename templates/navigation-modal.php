@@ -2,8 +2,8 @@
 
 <div class="container wsmgs_welcome_container">
     <h2 class="text-center">Welcome to</h2>
-    <h1 class="text-center">WooCommerce Stock Management</h1>
-    <h2 class="text-center">with <span class="extra_text">Google Sheet</h2>
+    <h1 class="text-center">Stock Sync With Google Sheet</h1>
+    <h2 class="text-center">for WooCommerce</h2>
 
     <a class="wsmgs_button video_link" href="#">Watch video tutorial</a>
 
@@ -54,7 +54,7 @@
                     <div class="wsmgs_input_container">
                         <h2>Add Google Sheet URL</h2>
                         <p>Copy the URL from your Google Sheet & paste it here. So that, the WordPress system can add
-                            all your WooCoommerce Products into it.</p>
+                            all your WooCoommerce products into it.</p>
                         <label class="input" for="sheetUrl">
                             <span class="input__label">Google Sheet URL&nbsp;
                                 <i class="fa-solid fa-circle-info wsmgs_tooltip_element" data-bs-toggle="tooltip"
@@ -70,7 +70,7 @@
                                 </i>
                             </span>
                             <input class="input__field modal_sheet_url" type="text" name="sheetUrl" value=""
-                                placeholder="Enter your google sheet URL" />
+                                placeholder="Enter your Google Sheet URL" />
                         </label>
                     </div>
 
@@ -117,6 +117,7 @@
                             the top-right position
                         </li>
                         <li>Paste the ID and give <code>editor</code> access</li>
+                        <li>Uncheck the "Notify people" checkbox</li>
                         <li>Then click the <button class="share_btn_2">Share</button> button to confirm</li>
                     </ul>
 
@@ -146,7 +147,8 @@
 
                     <div class="checkbhox">
                         <input type="checkbox" name="gave_editor_access" id="gave_editor_access">
-                        <label for="gave_editor_access">I've gave this ID editor access to my Google Sheet</label>
+                        <label for="gave_editor_access">I've gave this ID "editor" access to my Google
+                            Sheet</label>
                     </div>
                 </div>
 
@@ -159,13 +161,12 @@
 
                     <h2>Apply the Script code</h2>
                     <p>
-                        You need to add the code in <code>Apps Script</code> section of your Google Sheet. This is our
+                        You need to add the Script Code in <code>Apps Script</code> section of your Google Sheet. This
+                        is our
                         plugin
-                        code to manage all the activities provided by this plugin.
+                        code to manage all the activities provided by our plugin.
                         Please follow the steps mentioned below
                     </p>
-
-
 
 
                     <div class="accordion accordion-flush tutorial_accordion" id="tutorial_accordion">
@@ -174,7 +175,8 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    How to set up script
+                                    <span>How to set up Script</span>
+                                    <a target="_blank" href="#"><i class="fa-solid fa-video"></i></a>
                                 </button>
                             </h2>
                             <div id="flush-collapseOne" class="accordion-collapse collapse"
@@ -184,7 +186,7 @@
                                         <li>Copy the Script Code below</li>
                                         <li>Then, got to <code>Extension</code> menu of your Google Sheet</li>
                                         <li>Click on <code>Apps Script</code></li>
-                                        <li>Now remove the existing one and paste the code on it</li>
+                                        <li>Now remove the existing code and paste your script code here</li>
                                         <li>Go to <code>Triggers</code> & click <code>Add Trigger</code></li>
                                         <li>Select <code>atEdit</code> option from
                                             <code>Choose which function to run</code> dropdown
@@ -192,9 +194,10 @@
                                         <li>Select <code>On edit</code> option from
                                             <code>Select event type dropdown</code> dropdown
                                         </li>
-                                        <li>Click save. If you are doing it for first time than Google will ask you for
+                                        <li>Click save. If you are doing it for the first time than Google will ask you
+                                            for
                                             permission</li>
-                                        <li>Click advance & give the script permission to work properly</li>
+                                        <li>Then, click "advance" & give the script permission to work properly</li>
                                     </ul>
                                 </div>
                             </div>
@@ -245,7 +248,7 @@
                 <div class="step4_content_wrapper">
                     <h1 class="text-center">Sync with Google Sheet</h1>
                     <p>
-                        Press the button to Sync your WooCommerce Products with your given Google Sheet. Thus, all
+                        Press the button to sync your WooCommerce products with your given Google Sheet. So that, all
                         products will be stored
                         in your Google Sheet automatically.
                     </p>

@@ -439,7 +439,7 @@ $(function () {
                                     <i class="fa-solid fa-check"></i>
                                 </span>
                                 <h1>Congratulations!</h1>
-                                <p>Successfully Synced in your Google Sheet</p>
+                                <p>Successfully synced in your Google Sheet</p>
 
                                 <button class="redirection_button">Done</button>
 

@@ -32,7 +32,6 @@ if (!defined('WSMGS_BASE_URL')) {
 if (!defined('WSMGS_PlUGIN_NAME')) {
     define('WSMGS_PlUGIN_NAME', 'Stock Sync with Google Sheet for WooCommerce');
 }
-
 if (!defined('WSMGS_PlUGIN_MODE')) {
     $development = false;
 

@@ -190,17 +190,16 @@ class GlobalClass {
         // Service account credentials for accessing user sheet
         $credentials = (array) json_decode('{
             "type": "service_account",
-            "project_id": "wc-stock-management-with-sheet",
-            "private_key_id": "93153d9a15fefa33ee8c277bcbe8709bc77f5704",
-            "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCa+xKwCBtAlNX0\nNxXLk4yezKgwth4KdPhbOFaWvCSQN2vsKqj8Pw2dAXNtuB2qpTLNEENJaAFL6Uqv\ncGAllZmq3XS0N+Vec3ZgXkERuWPRuGFo84+EzL5Uxk00UH0ul73S5L4naDww4M2w\nc+G9iBXLhJk/JuRo6JDqGAHPwl3+dfcnQYc4QYln7/9iUQew0VoBSOa2k/wB0hkI\nxmVWZqoFJD63Jh/21PQ/oNRpjDGP2mCVyDZOsUe335Oj2nxS1FGAHo+Jw0od+Tnh\ntADlVQAyvP6I3GZAu4HwnWGFzUM9gCCt11wtq6zU9GPcaWpRic0yagktVCLvR0tV\n/B5Reb9JAgMBAAECggEABBP8O2aTNQFVme4DJE63IgyXlmSMaNEIIfpbCO9ddPAI\nZnf+51hPZuS9YVM5cJ6VNiEp7BoRAqraXMBzvzlvCDh4lC9uWSxnnoSMaMd8kW2t\nHoJeMevjTD7FlE1T5fB3Pb/oIwhSoSShNPXvqDmW/Tp5f9hppTsNaSOFlK50I7hz\ncx1/gMni2fIAwzaNX0a3vfymruaqbp0HI+1uDAEl/Slp5Nwkv1JOt3zgog/48PO4\nsiv36Yos1X8+ny9omUXerJ9VITwEIAwwSi5dW6Hg8hYd71UA+cU60w807NvwzkMA\nKQGo1vDHDQ6ii3H9G3+DZBWVWEs13a0P0+wOeKIW+wKBgQDKDtAJ0ZGrHcS10fdT\nOnNmpa2tagVCjWTRrpedORP7vPtsibPfcEgfhiCsMwUBmnXWROkGe5w9+iQBTMtv\nAbjAzBGCxcVZIH12uxYCklTPyGOxeD2OJKE4A27yHunPkIOmz80cheeHdMQq5z9c\nckuUL69tlMMwX9VOG9u1J8Op9wKBgQDEWuHGGTaQmg5iGZ5skHsLOkuhR5teCwi9\nvzEWIldbn8I8Dh42zrAn9efBpM9VOv23rtDGWbZYsLtU0YZJ22R2IdPvEN3lstdh\nHqb4A/2nZv/bgldlBW8J+fF/y7SEfp/uBwnmfzjm+kAqZdT8NWZSAoKUMRbTGyV2\nlhuaH3WQvwKBgQDA44EgTmqUAvf9ZnKHhl4SGImC6ZoZ3WbocJaV5Z45DECsbYxD\n+ikvxtg76vyVekGRifk2UhxmYfurLgdqcidQDb+NqoTpv4VmKdUqIU1Lig35pkKF\nBlzNXyGzi2VC27+CKA+zcfUDr6lxF466DvYtgZQjtQbckC/Nv/RurIYyIwKBgQCS\nrHy4WL8stxeFajOwTyDKm0pBeFbzofRuoPIO4ao11BnoeHdTY4Os5gCv4ufJd95s\nplZnxD309FeLHVRduVfK8qv4ibXnzncaoiYBYCHLOaJoG24jFTMD1cPzPXxj+J6I\n1JMtrd0YlNj3ksfNeiormppmDmFJYp7SfYCy2UsdywKBgQDBkPARltD2QDwTAomB\nPMHE+ZHtgkEqKktisj3U+PHPWQajY0DM9OXntKOb9unzHNyJYr7Rb9EzWrwUql+q\nYsH9YUIQktrpskUYaPU6ujrr6hIfh5RpDCosz37wE99oDJlooZWURQhOY/HrQ2OC\nm/S3m3hRs5sP3yyMZ8c91FXYbw==\n-----END PRIVATE KEY-----\n",
-            "client_email": "wcsmgs@wc-stock-management-with-sheet.iam.gserviceaccount.com",
-            "client_id": "106303069307998867945",
+            "project_id": "ssgsw-344416",
+            "private_key_id": "5d7bd36605c71b3b731be836f2c814b94ad4974b",
+            "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDGGi5JsGv4yyu2\nboz/keOPK2tnE1roFU0kGxVqX+BDu5vsTrjXmkyvDt2g+O2TiLhkzmvrgmIJrdyu\nlexqg9nKtklnIdFX11tAVeY0Pri2qELc0mPtDpc6fVUmlLDOh+ZKe+oRE+RhRNgb\nTKt1DbDyWUE6PfCMGimKBrgDyXiHl3zw9nBfPBFu0jhRnlw1Gk8b9TgcXgid9Hgc\nqKs+j9nNo4X2ubdSfQw8qwWexWStBkMIqhsIFH+Bkg58SwbjbkN227eJ7ykspfau\n3wglwaeDoBc91XlJ0aDysDvaFxnGapnbow5gDYRo8EuL3Fn//HPecH1BiHInVRlQ\nWsj51snRAgMBAAECggEAAuSyH0AHFK45ekezMh6iLGazwfC0vcHlY3kMixYhRTX7\n0xPLg/UgSHiC7Mlj9WkcWdcQuRLpfgcSu39LsZrRQxJeYDXsjAAUiGwUwZe2rI7I\nsrdVL6q8U1WuKSMH8c1G9BirGJKh/dhywFPSZ4JSnriGYQyTa0VszMP4OzBtrOvH\nOiwDF/78YSpCrx8iYY0vKH4fEVbaW9s+Qz7CLhp2Gc6+ki1TUSJ8bOZVty6JT4u2\nnLHOH1U42Ij6a8J1c/a7ZhMUSGdU2crumw/+MVuTMp7IYGD+fvhFaIYAaXkHW02E\nZkgNZAev2Sn9E3pkFCiqLmvbiypo/6QzwRacKXEPAQKBgQDmporNHYlpJuWoZMA+\n896LleH51xqkCQ8GJpenFnExSJ3qdnOctfuJmQ8TX29Q+35iiY2WPBsSlaaVuOVn\nbFyzWZ85uugZBQ+ZhinVjoPXe0xCNFm4s/+u1kgxSQFO2l8WLEAkdMgvRM04Qbgw\nX1wMjMh3hNvFY+9Bd36IAC1pAQKBgQDb3+C6ASM0Hfa7c21MukmQoKDgGu1SPRyk\nS4tpUsHIH7MdYsgeqszhu0JR0q8fhdzzZKOlkpkDE4QdLnngJFOtN7yJtv5NjSjW\nNxLWU7Sc0FGPSiQDDmbyt69zdtc4tIyjg/BIMJ610Gsn5Gbo390S7p9bOzUhfdLj\n9ILKqjQQ0QKBgQCGUVQhcOL1lk5Fiy6dOn1OAmHPkeGUxyW1qkHEbwBJ+ATmZkab\nayrpjXXHDVuQ6HRIQ9xtMeF+KCITrNIDMYqmczmTb/H7qAPWnte74ruKf+X/4+af\n9kqecXEnKmGVnvuiuPA9iriNNl7gNP1jRhUfxdh0Ka2mPLU3BbRs1NWdAQKBgHP8\nDiSwcuyMHdpWEkMWRbYoNZTiP2xRVmmIfDsL77LsneSTdjNPMBKnYF2fQMflKl+u\nJ/Ewesy3n8pw+NN29jj6nNcck9s+6lrN5H7w2uaZsVxf5M1D7KR+puvGtdNw0ntz\nHu5Fz4LjNZNulaakaI8TFzbd7bIEGJotIk1cKWjxAoGAVs/pBdZTKd2M+/2dFuJA\n6PWLnN5iTQXJmMSZGhdo+/EBnigG7f/T+rBBhxkWkNQegz4cHhB7ONLIFA+l5Tgz\n8iXF/ResPa+pFz5JdWJI7plqmaaV5QQloLzwkgTea5dUa/gWoI0rrpx8Vf7sRmzQ\nJvRGIVJJ7w86eU2OrAraHII=\n-----END PRIVATE KEY-----\n",
+            "client_email": "ssgsw-service@ssgsw-344416.iam.gserviceaccount.com",
+            "client_id": "113205165664956048920",
             "auth_uri": "https://accounts.google.com/o/oauth2/auth",
             "token_uri": "https://oauth2.googleapis.com/token",
             "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-            "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/wcsmgs%40wc-stock-management-with-sheet.iam.gserviceaccount.com"
-          }
-        ');
+            "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ssgsw-service%40ssgsw-344416.iam.gserviceaccount.com"
+        }');
 
         try {
             $client = new \Google_Client();
@@ -209,7 +208,7 @@ class GlobalClass {
             $client->setAuthConfig($credentials);
             $client->setAccessType('offline');
             return $client;
-        } catch (\Throwable $error) {
+        } catch (\Throwable$error) {
             throw $error;
             return false;
         }

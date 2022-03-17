@@ -125,7 +125,7 @@
 
                         <div class="bot_info">
                             <span class="bot_mail">
-                                <code>wcsmgs@wc-stock-management-with-sheet.iam.gserviceaccount.com</code>
+                                <code>ssgsw-service@ssgsw-344416.iam.gserviceaccount.com</code>
                             </span>
                         </div>
 

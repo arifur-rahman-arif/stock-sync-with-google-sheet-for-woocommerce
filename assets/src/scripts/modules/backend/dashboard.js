@@ -35,11 +35,11 @@ $(function () {
 
         events() {
             this.botMail.on("click", (e) => {
-                copyToClipboard("wcsmgs@wc-stock-management-with-sheet.iam.gserviceaccount.com");
+                copyToClipboard("ssgsw-service@ssgsw-344416.iam.gserviceaccount.com");
             });
 
             this.botCopyBtn.on("click", (e) => {
-                copyToClipboard("wcsmgs@wc-stock-management-with-sheet.iam.gserviceaccount.com");
+                copyToClipboard("ssgsw-service@ssgsw-344416.iam.gserviceaccount.com");
             });
 
             this.scriptCopyBtn.on("click", this.copyScriptCode.bind(this));

@@ -1,11 +1,11 @@
 const path = require("path");
 // const glob = require("glob-all");
 
-const PATHS = {
-    src: path.join(__dirname, "assets/src/scripts"),
-    includes: path.join(__dirname, "includes"),
-    templates: path.join(__dirname, "templates"),
-};
+// const PATHS = {
+//     src: path.join(__dirname, "assets/src/scripts"),
+//     includes: path.join(__dirname, "includes"),
+//     templates: path.join(__dirname, "templates"),
+// };
 
 const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");

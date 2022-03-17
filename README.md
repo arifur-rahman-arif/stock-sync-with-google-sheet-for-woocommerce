@@ -1,4 +1,5 @@
-##[ _Stock Sync with Google Sheet for WooCommerce_](https://wordpress.org/plugins/stock-sync-with-google-sheet-for-woocommerce/#developers " _Stock Sync with Google Sheet for WooCommerce_")
+## [ _Stock Sync with Google Sheet for WooCommerce_](https://wordpress.org/plugins/stock-sync-with-google-sheet-for-woocommerce/#developers " _Stock Sync with Google Sheet for WooCommerce_")
+
 ![](./assets/public/images/banner-772x250.jpg)
 
 ##### Contributors: [WPPOOL](https://wppool.dev/ "WPPOOL"), [AR. Arif](https://www.linkedin.com/in/arifur-rahman-arif-51222a1b8/ "AR. Arif")
@@ -23,7 +24,7 @@ Stock Sync with Google Sheet for WooCommerce, the most advanced inventory manage
 
 🚀 It is a hard job to manage the store inventory as a store owner. To keep an updated track record of all time managing a SpreadSheet is easier and organized. Save your time, boost up work efficiency. 🔥
 
-####Stock Sync with Google Sheet for WooCommerce Features:
+#### Stock Sync with Google Sheet for WooCommerce Features:
 
 -   🔀 **Export products:** Get all your store products details in one place in an organized way on a simple spreadsheet. All you need to do is just activate the plugin, open a Google SpreadSheet, connect the sheet to your site dashboard and follow the steps for exporting all the stock details. Simple, organized, and hassle-free.
 
